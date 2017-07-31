@@ -13,6 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+    	if(isset($_COOKIE['id']) && isset($_COOKIE['pw']))
+		{
+			return $this->render('nao/indexConnected.html.twig');
+		}
+
         return $this->render('nao/index.html.twig');
     }
+
 }
