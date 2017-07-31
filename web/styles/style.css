@@ -1,0 +1,35 @@
+/* base.html.twig - Footer*/
+footer
+{
+
+}
+
+footer .col-md-12
+{
+    color: white;
+    background-color: #416d8c;
+    padding: 50px 0;
+    min-height: 200px;
+}
+
+footer ul li
+{
+    list-style: none;
+}
+
+footer ul li a
+{
+    color: white;
+}
+
+.socialLink
+{
+    color:white;
+}
+
+#copyright
+{
+    line-height: 50px;
+    background-color: #29475f;
+    color:white;
+}
