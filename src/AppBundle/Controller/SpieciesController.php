@@ -10,7 +10,7 @@ class SpieciesController extends Controller
 {
 
 	/**
-	 * @Route("/speciesSearch", name="speciesSearch")
+	 * @Route("/speciessearch", name="speciesSearch")
 	 */
 	public function speciesSearchAction(Request $request)
 	{
@@ -18,7 +18,7 @@ class SpieciesController extends Controller
 	}
 
 	/**
-	 * @Route("/addingSpecies", name="addingSpecies")
+	 * @Route("/addingspecies", name="addingSpecies")
 	 */
 	public function addingSpeciesAction(Request $request)
 	{
@@ -26,7 +26,7 @@ class SpieciesController extends Controller
 	}
 
 	/**
-	 * @Route("/obsWaitingValidation", name="obsWaitingValidation")
+	 * @Route("/obswaitingsalidation", name="obsWaitingValidation")
 	 */
 	public function obsWaitingValidationAction(Request $request)
 	{
