@@ -43,16 +43,16 @@ class Observations
     private $number;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="longitude", type="integer")
+     * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="latitude", type="integer")
+     * @ORM\Column(name="latitude", type="float")
      */
     private $latitude;
 
@@ -142,7 +142,7 @@ class Observations
     /**
      * Set longitude
      *
-     * @param integer $longitude
+     * @param float $longitude
      *
      * @return Observations
      */
@@ -156,7 +156,7 @@ class Observations
     /**
      * Get longitude
      *
-     * @return int
+     * @return float
      */
     public function getLongitude()
     {
@@ -166,7 +166,7 @@ class Observations
     /**
      * Set latitude
      *
-     * @param string $latitude
+     * @param float $latitude
      *
      * @return Observations
      */
@@ -180,7 +180,7 @@ class Observations
     /**
      * Get latitude
      *
-     * @return string
+     * @return float
      */
     public function getLatitude()
     {
