@@ -42,6 +42,13 @@ class Observations
      */
     private $number;
 
+	/**
+	 * @var array
+	 *
+	 * @ORM\Column(name="pictures", type="array")
+	 */
+	private $pictures;
+
     /**
      * @var float
      *
@@ -56,6 +63,19 @@ class Observations
      */
     private $latitude;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="validated", type="boolean")
+	 */
+	private $validated;
+
+	/**
+	 * @var datetime
+	 *
+	 * @ORM\Column(name="obs_date", type="datetime")
+	 */
+	private $obsDate;
 
     /**
      * Get id
@@ -186,5 +206,76 @@ class Observations
     {
         return $this->latitude;
     }
-}
 
+    /**
+     * Set pictures
+     *
+     * @param array $pictures
+     *
+     * @return Observations
+     */
+    public function setPictures($pictures)
+    {
+        $this->pictures = $pictures;
+
+        return $this;
+    }
+
+    /**
+     * Get pictures
+     *
+     * @return array
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * Set validated
+     *
+     * @param boolean $validated
+     *
+     * @return Observations
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    /**
+     * Get validated
+     *
+     * @return boolean
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * Set obsDate
+     *
+     * @param \DateTime $obsDate
+     *
+     * @return Observations
+     */
+    public function setObsDate($obsDate)
+    {
+        $this->obsDate = $obsDate;
+
+        return $this;
+    }
+
+    /**
+     * Get obsDate
+     *
+     * @return \DateTime
+     */
+    public function getObsDate()
+    {
+        return $this->obsDate;
+    }
+}
