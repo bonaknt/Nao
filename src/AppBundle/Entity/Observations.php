@@ -42,6 +42,13 @@ class Observations
      */
     private $number;
 
+	/**
+	 * @var array
+	 *
+	 * @ORM\Column(name="pictures", type="array")
+	 */
+	private $pictures;
+
     /**
      * @var float
      *
@@ -56,6 +63,12 @@ class Observations
      */
     private $latitude;
 
+	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(name="validated", type="boolean")
+	 */
+	private $validated;
 
     /**
      * Get id
