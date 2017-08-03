@@ -1,0 +1,26 @@
+{
+  "name": "NAO",
+  "version": "1.0.0",
+  "description": "Michel Dujardin est le fondateur de l’association NAO (Nos Amis les Oiseaux), regroupant les passionnés d’ornithologie. Il souhaite créer une application participative dans laquelle les particuliers pourraient indiquer où ils ont observé des oiseaux au cours de leurs promenades.‌",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sikevin/NAO_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sikevin/NAO_project/issues"
+  },
+  "homepage": "https://github.com/sikevin/NAO_project#readme",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.12.0"
+  }
+}
