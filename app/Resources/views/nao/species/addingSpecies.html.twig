@@ -3,4 +3,16 @@
 {% block body %}
     {{ parent() }}
     <h1>Page d'ajout d'espèces</h1>
+
+    <div class="well">
+        {{ form_start(observationsForm) }}
+        {{ form_row(observationsForm.species) }}
+        {{ form_row(observationsForm.number) }}
+        {{ form_row(observationsForm.longitude) }}
+        {{ form_row(observationsForm.latitude) }}
+        {{ form_row(observationsForm.obsDate) }}
+        <div class="text-right">
+            {{ form_end(observationsForm) }}
+        </div>
+    </div>
 {% endblock %}

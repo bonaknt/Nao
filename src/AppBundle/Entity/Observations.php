@@ -23,14 +23,16 @@ class Observations
 
     /**
      * @var int
-     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Users", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(name="id_user", type="integer")
      */
     private $idUser;
 
     /**
      * @var string
-     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(name="species", type="string", length=255)
      */
     private $species;
