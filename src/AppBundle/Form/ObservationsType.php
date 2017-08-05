@@ -8,7 +8,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 class ObservationsType extends AbstractType
 {
@@ -16,23 +20,35 @@ class ObservationsType extends AbstractType
 	{
 		$builder
 			->add('species', ChoiceType::class, array(
-				'label' => 'Espèce d\'oiseau rencontré'
+				'label' => 'Espèce d\'oiseau rencontré',
+				'attr'	=> ['class' => 'form-control'],
 			))
 			->add('number', NumberType::class, array(
-				'label' => 'Nombre rencontré'
+				'label' => 'Nombre rencontré',
+				'attr'	=> ['class' => 'form-control'],
 			))
 			->add('longitude', NumberType::class, array(
-				'label' => 'Longitude'
+				'label' => 'Longitude',
+				'attr'	=> ['class' => 'form-control'],
 			))
 			->add('latitude', NumberType::class, array(
-				'label' => 'Latitude'
+				'label' => 'Latitude',
+				'attr'	=> ['class' => 'form-control'],
 			))
-			->add('obsDate', DateTimeType::class, array(
+			->add('obsDate', DateType::class, array(
 				'label' => 'Date d\'observation',
-				'placeholder' => array(
-					'year' => 'Année', 'day' => 'Jour', 'month' => 'Mois',
-					'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Second',
-				)
+				'format'	 	=> 'dd-MM-yyyy',
+				'constraints'	=> [
+					new LessThanOrEqual(
+						array(
+							"value" => "today",
+							"message" => "La date doit être inférieur ou égale à celle d'aujourd'hui"
+						)
+					),
+				]
+			))
+			->add('submit', SubmitType::class, array(
+				'label'	=> 'Ajouter',
 			))
 		;
 	}
