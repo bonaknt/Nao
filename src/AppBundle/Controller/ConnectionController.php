@@ -9,11 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 class ConnectionController extends Controller
 {
 	/**
-	 * @Route("/login", name="login")
+	 * @Route("/loin", name="login")
 	 */
 	public function loginAction(Request $request)
 	{
-		return $this->render('nao/connection/login.html.twig');
 	}
 
 	/**
