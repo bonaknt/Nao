@@ -4,16 +4,15 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Species;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(Request $request)
+	/**
+	 * @Route("/", name="homepage")
+	 */
+    public function indexAction()
     {
     	if(isset($_COOKIE['id']) && isset($_COOKIE['pw']))
 		{
@@ -24,9 +23,8 @@ class DefaultController extends Controller
     }
 
     /**
-	 * @Route("/insertTAXREF", name="homepage"),
+	 * @Route("/insertTAXREF", name="insertTAXREF")
 	 */
-
     public function insertTAXREFAction()
 	{
 		$em = $this->getDoctrine()->getManager();
