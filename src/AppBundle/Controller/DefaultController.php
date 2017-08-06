@@ -29,6 +29,7 @@ class DefaultController extends Controller
 
     public function insertTAXREFAction()
 	{
+		$em = $this->getDoctrine()->getManager();
 		$taxref = array(
 			'scientificName' => [
 				'Accipiter gentilis arrigonii (Kleinschmidt, 1903)',
@@ -1268,12 +1269,18 @@ class DefaultController extends Controller
 			]
 		);
 
-		$i = 0;
-		for ($i; $i < 411 ; $i++)
+		for ($i=0;$i<410;$i++)
 		{
 			$speciesEntity = new Species();
 
-		}
-	}
+			$speciesEntity->setScientificName($taxref['scientificName'][$i]);
+			$speciesEntity->setSequence($taxref['sequence'][$i]);
+			$speciesEntity->setFamily($taxref['family'][$i]);
 
+			$em->persist($speciesEntity);
+		}
+		$em->flush();
+
+		return $this->render('nao/species/insertTaxref.html.twig');
+	}
 }
