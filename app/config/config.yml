@@ -91,6 +91,7 @@ easy_admin:
                 - { property: 'email', label: 'Contact' }
                 - { property: 'enabled', label: 'Actif' }
                 - roles
+            label: 'Utilisateurs'
 
             form:
                 fields:
@@ -98,11 +99,10 @@ easy_admin:
                     - { property: 'firstname', label: 'Prenom' }
                     - { property: 'lastname', label: 'Nom' }
                     - { property: 'username', label: 'Pseudo' }
-                    - { property: 'password', type: 'password', label: 'Mot de passe' }
-                    - { property: 'plainPassword', type: 'password', label: 'Mot de passe' }
+                    - { property: 'password', label: 'Mot de passe' }
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'enabled', label: 'Actif' }
-                    - { property: 'roles', label: 'Roles' }
-        Observatios:
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Particulier' : 'ROLE_USER', 'Naturaliste' : 'ROLE_SUPER_USER', 'Administrateur' : 'ROLE_SUPER_ADMIN' } }, label: 'Roles' }
+        Observations:
             class: AppBundle\Entity\Observations
    
