@@ -72,10 +72,37 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\Users
+    registration:
+        form:
+            name: app_user_registration
     from_email:
         address: test@mail.fr
         sender_name: konate
 
 easy_admin:
+    site_name: 'NAO'
     entities:
-        - AppBundle\Entity\Users
+        Users:
+            class: AppBundle\Entity\Users
+            list:
+                fields: 
+                - id
+                - username
+                - { property: 'email', label: 'Contact' }
+                - { property: 'enabled', label: 'Actif' }
+                - roles
+            label: 'Utilisateurs'
+
+            form:
+                fields:
+                    
+                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'username', label: 'Pseudo' }
+                    - { property: 'password', label: 'Mot de passe' }
+                    - { property: 'email', type: 'email', label: 'Email' }
+                    - { property: 'enabled', label: 'Actif' }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Particulier' : 'ROLE_USER', 'Naturaliste' : 'ROLE_SUPER_USER', 'Administrateur' : 'ROLE_SUPER_ADMIN' } }, label: 'Roles' }
+        Observations:
+            class: AppBundle\Entity\Observations
+   
