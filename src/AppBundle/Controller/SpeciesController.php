@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Observations;
@@ -38,11 +39,34 @@ class SpeciesController extends Controller
 	public function addingSpeciesAction(Request $request)
 	{
 		$observationsEntity = new Observations();
+
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Species');
+
+		$listScientificName = $repository->findScientificName();
+
+		// Création du formulaire
 		$observationsForm = $this
 			->get('form.factory')
-			->create(ObservationsType::class, $observationsEntity);
+			->create(ObservationsType::class, $observationsEntity)
+			->add('species', ChoiceType::class, array(
+				//	on inverse les clés et valeurs
+				'choices'	=> array_flip($listScientificName),
+				'label'		=> "Espèce d'oiseau rencontré",
+				'attr'	=> ['class' => 'form-control'],
+			));
 
-		return $this->render('nao/species/addingSpecies.html.twig', [
+		// If form submit
+		if ($request->isMethod('POST') && $observationsForm->handleRequest($request)->isValid())
+		{
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($observationsForm);
+			$em->flush();
+		}
+
+				return $this->render('nao/species/addingSpecies.html.twig', [
 			'observationsForm' => $observationsForm->createView(),
 		]);
 	}

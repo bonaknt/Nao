@@ -19,10 +19,6 @@ class ObservationsType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('species', ChoiceType::class, array(
-				'label' => 'Espèce d\'oiseau rencontré',
-				'attr'	=> ['class' => 'form-control'],
-			))
 			->add('number', NumberType::class, array(
 				'label' => 'Nombre rencontré',
 				'attr'	=> ['class' => 'form-control'],
@@ -48,7 +44,8 @@ class ObservationsType extends AbstractType
 				]
 			))
 			->add('submit', SubmitType::class, array(
-				'label'	=> 'Ajouter',
+				'label'	=> 	'Ajouter',
+				'attr'	=>	['class' => 'btn btn-primary']
 			))
 		;
 	}
