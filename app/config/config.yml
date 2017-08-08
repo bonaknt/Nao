@@ -82,9 +82,16 @@ fos_user:
 easy_admin:
     site_name: 'NAO'
     entities:
+        
         Users:
             class: AppBundle\Entity\Users
             list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier' }
+                    - { name: 'delete', label: 'Supprimer' }
+                    - { name: 'new', label: 'Nouveau' }
+                    - { name: 'search', label: 'Recherche' }
+                title: "Utilisateurs"
                 fields: 
                 - id
                 - username
@@ -92,6 +99,12 @@ easy_admin:
                 - { property: 'enabled', label: 'Actif' }
                 - roles
             label: 'Utilisateurs'
+            new:
+                title:  'Ajout Utilisateur'
+                form_options: { validation_groups: ['Default', 'Customer'] }
+            edit:
+                title:  'Modification Utilisateur'
+                form_options: { validation_groups: ['Default'] }
 
             form:
                 fields:
