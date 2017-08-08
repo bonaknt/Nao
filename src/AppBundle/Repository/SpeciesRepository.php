@@ -16,9 +16,19 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 		$results = $query->getResult();
 
 		$scientificNameArray = [];
+
+		// ajout de l'index 0
+		array_unshift($scientificNameArray, "");
+
 		foreach ($results as $scientificName) {
 			array_push($scientificNameArray, $scientificName->getScientificName());
 		}
+
+		/*
+		 *	Suppression de l'index 0 -> pour que les array keys
+		 * 	soit en accord avec les IDs de la table Species
+		 */
+		unset($scientificNameArray[0]);
 
 		return $scientificNameArray;
 	}

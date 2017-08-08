@@ -63,7 +63,6 @@ class SpeciesController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($observationsEntity->setIdUser(1));
-			$em->persist($observationsEntity->setValidated(0));
 			$em->persist($observationsEntity->setPictures("https://laughingsquid.com/wp-content/uploads/2013/11/Dird-schnauzer-640x514.png"));
 			$em->persist($observationsEntity);
 			$em->flush();

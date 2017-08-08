@@ -6,18 +6,21 @@
 
     <div class="well container">
         {{ form_start(observationsForm) }}
+        <h3>L'espèce</h3>
         <div class="form-group">
             {{ form_row(observationsForm.species) }}
         </div>
         <div class="form-group">
             {{ form_row(observationsForm.number) }}
         </div>
+        <h3>Sa Position</h3>
         <div class="form-group">
             {{ form_row(observationsForm.longitude) }}
         </div>
         <div class="form-group">
             {{ form_row(observationsForm.latitude) }}
         </div>
+        <h3>Quand ?</h3>
         <div class="form-group">
             {{ form_row(observationsForm.obsDate) }}
         </div>

@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\Range;
 
 class ObservationsType extends AbstractType
 {
@@ -23,51 +23,55 @@ class ObservationsType extends AbstractType
 			->add('number', NumberType::class, array(
 				'label' => 'Nombre rencontré',
 				'attr'	=> ['class' => 'form-control'],
-			))
-			->add('longitude', NumberType::class, array(
-				'label' => 'Longitude',
-				'attr'	=> ['class' => 'form-control'],
 				'constraints'	=> [
-					new LessThanOrEqual(
-						array(
-							"value" => "180",
-							"message" => "La longitude doit être comprise entre 180 et -180"
-						)
-					),
 					new GreaterThanOrEqual(
 						array(
-							"value" => "-180",
-							"message" => "La longitude doit être comprise entre 180 et -180"
+							"value"		=>	"1",
+							"message"	=>	"Le nombre observé doit être supérieur à 0"
 						)
 					)
+				]
+			))
+			->add('longitude', NumberType::class, array(
+				'label' 		=> 'Longitude',
+				'attr'			=> ['class' => 'form-control'],
+				'constraints'	=> [
+					new Range(
+						array(
+							"min" 	=> 	"-180",
+							"max"	=>	"180",
+							"minMessage"	=>	"La longitude doit être supérieur à -180",
+							"maxMessage"	=>	"La longitude doit être supérieur à 180",
+						)
+					),
 				]
 			))
 			->add('latitude', NumberType::class, array(
 				'label' => 'Latitude',
 				'attr'	=> ['class' => 'form-control'],
 				'constraints'	=> [
-					new LessThanOrEqual(
+					new Range(
 						array(
-							"value" => "90",
-							"message" => "La longitude doit être comprise entre 90 et -90"
+							"min" 	=> 	"-90",
+							"max"	=>	"90",
+							"minMessage"	=>	"La longitude doit être supérieur à -90",
+							"maxMessage"	=>	"La longitude doit être supérieur à 90",
 						)
 					),
-					new GreaterThanOrEqual(
-						array(
-							"value" => "-90",
-							"message" => "La longitude doit être comprise entre 90 et -90"
-						)
-					)
 				]
 			))
-			->add('obsDate', DateType::class, array(
-				'label' => 'Date d\'observation',
-				'format'	 	=> 'dd-MM-yyyy',
-				'constraints'	=> [
+			->add('obsDate', DateTimeType::class, array(
+				'label'				=> 'Date d\'observation',
+				'date_format'	 	=> 'dd/MM/yyyy',
+				'placeholder' 		=> array(
+					'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+					'hour' => 'Heure', 'minute' => 'Minute', 'second' => 'Seconde',
+				),
+				'constraints'		=> [
 					new LessThanOrEqual(
 						array(
-							"value" => "today",
-							"message" => "La date doit être inférieur ou égale à celle d'aujourd'hui"
+							"value" 	=> "today",
+							"message" 	=> "La date doit être inférieur ou égale à celle d'aujourd'hui"
 						)
 					),
 				]

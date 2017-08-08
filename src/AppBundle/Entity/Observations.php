@@ -30,10 +30,10 @@ class Observations
     private $idUser;
 
     /**
-     * @var string
+     * @var int
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="species", type="string", length=255)
+     * @ORM\Column(name="species", type="integer")
      */
     private $species;
 
@@ -70,7 +70,7 @@ class Observations
 	 *
 	 * @ORM\Column(name="validated", type="boolean")
 	 */
-	private $validated;
+	private $validated = 0;
 
 	/**
 	 * @var datetime
