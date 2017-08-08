@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class ObservationsType extends AbstractType
 {
@@ -26,10 +27,38 @@ class ObservationsType extends AbstractType
 			->add('longitude', NumberType::class, array(
 				'label' => 'Longitude',
 				'attr'	=> ['class' => 'form-control'],
+				'constraints'	=> [
+					new LessThanOrEqual(
+						array(
+							"value" => "180",
+							"message" => "La longitude doit être comprise entre 180 et -180"
+						)
+					),
+					new GreaterThanOrEqual(
+						array(
+							"value" => "-180",
+							"message" => "La longitude doit être comprise entre 180 et -180"
+						)
+					)
+				]
 			))
 			->add('latitude', NumberType::class, array(
 				'label' => 'Latitude',
 				'attr'	=> ['class' => 'form-control'],
+				'constraints'	=> [
+					new LessThanOrEqual(
+						array(
+							"value" => "90",
+							"message" => "La longitude doit être comprise entre 90 et -90"
+						)
+					),
+					new GreaterThanOrEqual(
+						array(
+							"value" => "-90",
+							"message" => "La longitude doit être comprise entre 90 et -90"
+						)
+					)
+				]
 			))
 			->add('obsDate', DateType::class, array(
 				'label' => 'Date d\'observation',
