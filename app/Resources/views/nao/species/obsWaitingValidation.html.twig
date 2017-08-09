@@ -3,4 +3,31 @@
 {% block body %}
     {{ parent() }}
     <h1>Les observations en attente de validation: </h1>
+
+    <table class="table">
+        <tr>
+            <th>ID de du compte</th>
+            <th>Espèce observée</th>
+            <th>Le nombre</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Validité</th>
+            {#<th>Date de l'observation</th>#}
+        </tr>
+        {% for observation in listObservationsInvalid %}
+            <tr>
+                <td>{{ observation.idUser }}</td>
+                <td>{{ observation.species }}</td>
+                <td>{{ observation.number }}</td>
+                <td>{{ observation.longitude }}</td>
+                <td>{{ observation.latitude }}</td>
+                <td>
+                    {% if observation.validated == 0 %}
+                        Non validée
+                    {% endif %}
+                </td>
+                {#<td>{{ observation.obsDate }}</td>#}
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

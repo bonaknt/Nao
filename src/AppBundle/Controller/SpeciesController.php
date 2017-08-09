@@ -26,8 +26,6 @@ class SpeciesController extends Controller
 
 		$listSpecies = $repository->findAll();
 
-		dump($listSpecies);
-
 		return $this->render('nao/species/speciesSearch.html.twig', array(
 			'listSpecies' => $listSpecies,
 		));
@@ -74,10 +72,19 @@ class SpeciesController extends Controller
 	}
 
 	/**
-	 * @Route("/obswaitingsalidation", name="obsWaitingValidation")
+	 * @Route("/obswaitingvalidation", name="obsWaitingValidation")
 	 */
 	public function obsWaitingValidationAction(Request $request)
 	{
-		return $this->render('nao/species/obsWaitingValidation.html.twig');
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Observations');
+
+		$listObservationsInvalid = $repository->findInvalid();
+
+		return $this->render('nao/species/obsWaitingValidation.html.twig', array(
+			'listObservationsInvalid' => $listObservationsInvalid,
+		));
 	}
 }
