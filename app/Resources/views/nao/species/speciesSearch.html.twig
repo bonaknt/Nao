@@ -3,7 +3,15 @@
 {% block body %}
     {{ parent() }}
     <h1>La page de recherche d'espèces</h1>
+    <div id="search-form">
+        <div id="search-group" class="">
+            <input type="text" id="search-input">
+            <ul id="suggestions-container">
 
+            </ul>
+        </div>
+    </div>
+    <div id="search-result-container"></div>
     <table class="table">
         <tr>
             <th>Nom</th>
@@ -21,4 +29,8 @@
         </tr>
     </table>
 
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    {{ parent() }}
 {% endblock %}
