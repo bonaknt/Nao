@@ -32,4 +32,12 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 
 		return $scientificNameArray;
 	}
+
+	public function findSpeciesById($id)
+	{
+		$query = $this->_em->createQuery('SELECT s.scientificName FROM AppBundle:Species s WHERE s.id = :id');
+		$query->setParameter('id', $id);
+
+		return $query->getSingleResult();
+	}
 }

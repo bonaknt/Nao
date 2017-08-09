@@ -17,4 +17,12 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
 		return $results;
 	}
+
+	public function findObsInvalidSpecies()
+	{
+		$query  = $this->_em->createQuery('SELECT o.species FROM AppBundle:Observations o WHERE o.validated = 0');
+		$results = $query->getResult();
+
+		return $results;
+	}
 }

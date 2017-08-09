@@ -4,30 +4,52 @@
     {{ parent() }}
     <h1>Les observations en attente de validation: </h1>
 
-    <table class="table">
+    <table class="table table-bordered">
         <tr>
             <th>ID de du compte</th>
-            <th>Espèce observée</th>
-            <th>Le nombre</th>
-            <th>Longitude</th>
-            <th>Latitude</th>
-            <th>Validité</th>
-            {#<th>Date de l'observation</th>#}
-        </tr>
-        {% for observation in listObservationsInvalid %}
-            <tr>
+            {% for observation in listObservationsInvalid %}
                 <td>{{ observation.idUser }}</td>
-                <td>{{ observation.species }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Espèce observée</th>
+            {% for speciesName in listSpeciesName %}
+                <td>{{ speciesName['scientificName'] }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Le nombre</th>
+            {% for observation in listObservationsInvalid %}
                 <td>{{ observation.number }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            {% for observation in listObservationsInvalid %}
                 <td>{{ observation.longitude }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Latitude</th>
+            {% for observation in listObservationsInvalid %}
                 <td>{{ observation.latitude }}</td>
-                <td>
-                    {% if observation.validated == 0 %}
-                        Non validée
-                    {% endif %}
-                </td>
-                {#<td>{{ observation.obsDate }}</td>#}
-            </tr>
-        {% endfor %}
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Date de l'observation</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.obsDate|date('d-M-Y  H:i') }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Validité</th>
+            {% for observation in listObservationsInvalid %}
+                {% if observation.validated == 0 %}
+                    <td>
+                        <button class="btn btn-primary">Valider l'observation</button>
+                    </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
     </table>
 {% endblock %}

@@ -83,8 +83,24 @@ class SpeciesController extends Controller
 
 		$listObservationsInvalid = $repository->findInvalid();
 
+		$listObsInvalidName = $repository->findObsInvalidSpecies();
+		dump($listObsInvalidName[1]['species']);
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Species');
+
+		$listSpeciesName = [];
+
+		for($i=0 ; $i<count($listObsInvalidName); $i++)
+		{
+			array_push($listSpeciesName, $repository->findSpeciesById($listObsInvalidName[$i]['species']));
+		}
+		dump($listSpeciesName);
+
 		return $this->render('nao/species/obsWaitingValidation.html.twig', array(
-			'listObservationsInvalid' => $listObservationsInvalid,
+			'listObservationsInvalid' 	=> 	$listObservationsInvalid,
+			'listSpeciesName'			=>	$listSpeciesName,
 		));
 	}
 }
