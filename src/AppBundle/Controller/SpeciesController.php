@@ -25,8 +25,6 @@ class SpeciesController extends Controller
 
 		$listSpecies = $repository->findAll();
 
-		dump($listSpecies);
-
 		return $this->render('nao/species/speciesSearch.html.twig', array(
 			'listSpecies' => $listSpecies,
 		));
@@ -62,7 +60,6 @@ class SpeciesController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($observationsEntity->setIdUser(1));
-			$em->persist($observationsEntity->setValidated(0));
 			$em->persist($observationsEntity->setPictures("https://laughingsquid.com/wp-content/uploads/2013/11/Dird-schnauzer-640x514.png"));
 			$em->persist($observationsEntity);
 			$em->flush();
@@ -74,10 +71,35 @@ class SpeciesController extends Controller
 	}
 
 	/**
-	 * @Route("/obswaitingsalidation", name="obsWaitingValidation")
+	 * @Route("/obswaitingvalidation", name="obsWaitingValidation")
 	 */
 	public function obsWaitingValidationAction(Request $request)
 	{
-		return $this->render('nao/species/obsWaitingValidation.html.twig');
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Observations');
+
+		$listObservationsInvalid = $repository->findInvalid();
+
+		$listObsInvalidName = $repository->findObsInvalidSpecies();
+		dump($listObsInvalidName[1]['species']);
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Species');
+
+		$listSpeciesName = [];
+
+		for($i=0 ; $i<count($listObsInvalidName); $i++)
+		{
+			array_push($listSpeciesName, $repository->findSpeciesById($listObsInvalidName[$i]['species']));
+		}
+		dump($listSpeciesName);
+
+		return $this->render('nao/species/obsWaitingValidation.html.twig', array(
+			'listObservationsInvalid' 	=> 	$listObservationsInvalid,
+			'listSpeciesName'			=>	$listSpeciesName,
+		));
 	}
 }

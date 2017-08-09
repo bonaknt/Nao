@@ -3,4 +3,53 @@
 {% block body %}
     {{ parent() }}
     <h1>Les observations en attente de validation: </h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>ID de du compte</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.idUser }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Espèce observée</th>
+            {% for speciesName in listSpeciesName %}
+                <td>{{ speciesName['scientificName'] }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Le nombre</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.number }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Longitude</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.longitude }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Latitude</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.latitude }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Date de l'observation</th>
+            {% for observation in listObservationsInvalid %}
+                <td>{{ observation.obsDate|date('d-M-Y  H:i') }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <th>Validité</th>
+            {% for observation in listObservationsInvalid %}
+                {% if observation.validated == 0 %}
+                    <td>
+                        <button class="btn btn-primary">Valider l'observation</button>
+                    </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
 {% endblock %}

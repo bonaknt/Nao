@@ -6,24 +6,35 @@
 
     <div class="well container">
         {{ form_start(observationsForm) }}
+        <h3>L'espèce</h3>
         <div class="form-group">
             {{ form_row(observationsForm.species) }}
         </div>
         <div class="form-group">
             {{ form_row(observationsForm.number) }}
         </div>
-        <div class="form-group">
-            {{ form_row(observationsForm.longitude) }}
+        <h3>Sa Position</h3>
+        <div class="col-md-7">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d20996.706608860346!2d2.3565281000000002!3d48.8660601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1502263608193"
+                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
-        <div class="form-group">
-            {{ form_row(observationsForm.latitude) }}
+        <div class="col-md-5">
+            <div class="form-group">
+                {{ form_row(observationsForm.longitude) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(observationsForm.latitude) }}
+            </div>
         </div>
-        <div class="form-group">
-            {{ form_row(observationsForm.obsDate) }}
-        </div>
-        <div class="text-right">
-            {{ form_row(observationsForm.submit) }}
-            {{ form_end(observationsForm) }}
+        <div class="col-md-12">
+            <h3>Quand ?</h3>
+            <div class="form-group">
+                {{ form_row(observationsForm.obsDate) }}
+            </div>
+            <div class="text-right">
+                {{ form_row(observationsForm.submit) }}
+                {{ form_end(observationsForm) }}
+            </div>
         </div>
     </div>
 {% endblock %}
