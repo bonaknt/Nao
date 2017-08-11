@@ -42,13 +42,16 @@
             {% endfor %}
         </tr>
         <tr>
-            <th>Validité</th>
+            <th>Validation</th>
             {% for observation in listObservationsInvalid %}
-                {% if observation.validated == 0 %}
-                    <td>
-                        <button class="btn btn-primary">Valider l'observation</button>
-                    </td>
-                {% endif %}
+                <td class="text-center">
+                    <button class="btn btn-primary">
+                        <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger">
+                        <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
+                    </button>
+                </td>
             {% endfor %}
         </tr>
     </table>
