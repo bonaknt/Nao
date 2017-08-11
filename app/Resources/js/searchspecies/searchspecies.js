@@ -3,6 +3,7 @@ import $ from 'jquery';
 import birdTemplate from './birdTemplate';
 import difference from 'lodash.difference';
 
+// ============= MAIN ================
 
 export default function main() {
     console.log('hello Im main');
@@ -18,7 +19,8 @@ export default function main() {
     events.on('speciesUpdatedEvent', speView.renderSpecies);
 }
 
-// suggestions façon google (un seul block)
+// ============= SPECIES MODEL ================
+
 function speciesModel() {
     var allSpecies = hydrateSpecies();
     var allPatternMatchingSpecies = [];
@@ -45,6 +47,7 @@ function speciesModel() {
     }
 }
 
+// ============= SPECIES VIEW ================
 
 function speciesView(template) {
     const birdTemplate = template;
@@ -103,7 +106,6 @@ function inputForm() {
                     currentlyHighlighted = currentlyHighlighted - 1;
                 }
                 highlightSuggestion(suggestionsLength)
-                print(currentlyHighlighted)
             }
             // DOWN
             if (keyPressed == '(') {
@@ -111,7 +113,6 @@ function inputForm() {
                     currentlyHighlighted++;
                 }
                 highlightSuggestion(suggestionsLength)
-                print(currentlyHighlighted)
             }
         } else {
         }
