@@ -1,33 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
     {{ parent() }}
-    <h1>La page de recherche d'espèces</h1>
-    <div id="search-form">
-        <div id="search-group" class="">
-            <input type="text" id="search-input">
-            <ul id="suggestions-container">
+        <h1>La page de recherche d'espèces</h1>
+        <div id="search-form">
+            <div id="search-group" class="">
+                <input type="text" id="search-input" autocomplete="off">
+                <ul id="suggestions-container">
 
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="search-result-container"></div>
-    <table class="table">
-        <tr>
-            <th>Nom</th>
-            <th>Nom Scientifique</th>
-            <th>Ordre</th>
-            <th>Famille</th>
-        </tr>
-        <tr>
-        {% for species in listSpecies %}
-            <td>{{ species.name }}</td>
-            <td>{{ species.scientificName }}</td>
-            <td>{{ species.sequence }}</td>
-            <td>{{ species.family }}</td>
-        {% endfor %}
-        </tr>
-    </table>
+
+        <div id="search-result-container">
+            <div class="row" id="result-row">
+
+            </div>
+        </div>
+
+
 
 {% endblock %}
 {% block javascripts %}
