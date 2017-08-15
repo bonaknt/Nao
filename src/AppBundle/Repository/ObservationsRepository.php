@@ -25,4 +25,12 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
 		return $results;
 	}
+
+	public function findById($id)
+	{
+		$query = $this->_em->createQuery('SELECT o FROM AppBundle:Observations o WHERE o.id = :id');
+		$query->setParameter('id', $id);
+
+		return $query->getSingleResult();
+	}
 }

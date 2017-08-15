@@ -45,14 +45,18 @@
             <th>Validation</th>
             {% for observation in listObservationsInvalid %}
                 <td class="text-center">
-                    <button class="btn btn-primary">
+                    {#  Valider l'observation   #}
+                    <a class="btn btn-primary" href="{{ path('obsValidated') }}?id={{ observation.id }}">
                         <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-danger">
+                    </a>
+
+                    {#  Supprimer l'observation #}
+                    <a class="btn btn-danger" href="{{ path('obsDeleted') }}?id={{ observation.id }}">
                         <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
-                    </button>
+                    </a>
                 </td>
             {% endfor %}
         </tr>
     </table>
+
 {% endblock %}

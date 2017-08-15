@@ -45,6 +45,7 @@ class SpeciesController extends Controller
 		$listScientificName = $repository->findScientificName();
 
 		// Création du formulaire
+			//	Il faut ajouter un champ pour ajouter les images capturées
 		$observationsForm = $this
 			->get('form.factory')
 			->create(ObservationsType::class, $observationsEntity)
@@ -80,16 +81,18 @@ class SpeciesController extends Controller
 			->getManager()
 			->getRepository('AppBundle:Observations');
 
+		//	Trouver toutes les observations pas encore validées
 		$listObservationsInvalid = $repository->findInvalid();
 
+		//	Récupérer le nom des espèces des espèces pas encore validées au lieu des nombres.
 		$listObsInvalidName = $repository->findObsInvalidSpecies();
 		$repository = $this
 			->getDoctrine()
 			->getManager()
 			->getRepository('AppBundle:Species');
 
+			//	On met dans un tableau le nom des espèces
 		$listSpeciesName = [];
-
 		for($i=0 ; $i<count($listObsInvalidName); $i++)
 		{
 			array_push($listSpeciesName, $repository->findSpeciesById($listObsInvalidName[$i]['species']));
@@ -99,5 +102,37 @@ class SpeciesController extends Controller
 			'listObservationsInvalid' 	=> 	$listObservationsInvalid,
 			'listSpeciesName'			=>	$listSpeciesName,
 		));
+	}
+
+	/**
+	 * @Route("/obsvalidated", name="obsValidated")
+	 */
+	public function ObsValidatedAction(Request $request)
+	{
+		//	Récupérer l'id
+		$id = $request->get('id');
+		//	passer Validated à 1 dans MYSQL
+		$em = $this->getDoctrine()->getManager();
+		$valid = $em->getRepository(Observations::class)->findById($id);
+		$valid->setValidated('1');
+		$em->flush();
+
+		return $this->redirectToRoute('obsWaitingValidation');
+	}
+
+	/**
+	 * @Route("/obsdeleted", name="obsDeleted")
+	 */
+	public function ObsDeletedAction(Request $request)
+	{
+		//	Récupérer l'id
+		$id = $request->get('id');
+		//	Supprimer l'obj
+		$em = $this->getDoctrine()->getManager();
+		$valid = $em->getRepository(Observations::class)->findById($id);
+		$em->remove($valid);
+		$em->flush();
+
+		return $this->redirectToRoute('obsWaitingValidation');
 	}
 }
