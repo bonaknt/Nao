@@ -4,11 +4,11 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Observations;
 
 use AppBundle\Form\ObservationsType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SpeciesController extends Controller
 {
@@ -59,9 +59,22 @@ class SpeciesController extends Controller
 		// If form submit
 		if ($request->isMethod('POST') && $observationsForm->handleRequest($request)->isValid())
 		{
+			$picture = $observationsEntity->getPictures();
+			// S'il y a une image
+			if($picture != null )
+			{
+				//	Un nom unique pour le fichier :
+				$pictureName = md5(uniqid()).'.'.$picture->guessExtension();
+				//	Déplace le fichier dans la répertoire photo
+				$picture->move(
+					$this->getParameter('pictures_directory'),
+					$pictureName
+				);
+				$observationsEntity->setPictures($pictureName);
+			}
+
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($observationsEntity->setIdUser(1));
-			$em->persist($observationsEntity->setPictures("https://laughingsquid.com/wp-content/uploads/2013/11/Dird-schnauzer-640x514.png"));
 			$em->persist($observationsEntity);
 			$em->flush();
 		}

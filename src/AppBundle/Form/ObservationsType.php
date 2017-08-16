@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
@@ -31,6 +32,11 @@ class ObservationsType extends AbstractType
 						)
 					)
 				]
+			))
+			->add('pictures', FileType::class, array(
+				'label' 		=>	'Image JPG',
+				'attr'			=>	['class' => 'form-control'],
+				'required'		=>	false
 			))
 			->add('longitude', NumberType::class, array(
 				'label' 		=> 'Longitude',

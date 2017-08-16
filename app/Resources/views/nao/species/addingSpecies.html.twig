@@ -13,6 +13,9 @@
         <div class="form-group">
             {{ form_row(observationsForm.number) }}
         </div>
+        <div class="form-group">
+            {{ form_row(observationsForm.pictures) }}
+        </div>
         <h3>Sa Position</h3>
         <div class="col-md-7">
             <div id="map" style="height: 400px;"></div>
@@ -21,12 +24,12 @@
             <div class="form-group">
                 {{ form_label(observationsForm.longitude) }}
                 {{ form_errors(observationsForm.longitude) }}
-                {{ form_widget(observationsForm.longitude, { 'attr': {'class': 'longitude'} }) }}
+                {{ form_widget(observationsForm.longitude) }}
             </div>
             <div class="form-group">
                 {{ form_label(observationsForm.latitude) }}
                 {{ form_errors(observationsForm.latitude) }}
-                {{ form_widget(observationsForm.latitude, { 'attr': {'class': 'latitude'} }) }}
+                {{ form_widget(observationsForm.latitude) }}
             </div>
         </div>
         <div class="col-md-12">
