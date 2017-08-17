@@ -17,6 +17,18 @@
                 <td>{{ speciesName['scientificName'] }}</td>
             {% endfor %}
         </tr>
+        <tr  class="text-center">
+            <th>Image</th>
+            {% for observation in listObservationsInvalid %}
+                <td>
+                {% if observation.pictures != null %}
+                    <img src="{{ asset('uploads/pictures/') ~ observation.pictures}}" width="200">
+                {% else %}
+                    <img src="{{ asset('uploads/pictures/photo_manquante.png')}}" width="200">
+                {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
         <tr>
             <th>Le nombre</th>
             {% for observation in listObservationsInvalid %}
