@@ -30,9 +30,10 @@ class ApiController extends Controller
                 ->getManager()
                 ->getRepository('AppBundle:Species');
 
-            $listSpecies = $repository->findAll();
+            $result = $repository->findAll();
 
-            $response = new JsonResponse(array('data' => $listSpecies));
+
+            $response = new JsonResponse(array('data' => $result));
             return $response;
         }
         return new Response("Erreur, ceci n'est pas une requête ajax");

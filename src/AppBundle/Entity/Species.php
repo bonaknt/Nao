@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="species")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SpeciesRepository")
  */
-class Species
+class Species   implements \JsonSerializable
 {
     /**
      * @var int
@@ -155,5 +155,16 @@ class Species
     {
         return $this->family;
     }
+
+    public function jsonSerialize()
+    {
+
+        return json_encode(['name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
+    }
+
+
+
+
+
 }
 
