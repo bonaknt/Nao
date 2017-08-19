@@ -61,7 +61,7 @@ class SpeciesController extends Controller
 		{
 			$picture = $observationsEntity->getPictures();
 			// S'il y a une image
-			if($picture != null )
+			if($picture != null)
 			{
 				//	Un nom unique pour le fichier :
 				$pictureName = md5(uniqid()).'.'.$picture->guessExtension();

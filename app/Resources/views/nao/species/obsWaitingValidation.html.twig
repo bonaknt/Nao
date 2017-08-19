@@ -58,12 +58,12 @@
             {% for observation in listObservationsInvalid %}
                 <td class="text-center">
                     {#  Valider l'observation   #}
-                    <a class="btn btn-primary" href="{{ path('obsValidated') }}?id={{ observation.id }}">
+                    <a class="btn btn-primary confirm" href="{{ path('obsValidated') }}?id={{ observation.id }}">
                         <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
                     </a>
 
                     {#  Supprimer l'observation #}
-                    <a class="btn btn-danger" href="{{ path('obsDeleted') }}?id={{ observation.id }}">
+                    <a class="btn btn-danger confirm" href="{{ path('obsDeleted') }}?id={{ observation.id }}">
                         <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
                     </a>
                 </td>
@@ -71,4 +71,18 @@
         </tr>
     </table>
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('.confirm').click(function()
+        {
+            var r = confirm('Souhaitez-vous confirmer ce choix ?');
+            if(r == false)
+            {
+                return false;
+            }
+        });
+    </script>
 {% endblock %}

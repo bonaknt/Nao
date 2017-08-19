@@ -33,4 +33,14 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
 		return $query->getSingleResult();
 	}
+
+	public function findBySpecies($species)
+	{
+		$query  = $this->_em->createQuery('SELECT o.species FROM AppBundle:Observations o WHERE o.species = :species');
+		$query->setParameter('species', $species);
+
+		$results = $query->getResult();
+
+		return $results;
+	}
 }

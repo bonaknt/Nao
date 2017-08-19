@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Algolia\AlgoliaSearchBundle\Mapping\Annotation as Algolia;
 
 /**
  * Observations
@@ -35,8 +34,6 @@ class Observations
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(name="species", type="integer")
-	 *
-	 * @Algolia\Attribute
      */
     private $species;
 
