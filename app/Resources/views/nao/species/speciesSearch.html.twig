@@ -1,6 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
     {{ parent() }}
-    <h1>La page de recherche d'espèces</h1>
+        <h1>La page de recherche d'espèces</h1>
+        <div id="search-form">
+            <div id="search-group" class="">
+                <input type="text" id="search-input" autocomplete="off">
+                <ul id="suggestions-container">
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="search-result-container">
+            <div class="row" id="result-row">
+                {{ species }}
+            </div>
+        </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    {{ parent() }}
 {% endblock %}

@@ -23,15 +23,17 @@ class Observations
 
     /**
      * @var int
-     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Users", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(name="id_user", type="integer")
      */
     private $idUser;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="species", type="string", length=255)
+     * @var int
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
+	 * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(name="species", type="integer")
      */
     private $species;
 
@@ -68,7 +70,7 @@ class Observations
 	 *
 	 * @ORM\Column(name="validated", type="boolean")
 	 */
-	private $validated;
+	private $validated = 0;
 
 	/**
 	 * @var datetime

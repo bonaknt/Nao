@@ -10,4 +10,37 @@ namespace AppBundle\Repository;
  */
 class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findInvalid()
+	{
+		$query  = $this->_em->createQuery('SELECT o FROM AppBundle:Observations o WHERE o.validated = 0');
+		$results = $query->getResult();
+
+		return $results;
+	}
+
+	public function findObsInvalidSpecies()
+	{
+		$query  = $this->_em->createQuery('SELECT o.species FROM AppBundle:Observations o WHERE o.validated = 0');
+		$results = $query->getResult();
+
+		return $results;
+	}
+
+	public function findById($id)
+	{
+		$query = $this->_em->createQuery('SELECT o FROM AppBundle:Observations o WHERE o.id = :id');
+		$query->setParameter('id', $id);
+
+		return $query->getSingleResult();
+	}
+
+	public function findBySpecies($species)
+	{
+		$query  = $this->_em->createQuery('SELECT o.species FROM AppBundle:Observations o WHERE o.species = :species');
+		$query->setParameter('species', $species);
+
+		$results = $query->getResult();
+
+		return $results;
+	}
 }
