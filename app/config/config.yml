@@ -6,11 +6,11 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -94,8 +94,8 @@ easy_admin:
                 title: "Utilisateurs"
                 fields: 
                 - id
-                - username
-                - { property: 'email', label: 'Contact' }
+                - { property: 'username', label: 'Pseudo'}
+                - { property: 'email', label: 'Email' }
                 - { property: 'enabled', label: 'Actif' }
                 - roles
             label: 'Utilisateurs'
@@ -118,4 +118,14 @@ easy_admin:
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Particulier' : 'ROLE_USER', 'Naturaliste' : 'ROLE_SUPER_USER', 'Administrateur' : 'ROLE_SUPER_ADMIN' } }, label: 'Roles' }
         Observations:
             class: AppBundle\Entity\Observations
-   
+            list:
+                title: 'Observations'
+                fields:
+                - id
+                - { property: 'id user', label: 'Identifiant utilisateur'}
+                - { property: 'species', label: 'Espèce' }
+                - { property: 'pictures', label: 'image' }
+                - { property: 'number', label: 'Nombre' }
+                - { property: 'longitude', label: 'Longitude' }
+                - { property: 'latitude', label: 'Latitude' }
+                - { property: 'validated', label: 'Validité' }
