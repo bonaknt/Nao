@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    translator: { fallbacks: ['%locale%'] }
+    #translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -119,6 +119,7 @@ easy_admin:
         Observations:
             class: AppBundle\Entity\Observations
             list:
+<<<<<<< HEAD
                 title: 'Observations'
                 fields:
                 - id
@@ -129,3 +130,20 @@ easy_admin:
                 - { property: 'longitude', label: 'Longitude' }
                 - { property: 'latitude', label: 'Latitude' }
                 - { property: 'validated', label: 'Validité' }
+=======
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier' }
+                    - { name: 'delete', label: 'Supprimer' }
+                    - { name: 'new', label: 'Nouveau' }
+                    - { name: 'search', label: 'Recherche' }
+                title: "Observations"
+                fields:
+
+                    - { property: 'idUser', label: 'ID utilisateur' }
+                    - { property: 'species', label: 'espèce' }
+                    - { property: 'pictures', type: 'image', label: 'image' }
+                    - { property: 'number', label: 'nombre rencontré' }
+                    - { property: 'longitude', label: 'longitude' }
+                    - { property: 'latitude', label: 'latitude' }
+                    - { property: 'validated', label: 'validité' }
+>>>>>>> mohamed_konate
