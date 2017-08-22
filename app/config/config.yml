@@ -119,18 +119,6 @@ easy_admin:
         Observations:
             class: AppBundle\Entity\Observations
             list:
-<<<<<<< HEAD
-                title: 'Observations'
-                fields:
-                - id
-                - { property: 'id user', label: 'Identifiant utilisateur'}
-                - { property: 'species', label: 'Espèce' }
-                - { property: 'pictures', label: 'image' }
-                - { property: 'number', label: 'Nombre' }
-                - { property: 'longitude', label: 'Longitude' }
-                - { property: 'latitude', label: 'Latitude' }
-                - { property: 'validated', label: 'Validité' }
-=======
                 actions:
                     - { name: 'edit', icon: 'pencil', label: 'Modifier' }
                     - { name: 'delete', label: 'Supprimer' }
@@ -146,4 +134,4 @@ easy_admin:
                     - { property: 'longitude', label: 'longitude' }
                     - { property: 'latitude', label: 'latitude' }
                     - { property: 'validated', label: 'validité' }
->>>>>>> mohamed_konate
+
