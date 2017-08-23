@@ -67,8 +67,6 @@
         },
         {
             "name": "doctrine/annotations",
-<<<<<<< HEAD
-<<<<<<< HEAD
             "version": "v1.5.0",
             "source": {
                 "type": "git",
@@ -79,9 +77,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/annotations/zipball/5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
                 "reference": "5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
-=======
-=======
->>>>>>> mohamed_konate
             "version": "v1.4.0",
             "source": {
                 "type": "git",
@@ -92,23 +87,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
                 "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "php": "^7.1"
-=======
                 "php": "^5.6 || ^7.0"
->>>>>>> mohamed_konate
-=======
                 "php": "^5.6 || ^7.0"
->>>>>>> mohamed_konate
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
@@ -117,15 +102,9 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-<<<<<<< HEAD
-<<<<<<< HEAD
                     "dev-master": "1.5.x-dev"
-=======
                     "dev-master": "1.4.x-dev"
->>>>>>> mohamed_konate
-=======
                     "dev-master": "1.4.x-dev"
->>>>>>> mohamed_konate
                 }
             },
             "autoload": {
@@ -166,8 +145,6 @@
                 "docblock",
                 "parser"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2017-07-22T10:58:02+00:00"
         },
         {
@@ -182,9 +159,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/cache/zipball/53d9518ffeb019c51d542ff60cb578f076d3ff16",
                 "reference": "53d9518ffeb019c51d542ff60cb578f076d3ff16",
-=======
-=======
->>>>>>> mohamed_konate
             "time": "2017-02-24T16:22:25+00:00"
         },
         {
@@ -199,10 +173,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/cache/zipball/eb152c5100571c7a45470ff2a35095ab3f3b900b",
                 "reference": "eb152c5100571c7a45470ff2a35095ab3f3b900b",
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
                 "shasum": ""
             },
             "require": {
@@ -259,8 +229,6 @@
                 "cache",
                 "caching"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2017-07-22T13:00:15+00:00"
         },
         {
@@ -279,9 +247,6 @@
             },
             "require": {
                 "php": "^7.1"
-=======
-=======
->>>>>>> mohamed_konate
             "time": "2017-07-22T12:49:21+00:00"
         },
         {
@@ -300,10 +265,6 @@
             },
             "require": {
                 "php": "^5.6 || ^7.0"
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
             },
             "require-dev": {
                 "doctrine/coding-standard": "~0.1@dev",
@@ -353,8 +314,6 @@
                 "collections",
                 "iterator"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2017-07-22T10:37:32+00:00"
         },
         {
@@ -369,9 +328,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/common/zipball/ed349f953d443963c590b008b37b864b8a3c4b21",
                 "reference": "ed349f953d443963c590b008b37b864b8a3c4b21",
-=======
-=======
->>>>>>> mohamed_konate
             "time": "2017-01-03T10:49:41+00:00"
         },
         {
@@ -386,10 +342,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/common/zipball/4acb8f89626baafede6ee5475bc5844096eba8a9",
                 "reference": "4acb8f89626baafede6ee5475bc5844096eba8a9",
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
                 "shasum": ""
             },
             "require": {
@@ -398,23 +350,14 @@
                 "doctrine/collections": "1.*",
                 "doctrine/inflector": "1.*",
                 "doctrine/lexer": "1.*",
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "php": "~7.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.7"
-=======
-=======
->>>>>>> mohamed_konate
                 "php": "~5.6|~7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.4.6"
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
             },
             "type": "library",
             "extra": {
@@ -462,8 +405,6 @@
                 "persistence",
                 "spl"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2017-07-22T09:01:43+00:00"
         },
         {
@@ -478,9 +419,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/1a086f853425b1f5349775ce57e45a772d2d2ba5",
                 "reference": "1a086f853425b1f5349775ce57e45a772d2d2ba5",
-=======
-=======
->>>>>>> mohamed_konate
             "time": "2017-07-22T08:35:12+00:00"
         },
         {
@@ -495,10 +433,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/729340d8d1eec8f01bff708e12e449a3415af873",
                 "reference": "729340d8d1eec8f01bff708e12e449a3415af873",
-<<<<<<< HEAD
->>>>>>> mohamed_konate
-=======
->>>>>>> mohamed_konate
                 "shasum": ""
             },
             "require": {
@@ -556,15 +490,6 @@
                 "persistence",
                 "queryobject"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "time": "2017-07-28T10:40:18+00:00"
-=======
-            "time": "2017-07-22T20:44:48+00:00"
->>>>>>> mohamed_konate
-=======
-            "time": "2017-07-22T20:44:48+00:00"
->>>>>>> mohamed_konate
         },
         {
             "name": "doctrine/doctrine-bundle",
