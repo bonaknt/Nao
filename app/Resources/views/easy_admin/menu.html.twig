@@ -33,13 +33,25 @@
 <ul class="sidebar-menu">
     {% block main_menu %}
         
-        <li> <a href="?entity=Observations"> Observations </a></li>
+        <li>
+            <a href="?entity=Observations">
+                <i class="fa fa-camera-retro" aria-hidden="true"></i> Observations
+            </a>
+        </li>
 
         {% if is_granted('ROLE_ADMIN') %}
-        <li> <a href="?entity=Users"> Utilisateurs </a></li>
+        <li>
+            <a href="?entity=Users">
+                <i class="fa fa-users" aria-hidden="true"></i> Utilisateurs
+            </a>
+        </li>
         {% endif %}
 
-        <li> <a href="{{ path('homepage') }}">Retour au site</a></li>
+        <li>
+            <a href="{{ path('homepage') }}">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i>Retour au site
+            </a>
+        </li>
 
     {% endblock main_menu %}
 </ul>

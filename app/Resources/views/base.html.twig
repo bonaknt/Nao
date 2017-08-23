@@ -40,24 +40,27 @@
                                     </form>
                                 </li>
 
-                                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                      <li><a href="{{ path('fos_user_security_logout') }}"> Déconnexion</a></li>
-                                      <li><a href="{{ path('admin') }}">Administration</a></li>
-                                      <li> <a class="navbar-brand" href="{{ path('homepage') }}">Connecté en tant que {{ app.user.username }} </li>
-                                    {% else %}
-
                                 <li class="dropdown">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-user"></span>  {{ app.user.username }} <b class="caret"></b>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ path('admin') }}">Administration</a></li>
+                                            <li><a href="{{ path('fos_user_security_logout') }}"> Déconnexion</a></li>
+                                        </ul>
+                                {% else %}
+
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="glyphicon glyphicon-user"></span>Connexion/Inscription<b class="caret"></b></a>
-
 
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
                                         <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
                                     </ul>
-                                    
-                                </li>
                                 {% endif %}
+                                </li>
 
                                 <!--Si l'utilisateur est connecté-->
                                 <li class="dropdown" style="display: none;">
