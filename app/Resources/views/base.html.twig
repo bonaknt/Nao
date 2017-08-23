@@ -5,73 +5,160 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/global.css') }}"> <!--Feuille de style CSS-->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!--BOOTSTRAP-->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--FONT AWESOME-->
+            <link rel="stylesheet" href="{{ asset('build/global.css') }}"> <!--Feuille de style CSS-->
+
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+    <style>
+        body {
+            margin: 0;
+            color: white;
+        }
+        nav {
+            height: 90px;
+            background-color: #38817A;
+            box-sizing: border-box;
+            font-size: 1.3em;
+        }
+        #logo-nao-block {
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 80px;
+        }
+        #logo-nao {
+            height: 70px;
+        }
+        #observation-block {
+            display: inline-block;
+            /*transform: translateY(-8px);*/
+            margin-right: 90px;
+        }
+        .icon {
+            /*height: 60px;*/
+            width: 60px;
+            height: 70px;
+        }
+
+        /*.red {*/
+            /*border: 1px solid red;*/
+        /*}*/
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+        .inline-block {
+            display: inline-block;
+        }
+        .icon {
+        }
+        .nav-text-block {
+
+        }
+        #recherche-block {
+            transform: translateY(-12px);
+        }
+        #icon-rechercher {
+            transform: translateY(10px)
+        }
+        #icon-ajouter {
+            transform: translateY(-7px);
+        }
+        b {
+            font-size: 1.2em;
+        }
+        #recherche-input {
+            width: 235px;
+            height: 25px;
+        }
+        #rechercher {
+            position: relative;
+            top: 16px;
+        }
+        .fa-arrow-right {
+            color: #346473;
+        }
+        #arrow-span {
+            background-color: white;
+            display: inline-block;
+            margin-left: -6px;
+            height: 25px;
+            width: 20px;
+        }
+
+        #login-block {
+            display: inline-block;
+            background-color: #75B350;
+            height: 90px;
+            width: 180px;
+            float: right;
+        }
+        #connexion {
+            height: 45px;
+            text-align: center;
+            box-sizing: border-box ;
+            padding-top: 10px;
+            font-size: 0.8em;
+            border-bottom: 1px solid #346473;
+        }
+        #inscription {
+            height: 45px;
+            text-align: center;
+            box-sizing: border-box ;
+            padding-top: 10px;
+            font-size: 0.8em;
+            border-top: 1px solid #346473;
+        }
+        .nav-text-block {
+            transform: translateY(10px);
+
+        }
+    </style>
 
     <body>
-
-        <div class="container-fluid">
-            {% block body %}
-            <div class="row">
-                <!--Barre de navigation-->
-                <nav class="navbar navbar-default">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></span>
-                            </button>
-                            <a class="navbar-brand" href="{{ path('homepage') }}">Nos Amis les Oiseaux</a>
+            {% block nav %}
+                <nav>
+                    <div id="logo-nao-block">
+                        <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                    </div>
+                    <div id="observation-block" class="red">
+                        <div class="icon white inline-block"><img id="icon-ajouter" src="{{ asset('images/Ajouter.svg') }}" alt=""></div>
+                        <div class="nav-text-block inline-block">
+                            <div class="nav-text white"><b>Ajouter</b></div>
+                            <div class="nav-text white">une observation</div>
                         </div>
+                    </div>
 
-                        <div class="collapse navbar-collapse nav" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{{ path('addingSpecies') }}"><i class="fa fa-share-square-o" aria-hidden="true"></i>  Ajouter une observation</a></li>
-                                <li>
-                                    <form class="navbar-form navbar-right">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Rechercher">
-                                        </div>
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </form>
-                                </li>
-
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-user"></span>Connexion/Inscription<b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                                        <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
-                                    </ul>
-                                </li>
-
-                                <!--Si l'utilisateur est connecté-->
-                                <li class="dropdown" style="display: none;">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-hand-spock-o" aria-hidden="true"></i>  Bonjour [Prenom] <span class="badge">3</span> <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">Dashboard <span class="badge">2</span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Ajout d'observations <span class="badge">1</span></a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            </ul>
+                    <div id="recherche-block" class="inline-block red">
+                        <div class="icon white inline-block"><img id="icon-rechercher" src="{{ asset('images/Rechercher.svg') }}" alt=""></div>
+                        <div id="rechercher" class="nav-text-block inline-block white">
+                            <b>Rechercher</b>
+                            <div>
+                                <input id="recherche-input" type="text" placeholder="Entrez le nom d'une espèce">
+                                <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                            </div>
                         </div>
+                    </div>
+
+                    <div id="login-block">
+                        <div id="connexion" class="red">CONNEXION</div>
+                        <div id="inscription" class="red">INSCRIPTION</div>
+                    </div>
+
                 </nav>
+            {% endblock %}
 
+            {% block body %}
             {% endblock %}
 
             {% block footer %}
-
+            <div class="row">
                 <footer>
                     <div class="col-md-12">
                         <div class="col-md-4 text-right" >
@@ -103,12 +190,14 @@
                     <div class="text-center" id="copyright">© 2017 - Copyright Nos Amis les Oiseaux</div>
                 </footer>
             </div>
+
+
             {% endblock %}
             {% block javascripts %}
                 <script src="{{ asset('build/app.js') }}"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
+                <script src="{{ asset('build/size.js') }}"></script>
             {% endblock %}
-        </div>
     </body>
 </html>
