@@ -1,6 +1,7 @@
 {
     "name": "kevin/nao_project",
     "license": "proprietary",
+    "description" : "Projet nos amis les oiseaux",
     "type": "project",
     "autoload": {
         "psr-4": {
