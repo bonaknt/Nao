@@ -4,7 +4,7 @@ var bird =  '{{#each birds}}' +
                         '<div class="img-container">' +
                         '</div>' +
                         '<div class="scient-name text-center">' +
-                            '{{name}}'+
+                            '<a href={{name}}>{{name}}</a>'+
                         '</div>'+
                     '</div>' +
                 '</div>' +
