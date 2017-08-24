@@ -4,51 +4,42 @@
     {{ parent() }}
     <h1>Page d'ajout d'espèces</h1>
 
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <div class="well container">
-            {{ form_start(observationsForm) }}
-            <h3>L'espèce</h3>
+    <div class="well container">
+        {{ form_start(observationsForm) }}
+        <h3>L'espèce</h3>
+        <div class="form-group">
+            {{ form_row(observationsForm.species) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(observationsForm.number) }}
+        </div>
+        <h3>Sa Position</h3>
+        <div class="col-md-7">
+            <div id="map" style="height: 400px;"></div>
+        </div>
+        <div class="col-md-5">
             <div class="form-group">
-                {{ form_row(observationsForm.species) }}
+                {{ form_label(observationsForm.longitude) }}
+                {{ form_errors(observationsForm.longitude) }}
+                {{ form_widget(observationsForm.longitude, { 'attr': {'class': 'longitude'} }) }}
             </div>
             <div class="form-group">
-                {{ form_row(observationsForm.number) }}
-            </div>
-            <div class="form-group">
-                {{ form_row(observationsForm.pictures) }}
-            </div>
-            <h3>Sa Position</h3>
-            <div class="col-md-7">
-                <div id="map" style="height: 400px;"></div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    {{ form_label(observationsForm.longitude) }}
-                    {{ form_errors(observationsForm.longitude) }}
-                    {{ form_widget(observationsForm.longitude) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(observationsForm.latitude) }}
-                    {{ form_errors(observationsForm.latitude) }}
-                    {{ form_widget(observationsForm.latitude) }}
-                </div>
-            </div>
-            <div class="col-md-12">
-                <h3>Quand ?</h3>
-                <div class="form-group">
-                    {{ form_row(observationsForm.obsDate) }}
-                </div>
-                <div class="text-right">
-                    {{ form_row(observationsForm.submit) }}
-                    {{ form_end(observationsForm) }}
-                </div>
+                {{ form_label(observationsForm.latitude) }}
+                {{ form_errors(observationsForm.latitude) }}
+                {{ form_widget(observationsForm.latitude, { 'attr': {'class': 'latitude'} }) }}
             </div>
         </div>
-    {% else %}
-        <p class="bg-danger">
-            <a href="{{ path('signin') }}">Inscrivez-vous</a> ou <a href="{{ path('login') }}">connectez-vous</a> pour pouvoir ajouter une observation !
-        </p>
-    {% endif %}
+        <div class="col-md-12">
+            <h3>Quand ?</h3>
+            <div class="form-group">
+                {{ form_row(observationsForm.obsDate) }}
+            </div>
+            <div class="text-right">
+                {{ form_row(observationsForm.submit) }}
+                {{ form_end(observationsForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -56,5 +47,5 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkp9nFRlaIzb4BSIFO24Q7fLOF37x_NuA&callback=initMap">
     </script>
-    <script src="{{ asset('build/initMap.js') }}"></script>
+    <script src="{{ asset('static/initMap.js') }}"></script>
 {% endblock %}
