@@ -69,7 +69,7 @@ function speciesView(template) {
             birdObjectsArray.push(bird);
         }
         let html = birdTemplate({'birds': birdObjectsArray});
-        // print(html)
+        print(html)
         $resultRow.append(html);
     }
     return {
@@ -159,18 +159,16 @@ function inputForm() {
 
 
 function getAllSpeciesFixture() {
-    var scientifiNames = [];
-
-    $.get( "api/getallbirds", function( data ) {
-        data.data.forEach(function(row){
-            let parsed = JSON.parse(row);
-            scientifiNames.push(parsed.scientificName)
+    var species = [];
+    $.get('api/getallbirds', function(data){
+        data.data.forEach(function(bird){
+            var parsed = JSON.parse(bird)
+            species.push(parsed.scientificName)
         })
-
     });
-
-    return scientifiNames;
+    return species;
 }
+
 
 function print(string) {
     console.log(string)

@@ -23,7 +23,6 @@
             background-color: #38817A;
             box-sizing: border-box;
             font-size: 1.3em;
-            color: white;
         }
         #logo-nao-block {
             display: inline-block;
@@ -60,6 +59,7 @@
         .icon {
         }
         .nav-text-block {
+            color: white;
 
         }
         #recherche-block {
@@ -77,6 +77,7 @@
         #recherche-input {
             width: 235px;
             height: 25px;
+            color: black;
         }
         #rechercher {
             position: relative;
@@ -99,6 +100,8 @@
             height: 90px;
             width: 180px;
             float: right;
+            color: white;
+
         }
         #connexion {
             height: 45px;
@@ -107,6 +110,7 @@
             padding-top: 10px;
             font-size: 0.8em;
             border-bottom: 1px solid #346473;
+
         }
         #inscription {
             height: 45px;
@@ -143,6 +147,9 @@
                             <div>
                                 <input id="recherche-input" type="text" placeholder="Entrez le nom d'une espèce">
                                 <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                {#<ul id="suggestions-container">#}
+                                    {#<li class="suggestion">kjkljlkjlkj</li>#}
+                                {#</ul>#}
                             </div>
                         </div>
                     </div>
