@@ -1,6 +1,7 @@
-import searchSpecies from './searchspecies/searchspecies';
+import {initSearchPage, initNavbarSearch} from './searchspecies/searchspecies';
 
-if (isLocation('speciessearch')) searchSpecies();
+initNavbarSearch();
+if (isLocation('speciessearch')) initSearchPage();
 
 
 function isLocation(location) {

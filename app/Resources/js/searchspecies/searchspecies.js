@@ -1,17 +1,20 @@
-import events from '../events';
+import eventsConstructor from '../events';
 import $ from 'jquery';
 import birdTemplate from './birdTemplate';
 import difference from 'lodash.difference';
 
 // ============= MAIN ================
 
-export default function main() {
+
+// INIT function for page "searchspecies"
+export function initSearchPage() {
     console.log('hello Im main');
+    var events = eventsConstructor();
     var template = Handlebars.compile(birdTemplate);
     // print(template({'birds': [{'name':'aaaaaa'}, {'name': 'bbbbbbbb'}]}))
 
-    var inputFormObj = inputForm();
-    var speMod = speciesModel();
+    var inputFormObj = inputForm($('#search-input'), $('#suggestions-container'), events);
+    var speMod = speciesModel(events);
     var speView = speciesView(template);
 
     events.on('inputChangeEvent', speMod.updateSuggestionsArray);
@@ -19,9 +22,19 @@ export default function main() {
     events.on('speciesUpdatedEvent', speView.renderSpecies);
 }
 
+// INIT function for navbar search field, every pages
+export function initNavbarSearch() {
+    var events = eventsConstructor();
+    var inputFormObj = inputForm($('#nav-search-input'), $('#nav-suggestions-container'), events);
+    var speMod = speciesModel(events);
+
+    events.on('inputChangeEvent', speMod.updateSuggestionsArray);
+    events.on('speciesUpdatedEvent', inputFormObj.updateCurrentSuggestions);
+}
+
 // ============= SPECIES MODEL ================
 
-function speciesModel() {
+function speciesModel(events) {
     var allSpecies = hydrateSpecies();
     var allPatternMatchingSpecies = [];
     function uppdateSuggestionsArray(currentString) {
@@ -78,10 +91,8 @@ function speciesView(template) {
 }
 
 
-function inputForm() {
+function inputForm($input, $suggestionsContainer, events) {
     var currentSuggestionsArray = [];
-    var $input = $('#search-input');
-    var $suggestionsContainer = $('#suggestions-container');
     var currentlyHighlighted = -1;
 
     //dom events binding
@@ -95,7 +106,6 @@ function inputForm() {
         currentlyHighlighted = [];
     });
     $(document).on('keydown', function(e) {
-        print('keydown')
         var keyPressed = String.fromCharCode(e.keyCode);
         var suggestionsLength =  currentSuggestionsArray.length;
 

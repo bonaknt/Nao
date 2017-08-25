@@ -74,7 +74,7 @@
         b {
             font-size: 1.2em;
         }
-        #recherche-input {
+        #nav-search-input {
             width: 235px;
             height: 25px;
             color: black;
@@ -145,11 +145,10 @@
                         <div id="rechercher" class="nav-text-block inline-block white">
                             <b>Rechercher</b>
                             <div>
-                                <input id="recherche-input" type="text" placeholder="Entrez le nom d'une espèce">
+                                <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
                                 <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                {#<ul id="suggestions-container">#}
-                                    {#<li class="suggestion">kjkljlkjlkj</li>#}
-                                {#</ul>#}
+                                <ul id="nav-suggestions-container">
+                                </ul>
                             </div>
                         </div>
                     </div>
