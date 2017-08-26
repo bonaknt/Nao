@@ -124,11 +124,53 @@
             transform: translateY(10px);
 
         }
+        /* MOBILE MOBILE MOBILE MOBILE*/
+
+        #toggle-widget {
+            float: right;
+            margin-top: 20px;
+            margin-right: 25px;
+            height:40px;
+            width: 40px;
+
+            /*border:1px solid white;*/
+        }
+        .white-bar {
+            height: 5px;
+            background-color: #F8F5E4;
+            border-radius: 3px;
+            margin-top: 7px;
+        }
+        #toggle {
+            height:160px;
+            display: block;
+            background-color: #38817A;
+            overflow: hidden;
+        }
+        .small-navbar-el{
+            border: 1px solid #F8F5E4;
+            border-radius: 3px;
+            width: 80%;
+            margin-top: 10px;
+            margin-left: 10%;
+            font-weight: bold;
+        }
+        .small-login-block {
+            color: #F8F5E4;
+        }
+        .small-other {
+            background-color: white;
+            color: #38817A;
+        }
+        #small-search-bar {
+
+        }
     </style>
 
     <body>
             {% block nav %}
-                <nav>
+                {#  BARRE DE NAV DESKTOP #}
+                <nav class="hidden">
                     <div id="logo-nao-block">
                         <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
                     </div>
@@ -148,6 +190,7 @@
                                 <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
                                 <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 <ul id="nav-suggestions-container">
+
                                 </ul>
                             </div>
                         </div>
@@ -159,10 +202,37 @@
                     </div>
 
                 </nav>
+
+                {#BARRE DE NAV MOBILE #}
+
+                <nav>
+                    <div id="logo-nao-block">
+                        <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                    </div>
+                    <div id="toggle-widget">
+                        <div class="white-bar"></div>
+                        <div class="white-bar"></div>
+                        <div class="white-bar"></div>
+                    </div>
+
+                    <div id="toggle" class="text-center">
+                        <div class="small-navbar-el small-login-block">SE CONNECTER</div>
+                        <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
+                        <div class="small-navbar-el small-other">RECHERCHER</div>
+                        <div class="small-navbar-el small-other">AJOUTER UNE OBSERVATION</div>
+                    </div>
+
+                    <div id="small-search-bar">
+
+                    </div>
+                </nav>
+
             {% endblock %}
+
 
             {% block body %}
             {% endblock %}
+
 
             {% block footer %}
             <div class="row">

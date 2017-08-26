@@ -1,6 +1,5 @@
 #nav-suggestions-container {
-  width: 500px;
-  margin-left: calc(100%/2 - 250px);
+  width: 400px;
   box-shadow: 5px 5px 2.5px transparentize(black, 0.5);
   position: absolute;
   z-index: 9000;
@@ -15,6 +14,7 @@
     padding-left: 5px;
     padding-top: 5px;
     color: black;
+    z-index: 9999999;
   }
   .selected {
     background-color: #97a0b3;

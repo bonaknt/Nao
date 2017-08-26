@@ -110,6 +110,7 @@ function inputForm($input, $suggestionsContainer, events) {
         var suggestionsLength =  currentSuggestionsArray.length;
 
         if (suggestionsLength !== 0) {
+            // si e.which == 13 -> $('.selected').text() dans input.val()
             // UP
             if (keyPressed == '&') {
                 if (currentlyHighlighted !== 0) {
