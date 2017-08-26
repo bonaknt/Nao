@@ -14,17 +14,19 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <style>
-
-
-        #small-search-bar {
-
+        @media only screen and (max-width: 768px) {
+            #logo-nao-block {
+                margin-left: 60px;
+            }
         }
+
+
     </style>
 
     <body>
             {% block nav %}
                 {#  BARRE DE NAV DESKTOP #}
-                <nav class="hidden">
+                <nav id="big-nav" class="hidden-sm hidden-xs">
                     <div id="logo-nao-block">
                         <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
                     </div>
@@ -59,13 +61,11 @@
 
                 {#BARRE DE NAV MOBILE #}
 
-                <nav>
+                <nav id="small-nav" class="hidden-md hidden-lg">
                     <div id="logo-nao-block">
                         <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
                     </div>
                     <div id="toggle-widget">
-                        <div class="white-bar"></div>
-                        <div class="white-bar"></div>
                         <div class="white-bar"></div>
                     </div>
 
@@ -77,7 +77,8 @@
                     </div>
 
                     <div id="small-search-bar">
-
+                        <input type="text" placeholder="Entrez le nom d'une espèce">
+                        <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                     </div>
                 </nav>
 
@@ -132,6 +133,31 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
                 <script src="{{ asset('build/size.js') }}"></script>
+                <script>
+                    $(document).ready(function(){
+
+                        // var toggleWidgetIsClicked = false;
+                        $("#toggle-widget").on("click", function(){
+                            $this = $(this);
+                            if ($this.hasClass('is-open')) {
+                                $this.addClass('is-closed').removeClass('is-open');
+                                $("#toggle").animate({
+                                    height: "1"
+                                }, 500);
+                            } else {
+                                $this.addClass('is-open').removeClass('is-closed');
+                                $("#toggle").animate({
+                                    height: "170"
+                                }, 500);
+                            }
+                        });
+
+
+
+                    });
+
+
+                </script>
             {% endblock %}
     </body>
 </html>

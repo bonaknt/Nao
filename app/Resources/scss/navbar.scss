@@ -1,6 +1,6 @@
 nav {
   height: 90px;
-  background-color: #38817A;
+  background-color: $maingreen;
   box-sizing: border-box;
   font-size: 1.3em;
   #logo-nao-block {
@@ -84,7 +84,7 @@ nav {
     display: inline-block;
   }
   .nav-text-block {
-    color: #F8F5E4;
+    color: $almostwhite;
   }
   .nav-text-block {
     transform: translateY(10px);
@@ -103,21 +103,65 @@ nav {
   margin-right: 25px;
   height:40px;
   width: 40px;
+  //border: 1px solid white;
+  transition: transform 0.5s;
   .white-bar {
     height: 5px;
-    background-color: #F8F5E4;
+    background-color: $almostwhite;
     border-radius: 3px;
-    margin-top: 7px;
+    //margin-top: 7px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background 0.2s;
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      border-radius: 3px;
+      background-color: $almostwhite;
+      transform: translateY(-12px);
+      transition: transform 0.5s;
+      transform-origin: 50% 50%;
+    }
+    &::after {
+      transform: translateY(12px);
+    }
+
+  }
+  &:hover {
+    .white-bar::before {
+      transform: translateY(-15px);
+    }
+    .white-bar::after {
+      transform: translateY(15px);
+    }
+  }
+}
+#toggle-widget.is-open {
+  transform: rotate(180deg);
+  .white-bar {
+    background: transparent;
+  }
+  .white-bar::before {
+    transform: translateY(0) rotate(45deg);
+  }
+  .white-bar::after {
+    transform: translateY(0) rotate(-45deg);
   }
 }
 
 #toggle {
-  height:160px;
+  height:1px;
   display: block;
-  background-color: #38817A;
+  background-color: $maingreen;
   overflow: hidden;
   .small-navbar-el{
-    border: 1px solid #F8F5E4;
+    border: 1px solid $almostwhite;
     border-radius: 3px;
     width: 80%;
     margin-top: 10px;
@@ -125,10 +169,35 @@ nav {
     font-weight: bold;
   }
   .small-login-block {
-    color: #F8F5E4;
+    color: $almostwhite;
   }
   .small-other {
     background-color: white;
-    color: #38817A;
+    color: $maingreen;
   }
 }
+
+#small-search-bar {
+  background-color: white;
+  input {
+    width:85%;
+    height: 40px;
+  }
+  #arrow-span {
+    background-color: white;
+    display: inline-block;
+    //margin-left: -6px;
+    width: 12%;
+    .fa-arrow-right {
+      color: #346473;
+      font-size: 1.5em;
+      margin-left: 35%
+    }
+  }
+}
+
+//@media only screen and (max-width: 768px) {
+//  //#logo-nao-block {
+//  //  margin-left: 42% !important;
+//  //}
+//}
