@@ -1,7 +1,7 @@
 import {initSearchPage, initNavbarSearch} from './searchspecies/searchspecies';
 
-initNavbarSearch();
-if (isLocation('speciessearch')) initSearchPage();
+if (isLocation('speciessearch')) initSearchPage()
+else initNavbarSearch();
 
 
 function isLocation(location) {

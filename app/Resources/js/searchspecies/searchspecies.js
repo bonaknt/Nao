@@ -38,16 +38,17 @@ function speciesModel(events) {
     var allSpecies = hydrateSpecies();
     var allPatternMatchingSpecies = [];
     function uppdateSuggestionsArray(currentString) {
-        allPatternMatchingSpecies = [];
-        var regexString = '^' + currentString ;
-        var regex = new RegExp(regexString, 'i');
-        for (var i = 0; i < allSpecies.length; i++) {
-            if (regex.test(allSpecies[i])) {
-                allPatternMatchingSpecies.push(allSpecies[i]);
+            allPatternMatchingSpecies = [];
+            var regexString = '^' + currentString ;
+            var regex = new RegExp(regexString, 'i');
+            for (var i = 0; i < allSpecies.length; i++) {
+                if (regex.test(allSpecies[i])) {
+                    allPatternMatchingSpecies.push(allSpecies[i]);
+                }
             }
-        }
-        events.emit('speciesUpdatedEvent', allPatternMatchingSpecies);
+            events.emit('speciesUpdatedEvent', allPatternMatchingSpecies);
     }
+
     // makes ajax query and hydrate allSpeciesArray
     function hydrateSpecies() {
         //TODO: ajax query
@@ -82,7 +83,6 @@ function speciesView(template) {
             birdObjectsArray.push(bird);
         }
         let html = birdTemplate({'birds': birdObjectsArray});
-        print(html)
         $resultRow.append(html);
     }
     return {
@@ -97,6 +97,7 @@ function inputForm($input, $suggestionsContainer, events) {
 
     //dom events binding
     $input.on('input', function(e){
+        print('input')
         currentlyHighlighted = -1;
         var currentValue = $(e.target).val();
         events.emit('inputChangeEvent', currentValue);
@@ -111,6 +112,11 @@ function inputForm($input, $suggestionsContainer, events) {
 
         if (suggestionsLength !== 0) {
             // si e.which == 13 -> $('.selected').text() dans input.val()
+            // ENTER
+            if (e.which == 13) {
+                $input.val($('.selected').text());
+                events.emit("inputChangeEvent", $input.val());
+            }
             // UP
             if (keyPressed == '&') {
                 if (currentlyHighlighted !== 0) {
@@ -131,7 +137,6 @@ function inputForm($input, $suggestionsContainer, events) {
 
     function updateCurrentSuggestions(allPatternMAtchingSpecies) {
         currentSuggestionsArray = allPatternMAtchingSpecies.slice(0,4);
-        print('suggestions updated')
         renderSuggestions(currentSuggestionsArray);
     }
 
@@ -172,9 +177,16 @@ function inputForm($input, $suggestionsContainer, events) {
 function getAllSpeciesFixture() {
     var species = [];
     $.get('api/getallbirds', function(data){
+        console.log(data)
         data.data.forEach(function(bird){
-            var parsed = JSON.parse(bird)
-            species.push(parsed.scientificName)
+            var parsed = JSON.parse(bird);
+            let scientificName = parsed.scientificName;
+            // Strip first descriptor if he's included in scientificName
+            var indexOfParenthesis = scientificName.indexOf("(")
+            if (indexOfParenthesis !== -1) {
+                scientificName = scientificName.substr(0, indexOfParenthesis);
+            }
+            species.push(scientificName)
         })
     });
     return species;

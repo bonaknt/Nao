@@ -1,3 +1,11 @@
+a {
+  color: $almostwhite;
+  &:hover {
+    text-decoration: none;
+    color:  $almostwhite;
+  }
+}
+
 nav {
   height: 90px;
   background-color: $maingreen;
