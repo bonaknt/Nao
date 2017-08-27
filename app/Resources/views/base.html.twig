@@ -13,22 +13,16 @@
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <style>
-        @media only screen and (max-width: 768px) {
-            #logo-nao-block {
-                margin-left: 60px;
-            }
-        }
 
-
-    </style>
 
     <body>
             {% block nav %}
                 {#  BARRE DE NAV DESKTOP #}
                 <nav id="big-nav" class="hidden-sm hidden-xs">
                     <div id="logo-nao-block">
-                        <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                        <a href="{{ path('homepage') }}">
+                            <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                        </a>
                     </div>
                     <div id="observation-block" class="red">
                         <div class="icon white inline-block"><img id="icon-ajouter" src="{{ asset('images/Ajouter.svg') }}" alt=""></div>
@@ -50,15 +44,19 @@
                                 <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
                                 <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 <ul id="nav-suggestions-container">
-
+                                    {# SUGGESTIONS #}
                                 </ul>
                             </div>
                         </div>
                     </div>
 
                     <div id="login-block">
-                        <div id="connexion" class="red">CONNEXION</div>
-                        <div id="inscription" class="red">INSCRIPTION</div>
+                        <a href="{{ path('login') }}">
+                            <b><div id="connexion" class="red">CONNEXION</div></b>
+                        </a>
+                        <a href="{{ path('signin') }}">
+                            <b><div id="inscription" class="red">INSCRIPTION</div></b>
+                        </a>
                     </div>
 
                 </nav>
@@ -67,17 +65,27 @@
 
                 <nav id="small-nav" class="hidden-md hidden-lg">
                     <div id="logo-nao-block">
-                        <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                        <a href="{{ path('homepage') }}">
+                            <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+                        </a>
                     </div>
                     <div id="toggle-widget">
                         <div class="white-bar"></div>
                     </div>
 
                     <div id="toggle" class="text-center">
-                        <div class="small-navbar-el small-login-block">SE CONNECTER</div>
-                        <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
-                        <div class="small-navbar-el small-other">RECHERCHER</div>
-                        <div class="small-navbar-el small-other">AJOUTER UNE OBSERVATION</div>
+                        <a href="{{ path('login') }}">
+                            <div class="small-navbar-el small-login-block">SE CONNECTER</div>
+                        </a>
+                        <a href="{{ path('signin') }}">
+                            <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
+                        </a>
+                        <a href="{{ path('speciesSearch') }}">
+                            <div class="small-navbar-el small-other">RECHERCHER</div>
+                        </a>
+                        <a href="{{ path('addingSpecies') }}">
+                            <div class="small-navbar-el small-other">AJOUTER UNE OBSERVATION</div>
+                        </a>
                     </div>
 
                     <div id="small-search-bar">
