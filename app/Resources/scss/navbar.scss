@@ -190,6 +190,8 @@ nav {
   input {
     width:85%;
     height: 40px;
+    border: none;
+    border-right: 2px solid $maingreen;
   }
   #arrow-span {
     background-color: white;

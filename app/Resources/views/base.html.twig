@@ -51,10 +51,10 @@
                     </div>
 
                     <div id="login-block">
-                        <a href="{{ path('login') }}">
+                        <a href="{{ path('fos_user_security_login') }}">
                             <b><div id="connexion" class="red">CONNEXION</div></b>
                         </a>
-                        <a href="{{ path('signin') }}">
+                        <a href="{{ path('fos_user_registration_register') }}">
                             <b><div id="inscription" class="red">INSCRIPTION</div></b>
                         </a>
                     </div>
@@ -74,12 +74,21 @@
                     </div>
 
                     <div id="toggle" class="text-center">
-                        <a href="{{ path('login') }}">
-                            <div class="small-navbar-el small-login-block">SE CONNECTER</div>
-                        </a>
-                        <a href="{{ path('signin') }}">
-                            <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
-                        </a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('dashboard') }}">
+                                <div class="small-navbar-el small-login-block">TABLEAU DE BORD</div>
+                            </a>
+                            <a href="#">
+                                <div class="small-navbar-el small-login-block">PARAMÈTRES</div>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('login') }}">
+                                <div class="small-navbar-el small-login-block">SE CONNECTER</div>
+                            </a>
+                            <a href="{{ path('signin') }}">
+                                <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
+                            </a>
+                        {% endif %}
                         <a href="{{ path('speciesSearch') }}">
                             <div class="small-navbar-el small-other">RECHERCHER</div>
                         </a>
@@ -102,6 +111,14 @@
 
 
             {% block footer %}
+
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                {% else %}
+
+                {% endif %}
+
+
             <div class="container-fluid">
                 <div class="row">
                     <footer>
@@ -144,11 +161,10 @@
                 <script src="{{ asset('build/app.js') }}"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
-                <script src="{{ asset('build/size.js') }}"></script>
+                <script src="{{ asset('static/size.js') }}"></script>
                 <script>
                     $(document).ready(function(){
 
-                        // var toggleWidgetIsClicked = false;
                         $("#toggle-widget").on("click", function(){
                             $this = $(this);
                             if ($this.hasClass('is-open')) {
@@ -163,8 +179,6 @@
                                 }, 500);
                             }
                         });
-
-
 
                     });
 
