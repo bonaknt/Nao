@@ -81,7 +81,57 @@ nav {
       font-size: 0.8em;
       border-top: 1px solid #346473;
     }
-
+    #myTooltip {
+      height: 80px;
+      display: block;
+    }
+  }
+  .login-block-connected {
+    background-color: $maingreen !important;
+    //width: 120px !important;
+    img {
+      max-height: 80%;
+      margin-top: 12px;
+      margin-left: 0;
+      cursor: pointer;
+      //margin-right: 0;
+    }
+    #tooltip-triangle {
+      height: 20px;
+      width: 20px;
+      left: 80px;
+      top: 10px;
+      background-color: $lightgreen;
+      position: relative;
+      transform: rotate(45deg);
+    }
+    #tooltip {
+      height: 120px;
+      width: 150px;
+      left: 15px;
+      top: 10px;
+      background-color: $lightgreen;
+      position: relative;
+      transform: translateY(-10px);
+      border-radius: 10px;
+      z-index: 999999999999999999999999999;
+      a {
+        display: block;
+      }
+      h3 {
+        margin-top: 0;
+        padding-top: 5px;
+        margin-bottom: 5px;
+      }
+      hr {
+        margin-top: 10px;
+        margin-bottom: 6px;
+        width: 80%;
+      }
+      #tooltip-deconnexion {
+        margin-top: 5px;
+      }
+    }
   }
   .icon {
     /*height: 60px;*/
@@ -103,7 +153,9 @@ nav {
   }
 }
 
-// ====== VUE MOBILE =======
+
+// =================== VUE MOBILE =====================
+
 
 #toggle-widget {
   float: right;
@@ -168,6 +220,8 @@ nav {
   display: block;
   background-color: $maingreen;
   overflow: hidden;
+  position: relative;
+  z-index: 9999999999999;
   .small-navbar-el{
     border: 1px solid $almostwhite;
     border-radius: 3px;
@@ -179,6 +233,7 @@ nav {
   .small-login-block {
     color: $almostwhite;
   }
+
   .small-other {
     background-color: white;
     color: $maingreen;
@@ -206,8 +261,9 @@ nav {
   }
 }
 
-//@media only screen and (max-width: 768px) {
-//  //#logo-nao-block {
-//  //  margin-left: 42% !important;
-//  //}
+
+//@media only screen and (max-width: 992px) {
+//  #login-block {
+//    background-color: $maingreen;
+//  }
 //}

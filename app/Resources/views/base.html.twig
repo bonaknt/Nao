@@ -14,7 +14,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
 
-
+    <style>
+        /*#tooltip-triangle {*/
+            /*height: 20px;*/
+            /*width: 20px;*/
+            /*left: 80px;*/
+            /*top: 10px;*/
+            /*background-color: greenyellow;*/
+            /*position: relative;*/
+            /*transform: rotate(45deg);*/
+        /*}*/
+        /*#tooltip {*/
+            /*height: 100px;*/
+            /*width: 150px;*/
+            /*left: 15px;*/
+            /*top: 10px;*/
+            /*background-color: rgba(1,1,1,0.5);*/
+            /*position: relative;*/
+            /*transform: translateY(-10px);*/
+        /*}*/
+    </style>
     <body>
             {% block nav %}
                 {#  BARRE DE NAV DESKTOP #}
@@ -50,18 +69,36 @@
                         </div>
                     </div>
 
-                    <div id="login-block">
-                        <a href="{{ path('fos_user_security_login') }}">
-                            <b><div id="connexion" class="red">CONNEXION</div></b>
-                        </a>
-                        <a href="{{ path('fos_user_registration_register') }}">
-                            <b><div id="inscription" class="red">INSCRIPTION</div></b>
-                        </a>
-                    </div>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <div id="login-block" class="login-block-connected">
+                                <img id="oeuf" src="{{ asset('images/oeuf.svg') }}" alt="">
+                                <div id="tooltip-triangle" class="hidden"></div>
+                                <div id="tooltip" class="text-center hidden">
+                                    <h3>{{ app.user.username }}</h3>
+                                    <hr>
+                                    <a href="{{ path('dashboard') }}">
+                                        <div>Tableau de bord</div>
+                                    </a>
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        <div id="tooltip-deconnexion">Déconnexion</div>
+                                    </a>
+                                </div>
+                        </div>
+                    {% else %}
+                        <div id="login-block">
+                            <a  href="{{ path('fos_user_security_login') }}">
+                                <b><div id="connexion" class="red">CONNEXION</div></b>
+                            </a>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                <b><div id="inscription" class="red">INSCRIPTION</div></b>
+                            </a>
+                        </div>
+                    {% endif %}
+
 
                 </nav>
 
-                {#BARRE DE NAV MOBILE #}
+                {# ================== BARRE DE NAV MOBILE  ================= #}
 
                 <nav id="small-nav" class="hidden-md hidden-lg">
                     <div id="logo-nao-block">
@@ -78,8 +115,8 @@
                             <a href="{{ path('dashboard') }}">
                                 <div class="small-navbar-el small-login-block">TABLEAU DE BORD</div>
                             </a>
-                            <a href="#">
-                                <div class="small-navbar-el small-login-block">PARAMÈTRES</div>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <div class="small-navbar-el small-login-block">DÉCONNEXION</div>
                             </a>
                         {% else %}
                             <a href="{{ path('login') }}">
@@ -161,7 +198,7 @@
                 <script src="{{ asset('build/app.js') }}"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
-                <script src="{{ asset('static/size.js') }}"></script>
+                {#<script src="{{ asset('static/size.js') }}"></script>#}
                 <script>
                     $(document).ready(function(){
 
@@ -179,6 +216,13 @@
                                 }, 500);
                             }
                         });
+
+                        // CUSTOM TOOLTIP
+                        $('#oeuf').on("click", function(){
+                            $('#tooltip').toggleClass('hidden')
+                            $('#tooltip-triangle').toggleClass('hidden')
+                        })
+
 
                     });
 
