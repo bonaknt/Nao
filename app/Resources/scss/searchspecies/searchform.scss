@@ -1,7 +1,16 @@
+body {
+  background-image: url('../images/motif_fond_1.png');
+}
+#container-all {
+  //min-height: 100vh;
+  border: 1px solid pink;
+}
+
 #search-form {
   height: 150px;
-  background-color: $lighterblue;
+  background-color: $brown;
   padding-top: 75px;
+  margin-top: 30px;
   #search-group {
     //border: 2px solid pink;
     width: 500px;

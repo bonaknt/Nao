@@ -1,4 +1,5 @@
 {
   "build/app.js": "/build/app.js",
-  "build/global.css": "/build/global.css"
+  "build/global.css": "/build/global.css",
+  "build/images/motif_fond_1.png": "/build/images/motif_fond_1.png"
 }

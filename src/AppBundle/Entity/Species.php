@@ -159,7 +159,7 @@ class Species   implements \JsonSerializable
     public function jsonSerialize()
     {
 
-        return json_encode(['name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
+        return json_encode(['id' => $this->id ,'name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
     }
 
 
