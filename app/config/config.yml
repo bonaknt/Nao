@@ -48,6 +48,7 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
+        server_version: 5.6
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.project_dir%/var/data/data.sqlite"
@@ -83,38 +84,19 @@ easy_admin:
     site_name: 'NAO'
     entities:
 
-        Observations:
-                    class: AppBundle\Entity\Observations
-                    list:
-                        actions:
-                            - { name: 'edit', icon: 'pencil', label: 'Modifier' }
-                            - { name: 'delete', label: 'Supprimer' }
-                            - { name: 'new', label: 'Nouveau' }
-                            - { name: 'search', label: 'Recherche' }
-                        title: "Observations"
-                        fields:
-
-                            - { property: 'idUser', label: 'ID utilisateur' }
-                            - { property: 'species', label: 'espèce' }
-                            - { property: 'pictures', type: 'image', label: 'image' }
-                            - { property: 'number', label: 'nombre rencontré' }
-                            - { property: 'longitude', label: 'longitude' }
-                            - { property: 'latitude', label: 'latitude' }
-                            - { property: 'validated', label: 'validité' }
-        
         Users:
             class: AppBundle\Entity\Users
             list:
                 actions:
-                    - { name: 'edit', icon: 'pencil'}
-                    - { name: 'delete', icon: 'trash'}
-                    - { name: 'new', label: 'Créer Utilisateur' }
-                    - { name: 'search', label: 'Rechercher' }
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier' }
+                    - { name: 'delete', label: 'Supprimer' }
+                    - { name: 'new', label: 'Nouveau' }
+                    - { name: 'search', label: 'Recherche' }
                 title: "Utilisateurs"
-                fields: 
+                fields:
                 - id
-                - username
-                - { property: 'email', label: 'Contact' }
+                - { property: 'username', label: 'Pseudo'}
+                - { property: 'email', label: 'Email' }
                 - { property: 'enabled', label: 'Actif' }
                 - roles
             label: 'Utilisateurs'
@@ -127,11 +109,31 @@ easy_admin:
 
             form:
                 fields:
-                    
-                    - { property: 'firstname', type: 'text', label: 'Prenom' }
+
+                    - { property: 'firstname', label: 'Prenom' }
                     - { property: 'lastname', label: 'Nom' }
                     - { property: 'username', label: 'Pseudo' }
-                    - { property: 'plainPassword', type: 'text', type_options: { required: false }, label: 'Mot de passe'}
+                    - { property: 'password', label: 'Mot de passe' }
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'enabled', label: 'Actif' }
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Particulier' : 'ROLE_USER', 'Naturaliste' : 'ROLE_SUPER_USER', 'Administrateur' : 'ROLE_SUPER_ADMIN' } }, label: 'Roles' }
+        Observations:
+            class: AppBundle\Entity\Observations
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier' }
+                    - { name: 'delete', label: 'Supprimer' }
+                    - { name: 'new', label: 'Nouveau' }
+                    - { name: 'search', label: 'Recherche' }
+                title: "Observations"
+                fields:
+
+                    - { property: 'idUser', label: 'ID utilisateur' }
+                    - { property: 'species', label: 'espèce' }
+                    - { property: 'pictures', type: 'image', label: 'image' }
+                    - { property: 'number', label: 'nombre rencontré' }
+                    - { property: 'longitude', label: 'longitude' }
+                    - { property: 'latitude', label: 'latitude' }
+                    - { property: 'validated', label: 'validité' }
+
+
