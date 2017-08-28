@@ -13,6 +13,23 @@ use AppBundle\Form\ObservationsType;
 class SpeciesController extends Controller
 {
 
+    /**
+     * @Route("/speciessearch/{id}", name="speciesSearchId")
+     */
+    public function individualSpeciesSearchAction(Request $request, $id)
+    {
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Species');
+
+        $species = $repository->find($id);
+
+        return $this->render('nao/species/speciesCard.html.twig', array(
+            'species' => $species,
+        ));
+    }
+
 	/**
 	 * @Route("/speciessearch", name="speciesSearch")
 	 */
