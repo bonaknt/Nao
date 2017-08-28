@@ -83,7 +83,7 @@ fos_user:
 easy_admin:
     site_name: 'NAO'
     entities:
-        
+
         Users:
             class: AppBundle\Entity\Users
             list:
@@ -93,7 +93,7 @@ easy_admin:
                     - { name: 'new', label: 'Nouveau' }
                     - { name: 'search', label: 'Recherche' }
                 title: "Utilisateurs"
-                fields: 
+                fields:
                 - id
                 - { property: 'username', label: 'Pseudo'}
                 - { property: 'email', label: 'Email' }
@@ -109,7 +109,7 @@ easy_admin:
 
             form:
                 fields:
-                    
+
                     - { property: 'firstname', label: 'Prenom' }
                     - { property: 'lastname', label: 'Nom' }
                     - { property: 'username', label: 'Pseudo' }
@@ -135,4 +135,3 @@ easy_admin:
                     - { property: 'longitude', label: 'longitude' }
                     - { property: 'latitude', label: 'latitude' }
                     - { property: 'validated', label: 'validité' }
-
