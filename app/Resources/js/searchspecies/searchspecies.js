@@ -42,7 +42,7 @@ function speciesModel(events) {
             var regexString = '^' + currentString ;
             var regex = new RegExp(regexString, 'i');
             for (var i = 0; i < allSpecies.length; i++) {
-                if (regex.test(allSpecies[i])) {
+                if (regex.test(allSpecies[i].scientificName)) {
                     allPatternMatchingSpecies.push(allSpecies[i]);
                 }
             }
@@ -53,7 +53,7 @@ function speciesModel(events) {
     function hydrateSpecies() {
         //TODO: ajax query
         //fixte
-        return getAllSpeciesFixture();
+        return getAllSpeciesFromDB();
     }
     return {
         allCurrentSuggestionsArray: allPatternMatchingSpecies,
@@ -74,12 +74,13 @@ function speciesView(template) {
 
     function renderSpecies(speciesToRender) {
         $resultRow.empty();
-        function birdObject(birdName) {
-            this.name = birdName;
+        function birdObject(scientificName, id) {
+            this.scientificName = scientificName;
+            this.id = id;
         }
         let birdObjectsArray = [];
         for (let i = 0; i < speciesToRender.length; i++) {
-            let bird = new birdObject(speciesToRender[i]);
+            let bird = new birdObject(speciesToRender[i].scientificName, speciesToRender[i].id);
             birdObjectsArray.push(bird);
         }
         let html = birdTemplate({'birds': birdObjectsArray});
@@ -136,7 +137,7 @@ function inputForm($input, $suggestionsContainer, events) {
     });
 
     function updateCurrentSuggestions(allPatternMAtchingSpecies) {
-        currentSuggestionsArray = allPatternMAtchingSpecies.slice(0,4);
+        currentSuggestionsArray = allPatternMAtchingSpecies.slice(0,4).map((bird) => bird.scientificName);
         renderSuggestions(currentSuggestionsArray);
     }
 
@@ -173,11 +174,13 @@ function inputForm($input, $suggestionsContainer, events) {
 
 
 
+// AJAX :: bird objects array
+function getAllSpeciesFromDB() {
 
-function getAllSpeciesFixture() {
     var species = [];
+
     $.get('api/getallbirds', function(data){
-        console.log(data)
+        console.log(data);
         data.data.forEach(function(bird){
             var parsed = JSON.parse(bird);
             let scientificName = parsed.scientificName;
@@ -186,8 +189,13 @@ function getAllSpeciesFixture() {
             if (indexOfParenthesis !== -1) {
                 scientificName = scientificName.substr(0, indexOfParenthesis);
             }
-            species.push(scientificName)
-        })
+            let speciesObject = {
+                scientificName: scientificName,
+                id: parsed.id
+            };
+            species.push(speciesObject);
+        });
+        console.log(species);
     });
     return species;
 }
@@ -196,3 +204,11 @@ function getAllSpeciesFixture() {
 function print(string) {
     console.log(string)
 }
+
+
+// OK : getAllSPeciesFixture : transformer result de ajax de tableau vers objet {scientificName: "...", id: 1}
+// OK : input.updateCurrentSuggestion : transformer pour accepter tableau d'objet et extraire un nouveau trableau avec scientificNames
+// input ne se charge que de la barre de rech, il ne manipule que tableau avec scientificName mais c'est lui qui fait la transform initial
+
+// spciesview.renderSpecies : prend en charge même tableau d'objet que speciesModel donc pas transformation argument mais adapter le corps de la function
+// birdTemplate : adapter

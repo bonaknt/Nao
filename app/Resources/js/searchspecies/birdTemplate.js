@@ -5,7 +5,7 @@ var bird =  '{{#each birds}}' +
                             '<img class="no-photo-img" src="../images/no-photo.svg" alt="">' +
                         '</div>' +
                         '<div class="scient-name text-center">' +
-                            '<b>{{name}}</b>'+
+                            '<a href="speciessearch/{{id}}"><b>{{scientificName}}</b></a>'+
                         '</div>'+
                     '</div>' +
                 '</div>' +

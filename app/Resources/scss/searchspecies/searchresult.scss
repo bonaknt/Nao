@@ -33,6 +33,9 @@
       .scient-name {
         margin-top: 30px;
         color: $brown;
+        a {
+          color: $brown !important;
+        }
       }
     }
   }
