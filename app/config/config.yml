@@ -82,15 +82,22 @@ fos_user:
 easy_admin:
     site_name: 'NAO'
     entities:
+
+        Observations:
+            class: AppBundle\Entity\Observations
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil'}
+                    - { name: 'delete', icon: 'trash'}
         
         Users:
             class: AppBundle\Entity\Users
             list:
                 actions:
-                    - { name: 'edit', icon: 'pencil', label: 'Modifier' }
-                    - { name: 'delete', label: 'Supprimer' }
-                    - { name: 'new', label: 'Nouveau' }
-                    - { name: 'search', label: 'Recherche' }
+                    - { name: 'edit', icon: 'pencil'}
+                    - { name: 'delete', icon: 'trash'}
+                    - { name: 'new', label: 'Créer Utilisateur' }
+                    - { name: 'search', label: 'Rechercher' }
                 title: "Utilisateurs"
                 fields: 
                 - id
@@ -109,13 +116,11 @@ easy_admin:
             form:
                 fields:
                     
-                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'firstname', type: 'text', label: 'Prenom' }
                     - { property: 'lastname', label: 'Nom' }
                     - { property: 'username', label: 'Pseudo' }
-                    - { property: 'password', label: 'Mot de passe' }
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false }, label: 'Mot de passe'}
                     - { property: 'email', type: 'email', label: 'Email' }
                     - { property: 'enabled', label: 'Actif' }
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'Particulier' : 'ROLE_USER', 'Naturaliste' : 'ROLE_SUPER_USER', 'Administrateur' : 'ROLE_SUPER_ADMIN' } }, label: 'Roles' }
-        Observations:
-            class: AppBundle\Entity\Observations
    

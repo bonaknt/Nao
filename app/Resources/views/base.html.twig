@@ -42,7 +42,9 @@
 
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                       <li><a href="{{ path('fos_user_security_logout') }}"> Déconnexion</a></li>
+                                      {% if is_granted('ROLE_SUPER_USER') %}
                                       <li><a href="{{ path('admin') }}">Administration</a></li>
+                                      {% endif %}
                                       <li> <a class="navbar-brand" href="{{ path('homepage') }}">Connecté en tant que {{ app.user.username }} </li>
                                     {% else %}
 
