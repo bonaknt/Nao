@@ -1,5 +1,7 @@
 {
   "build/app.js": "/build/app.js",
   "build/global.css": "/build/global.css",
-  "build/images/motif_fond_1.png": "/build/images/motif_fond_1.png"
+  "build/images/bluebird.jpg": "/build/images/bluebird.jpg",
+  "build/images/motif_fond_1.png": "/build/images/motif_fond_1.png",
+  "build/images/mountains.jpg": "/build/images/mountains.jpg"
 }
