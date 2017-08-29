@@ -46,7 +46,7 @@ class ObservationsType extends AbstractType
 							"min" 	=> 	"-180",
 							"max"	=>	"180",
 							"minMessage"	=>	"La longitude doit être supérieur à -180",
-							"maxMessage"	=>	"La longitude doit être supérieur à 180",
+							"maxMessage"	=>	"La longitude doit être inférieur à 180",
 						)
 					),
 				]
@@ -60,7 +60,7 @@ class ObservationsType extends AbstractType
 							"min" 	=> 	"-90",
 							"max"	=>	"90",
 							"minMessage"	=>	"La longitude doit être supérieur à -90",
-							"maxMessage"	=>	"La longitude doit être supérieur à 90",
+							"maxMessage"	=>	"La longitude doit être inférieur à 90",
 						)
 					),
 				]

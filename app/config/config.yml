@@ -135,3 +135,5 @@ easy_admin:
                     - { property: 'longitude', label: 'longitude' }
                     - { property: 'latitude', label: 'latitude' }
                     - { property: 'validated', label: 'validité' }
+
+

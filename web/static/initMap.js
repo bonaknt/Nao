@@ -6,14 +6,7 @@ function initMap() {
         zoom: 5,
         center: paris
     });
-    var marker = new google.maps.Marker({
-        position: paris,
-        map: map
-    });
-    var marker = new google.maps.Marker({
-        position: {lat: 50.7167, lng: 1.6167},
-        map: map
-    });
+
     var obs;
     map.addListener('click', function(e) {
         var lat = e.latLng.lat();
@@ -27,4 +20,3 @@ function initMap() {
         });
     })
 }
-

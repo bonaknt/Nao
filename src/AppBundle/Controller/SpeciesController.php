@@ -25,28 +25,6 @@ class SpeciesController extends Controller
 
 		$listSpecies = $repository->findAll();
 
-		//Si y a un $_GET : c'est une page oiseau
-		if($request->isMethod('GET'))
-		{
-			$speciesId = $request->get('id');
-
-			// Le nom de l'oiseau correspondant à cet id
-			$species = $repository->findSpeciesById($speciesId);
-
-			$repoObs = $this
-				->getDoctrine()
-				->getManager()
-				->getRepository('AppBundle:Observations');
-
-			// Toutes les observations sur cet oiseau
-			$allObs = $repoObs->findBYId($speciesId);
-
-			return $this->render('nao/species/birdCard.html.twig', array(
-				'birdName' 	=>	$species,
-				'allObs'	=>	$allObs,
-			));
-		}
-
 		return $this->render('nao/species/speciesSearch.html.twig', array(
 			'listSpecies' => $listSpecies,
 		));
@@ -142,7 +120,6 @@ class SpeciesController extends Controller
 	/**
 	 * @Route("/obsvalidated", name="obsValidated")
 	 */
-	/*
 	public function ObsValidatedAction(Request $request)
 	{
 		//	Récupérer l'id
@@ -158,7 +135,7 @@ class SpeciesController extends Controller
 
 	/**
 	 * @Route("/obsdeleted", name="obsDeleted")
-
+	 */
 	public function ObsDeletedAction(Request $request)
 	{
 		//	Récupérer l'id
@@ -170,6 +147,5 @@ class SpeciesController extends Controller
 		$em->flush();
 
 		return $this->redirectToRoute('obsWaitingValidation');
-	}*/
-
+	}
 }
