@@ -15,6 +15,7 @@
       min-height: 400px;
       img {
         margin: 0 auto;
+        height: 100%;
       }
       .carousel-text-box {
         background-color: lighten(black, 15%);
@@ -31,11 +32,38 @@
   }
 }
 
+@media only screen and (max-width: 992px) {
+
+  .carousel-text-box {
+    width: 80%;
+    height: 80%;
+    top: calc(132px + 20%) !important;
+    //background-color: lighten(black, 15%);
+    //position: absolute;
+    //top: calc((100vh - 90px) / 2) !important;
+    //left: 50%;
+    //color: white;
+    //transform: translate(-50%, -50%);
+    //padding: 3%;
+    //p {
+    //}
+  }
+
+
+}
 
 @media only screen and (max-width: 992px) {
   .carousel {
-    height: calc(100vh - 120px) !important;
-    margin-top: 32px;
+    //height: calc(100vh - 90px) !important;
+    //margin-top: 32px;
+    height: auto !important;
+  }
+}
+@media only screen and (max-width: 748px) {
+  .carousel-text-box {
+      height: 60% !important;
+      top: calc(132px + 5%) !important;
+
   }
 }
 
@@ -50,6 +78,8 @@
   height: 100vh;
   h2 {
     margin-top: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     color: $brown;
   }
   .row-container {
@@ -92,8 +122,12 @@
     //margin-top: 4%;
     margin-right: 0;
     position: relative;
-    top: 60px;
+    top: 30px;
     //transform: translateY(-50%);
+    h3 {
+      color: $almostwhite;
+      margin-bottom: 20px;
+    }
   }
   .explication-icon {
     max-height: 200px;
@@ -107,12 +141,12 @@
     img {
       max-height: 60%;
       max-width: 60%;
-      transform: translateY(50%)
+      transform: translateY(50%);
     }
   }
   #lg-partager-icon {
     img {
-      transform: translateY(25px)
+      transform: translateY(25px);
     }
   }
 
@@ -169,3 +203,11 @@
     color: $almostwhite;
   }
 }
+
+
+
+
+// ===========   V  U  E    M  O  B  I  L  E     ===============
+
+
+
