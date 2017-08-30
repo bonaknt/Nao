@@ -64,18 +64,18 @@
     }
   }
   .col-xs-4 {
-    border: 1px solid red;
+    //border: 1px solid red;
   }
   .col-xs-12 {
-    border: 1px solid blue;
+    //border: 1px solid blue;
   }
 }
 
 // ===== COMMENT ÇA MARCHE ==========
 
 #comment-ca-marche {
-  height: 50vh;
-  background-image: url('../images/bluebird.jpg');
+  height:400px;
+  //background-image: url('../images/bluebird.jpg');
   background-position: center;
   #greenish-overlay {
     background-color: rgba(117, 179, 80, 0.6);
@@ -86,10 +86,14 @@
     color: $almostwhite;
     margin-top: 0;
     padding-top: 10px;
+    //border: 1px solid red;
   }
   .row {
-    margin-top: 4%;
+    //margin-top: 4%;
     margin-right: 0;
+    position: relative;
+    top: 60px;
+    //transform: translateY(-50%);
   }
   .explication-icon {
     max-height: 200px;
@@ -104,6 +108,11 @@
       max-height: 60%;
       max-width: 60%;
       transform: translateY(50%)
+    }
+  }
+  #lg-partager-icon {
+    img {
+      transform: translateY(25px)
     }
   }
 
@@ -136,14 +145,14 @@
 
 #observation-du-jour {
   height: 500px;
-  background-image: url('../images/mountains.jpg');
+  //background-image: url('../images/mountains.jpg');
   align-items: center;
   padding-top: 75px;
   .row {
     margin-right: 0;
     margin-left: 0;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 150px;
+    padding-right: 150px;
     //border: 1px solid pink;
   }
   .col-sm-6 {
