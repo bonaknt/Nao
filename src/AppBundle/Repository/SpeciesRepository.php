@@ -43,7 +43,7 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 
     public function findSpeciesByScientificName($name)
     {
-        $query = $this->_em->createQuery('SELECT s.scientificName FROM AppBundle:Species s WHERE s.scienttificName = :scientifiName');
+        $query = $this->_em->createQuery('SELECT s FROM AppBundle:Species s WHERE s.scienttificName = :scientifiName');
         $query->setParameter('scientificName', $name);
 
         return $query->getSingleResult();
