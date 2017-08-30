@@ -18,16 +18,27 @@ class SpeciesController extends Controller
 	 */
 	public function speciesSearchAction(Request $request)
 	{
-		$repository = $this
+		$repositorySpecies = $this
 			->getDoctrine()
 			->getManager()
 			->getRepository('AppBundle:Species');
 
-		$listSpecies = $repository->findAll();
+		$repositoryObs = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Observations');
 
-		return $this->render('nao/species/speciesSearch.html.twig', array(
-			'listSpecies' => $listSpecies,
-		));
+		if($request->isMethod('GET') && $request->get('id') != null)
+		{
+			$id = $request->get('id');
+			$specieName = $repositorySpecies->findSpeciesById($id);
+
+			return $this->render('nao/species/speciesSearch.html.twig', array(
+				'specieName' => $specieName,
+			));
+		}
+
+		return $this->render('nao/species/speciesSearch.html.twig');
 	}
 
 	/**
