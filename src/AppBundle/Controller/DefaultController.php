@@ -25,7 +25,7 @@ class DefaultController extends Controller
     /**
 	 * @Route("/insertTAXREF", name="insertTAXREF")
 	 */
-    public function insertTAXREFAction()
+ /*   public function insertTAXREFAction()
 	{
 		$em = $this->getDoctrine()->getManager();
 		$taxref = array(
@@ -1280,5 +1280,5 @@ class DefaultController extends Controller
 		$em->flush();
 
 		return $this->render('nao/species/insertTaxref.html.twig');
-	}
+	}*/
 }

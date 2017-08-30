@@ -4,6 +4,7 @@
     {{ parent() }}
     <h1>Page d'ajout d'espèces</h1>
 
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
     <div class="well container">
         {{ form_start(observationsForm) }}
         <h3>L'espèce</h3>
@@ -12,6 +13,9 @@
         </div>
         <div class="form-group">
             {{ form_row(observationsForm.number) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(observationsForm.pictures) }}
         </div>
         <h3>Sa Position</h3>
         <div class="col-md-7">
@@ -40,6 +44,11 @@
             </div>
         </div>
     </div>
+{% else %}
+    <p class="bg-danger">
+        <a href="{{ path('signin') }}">Inscrivez-vous</a> ou <a href="http://localhost/OC/projet5/NAO_project/web/app_dev.php/login">connectez-vous</a> pour pouvoir ajouter une observation !
+    </p>
+{% endif %}
 {% endblock %}
 
 {% block javascripts %}

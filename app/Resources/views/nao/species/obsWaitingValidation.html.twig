@@ -17,6 +17,18 @@
                 <td>{{ speciesName['scientificName'] }}</td>
             {% endfor %}
         </tr>
+        <tr  class="text-center">
+            <th>Image</th>
+            {% for observation in listObservationsInvalid %}
+                <td>
+                {% if observation.pictures != null %}
+                    <img src="{{ asset('uploads/pictures/') ~ observation.pictures}}" width="200">
+                {% else %}
+                    <img src="{{ asset('uploads/pictures/photo_manquante.svg')}}" width="200">
+                {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
         <tr>
             <th>Le nombre</th>
             {% for observation in listObservationsInvalid %}
@@ -45,14 +57,32 @@
             <th>Validation</th>
             {% for observation in listObservationsInvalid %}
                 <td class="text-center">
-                    <button class="btn btn-primary">
+                    {#  Valider l'observation   #}
+                    <a class="btn btn-primary confirm" href="{{ path('obsValidated') }}?id={{ observation.id }}">
                         <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-danger">
+                    </a>
+
+                    {#  Supprimer l'observation #}
+                    <a class="btn btn-danger confirm" href="{{ path('obsDeleted') }}?id={{ observation.id }}">
                         <i class="fa fa-times-circle-o fa-2x" aria-hidden="true"></i>
-                    </button>
+                    </a>
                 </td>
             {% endfor %}
         </tr>
     </table>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('.confirm').click(function()
+        {
+            var r = confirm('Souhaitez-vous confirmer ce choix ?');
+            if(r == false)
+            {
+                return false;
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -9,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
@@ -32,6 +32,11 @@ class ObservationsType extends AbstractType
 					)
 				]
 			))
+			->add('pictures', FileType::class, array(
+				'label' 		=>	'Image JPG',
+				'attr'			=>	['class' => 'form-control'],
+				'required'		=>	false
+			))
 			->add('longitude', NumberType::class, array(
 				'label' 		=> 'Longitude',
 				'attr'			=> ['class' => 'form-control'],
@@ -41,7 +46,7 @@ class ObservationsType extends AbstractType
 							"min" 	=> 	"-180",
 							"max"	=>	"180",
 							"minMessage"	=>	"La longitude doit être supérieur à -180",
-							"maxMessage"	=>	"La longitude doit être supérieur à 180",
+							"maxMessage"	=>	"La longitude doit être inférieur à 180",
 						)
 					),
 				]
@@ -55,7 +60,7 @@ class ObservationsType extends AbstractType
 							"min" 	=> 	"-90",
 							"max"	=>	"90",
 							"minMessage"	=>	"La longitude doit être supérieur à -90",
-							"maxMessage"	=>	"La longitude doit être supérieur à 90",
+							"maxMessage"	=>	"La longitude doit être inférieur à 90",
 						)
 					),
 				]
