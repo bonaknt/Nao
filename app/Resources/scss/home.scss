@@ -36,27 +36,6 @@
 
 
 
-@media only screen and (max-width: 992px) {
-
-  .carousel-text-box {
-    .background {
-      width: 100%;
-      height: 400px !important;
-      background-size: cover;
-    }
-  }
-
-
-}
-
-@media only screen and (max-width: 992px) {
-  .carousel {
-    //height: calc(100vh - 90px) !important;
-    //margin-top: 32px;
-    //height: auto !important;
-  }
-}
-
 
 // ==== VOUS-ÊTES =====
 
@@ -75,6 +54,7 @@
   .row-container {
     padding: 0;
     margin-right: 0 !important;
+    //border: 1px solid red;
     #jumelles {
       min-height: 60vh;
       img {
@@ -154,13 +134,30 @@
     margin-right: 50px;
   }
   input {
-    width: 20%;
+    width: 60%;
   }
   button {
     background-color: $maingreen;
     color: white;
     font-weight: bold;
     margin-left: 50px;
+  }
+  .col-sm-6 {
+    //border:1px solid blue;
+  }
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+    &:first-child {
+      span {
+        float: right;
+      }
+    }
+    .col-sm-6 {
+      &:nth-child(2) {
+        padding-left: 0;
+      }
+    }
   }
 }
 
@@ -179,7 +176,7 @@
     padding-right: 150px;
     //border: 1px solid pink;
   }
-  .col-sm-6 {
+  .col-md-6 {
     height: 350px;
 
   }
@@ -201,3 +198,117 @@
 
 
 
+@media only screen and (max-width: 992px) {
+
+  .carousel-text-box {
+    .background {
+      width: 100%;
+      height: 400px !important;
+      background-size: cover;
+    }
+  }
+
+
+  // OBSERVATION DU JOUR
+
+  #observation-du-jour {
+    padding-top: 25px;
+    .row {
+      padding-left: 50px;
+      padding-right: 50px;
+      #observation-jour-img-container {
+        height: 210px;
+      }
+      #text {
+        height: 220px;
+      }
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 767px) {
+
+
+  // VOUS ETES
+
+  #vous-etes {
+    height: 80vh;
+    .row-container {
+      margin-top: 6vh;
+      padding-left: 20px;
+      padding-right: 20px;
+      h3 {
+        font-weight: light;
+      }
+    }
+    .btn-container {
+      //border: 1px solid red;
+      height: 60px;
+      button {
+        margin-top: 30px;
+        transform: translateY(-50%);
+        background-color: $lightgreen;
+        font-weight: bold;
+        color: $almostwhite;
+        border-radius: 10px;
+      }
+    }
+
+  }
+
+  // COMMENT ÇA MARCHE
+
+  #comment-ca-marche {
+    h2 {
+      font-weight: normal;
+    }
+    .row {
+      top: 10px;
+      .col-xs-12 {
+        padding-right: 40px;
+        padding-left: 60px;
+        margin-bottom: 10px;
+      }
+    }
+    .explication-icon {
+      display: inline-block;
+      max-height: 150px;
+      .green-round {
+        height: 110px;
+        width: 110px;
+        margin-left: 0;
+      }
+      h3 {
+        font-size: 1.2em;
+        margin-top: 0;
+      }
+    }
+    .explication-left {
+      float: left;
+    }
+    .explication-right {
+      float: right;
+    }
+    .first-row, .second-row {
+    }
+  }
+
+  // NEWSLETTER
+
+  #newsletter {
+    padding-top: 0;
+    .row {
+      height: 100px !important;
+      .col-sm-6 {
+        height:50px;
+      }
+    }
+    span {
+      float: none !important;
+    }
+  }
+
+
+}
