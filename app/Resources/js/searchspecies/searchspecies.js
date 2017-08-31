@@ -25,7 +25,7 @@ export function initSearchPage() {
 // INIT function for navbar search field, every pages
 export function initNavbarSearch() {
     var events = eventsConstructor();
-    var inputFormObj = inputForm($('#nav-search-input'), $('#nav-suggestions-container'), events);
+    var inputFormObj = inputForm($('#nav-search-input'), $('#nav-suggestions-container'), events, $('#input-arrow'));
     var speMod = speciesModel(events);
 
     events.on('inputChangeEvent', speMod.updateSuggestionsArray);
@@ -39,7 +39,7 @@ function speciesModel(events) {
     var allPatternMatchingSpecies = [];
     function uppdateSuggestionsArray(currentString) {
             allPatternMatchingSpecies = [];
-            var regexString = '^' + currentString ;
+            var regexString = '^' + currentString.trim() ;
             var regex = new RegExp(regexString, 'i');
             for (var i = 0; i < allSpecies.length; i++) {
                 if (regex.test(allSpecies[i].scientificName)) {
@@ -92,11 +92,12 @@ function speciesView(template) {
 }
 
 
-function inputForm($input, $suggestionsContainer, events) {
+function inputForm($input, $suggestionsContainer, events, $inputArrow) {
+    var currentSuggestionsArrayWithId = [];
     var currentSuggestionsArray = [];
     var currentlyHighlighted = -1;
 
-    //dom events binding
+    //DOM EVENTS BINDING (INPUT)
     $input.on('input', function(e){
         print('input')
         currentlyHighlighted = -1;
@@ -111,12 +112,23 @@ function inputForm($input, $suggestionsContainer, events) {
         var keyPressed = String.fromCharCode(e.keyCode);
         var suggestionsLength =  currentSuggestionsArray.length;
 
-        if (suggestionsLength !== 0) {
+        if (suggestionsLength !== 0 && $input.is(":focus")) {
             // si e.which == 13 -> $('.selected').text() dans input.val()
             // ENTER
             if (e.which == 13) {
-                $input.val($('.selected').text());
-                events.emit("inputChangeEvent", $input.val());
+                // vérifier qu'un élément a bien la classe selected
+                if ($('.selected')) {
+                    $input.val($('.selected').text());
+                    events.emit("inputChangeEvent", $input.val());
+                    if ($inputArrow) {
+                        let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
+                        print(id)
+                        redirectToSpeciessearch(id);
+                    }
+                } else {
+                    let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
+                    redirectToSpeciessearch(id);
+                }
             }
             // UP
             if (keyPressed == '&') {
@@ -133,10 +145,48 @@ function inputForm($input, $suggestionsContainer, events) {
                 highlightSuggestion(suggestionsLength)
             }
         } else {
+            if ($input.is(":focus") && e.which == 13) {
+                redirectToSpeciessearch();
+            }
         }
     });
+    // DOM EVENT BINDING ($SUBMITBUTTON)
+    if ($inputArrow) {
+        $inputArrow.on('click', function() {
+            print(currentSuggestionsArray)
+            let inputVal = $input.val().trim();
+            if (currentSuggestionsArray.length == 0) {
+                redirectToSpeciessearch();
+            } else {
+                currentSuggestionsArray.forEach(function(suggestion){
+                    let trimmed = suggestion.trim();
+                    let regex = new RegExp(trimmed, 'i');
+                    if(regex.test(inputVal)) {
+                        let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == suggestion).id;
+                        redirectToSpeciessearch(id);
+                        print(trimmed)
+                    } else {
+                        redirectToSpeciessearch();
+                    }
+                })
+            }
+
+        });
+    }
+
+    // redirects by manipulating speciesSearchLink and triggering click
+    function redirectToSpeciessearch(id) {
+        let ssl = document.getElementById('speciesSearchLink');
+        if (id) {
+            ssl.href = ssl.href + '/' + id;
+            ssl.click();
+        } else {
+            ssl.click();
+        }
+    }
 
     function updateCurrentSuggestions(allPatternMAtchingSpecies) {
+        currentSuggestionsArrayWithId = allPatternMAtchingSpecies;
         currentSuggestionsArray = allPatternMAtchingSpecies.slice(0,4).map((bird) => bird.scientificName);
         renderSuggestions(currentSuggestionsArray);
     }
@@ -180,14 +230,13 @@ function getAllSpeciesFromDB() {
     var species = [];
 
     $.get('api/getallbirds', function(data){
-        console.log(data);
         data.data.forEach(function(bird){
             var parsed = JSON.parse(bird);
             let scientificName = parsed.scientificName;
             // Strip first descriptor if he's included in scientificName
             var indexOfParenthesis = scientificName.indexOf("(")
             if (indexOfParenthesis !== -1) {
-                scientificName = scientificName.substr(0, indexOfParenthesis);
+                scientificName = scientificName.substr(0, indexOfParenthesis).trim();
             }
             let speciesObject = {
                 scientificName: scientificName,

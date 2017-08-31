@@ -39,15 +39,12 @@
                     <div id="recherche-block" class="inline-block red">
                         <div class="icon white inline-block"><img id="icon-rechercher" src="{{ asset('images/Rechercher.svg') }}" alt=""></div>
                         <div id="rechercher" class="nav-text-block inline-block white">
-                            <a href="{{ path('speciesSearch') }}">
+                            <a id="speciesSearchLink" href="{{ path('speciesSearch') }}">
                                 <b>Rechercher</b>
                             </a>
                             <div>
-                                <form action="">
-                                    <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
-                                    <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                    <input type="submit" class="hidden">
-                                </form>
+                                <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
+                                <span id="arrow-span"><i id="input-arrow" class="fa fa-arrow-right" aria-hidden="true"></i></span>
                                 <ul id="nav-suggestions-container">
                                     {# SUGGESTIONS #}
                                 </ul>
@@ -184,7 +181,7 @@
                 <script src="{{ asset('build/app.js') }}"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
-                <script src="{{ asset('static/size.js') }}"></script>
+                {#<script src="{{ asset('static/size.js') }}"></script>#}
                 <script>
                     $(document).ready(function(){
 
