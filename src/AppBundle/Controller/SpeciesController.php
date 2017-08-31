@@ -67,8 +67,11 @@ class SpeciesController extends Controller
 				'attr'	=> ['class' => 'form-control'],
 			));
 
+		// Attraper la requete
+		$observationsForm->handleRequest($request);
+
 		// If form submit
-		if ($request->isMethod('POST') && $observationsForm->handleRequest($request)->isValid())
+		if ($observationsForm->isSubmitted() && $observationsForm->isValid())
 		{
 			$picture = $observationsEntity->getPictures();
 			// S'il y a une image
