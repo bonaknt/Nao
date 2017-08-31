@@ -117,17 +117,19 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
             // ENTER
             if (e.which == 13) {
                 // vérifier qu'un élément a bien la classe selected
-                if ($('.selected')) {
+                if ($('.selected').length != 0) {
+                    print("YES SELECTED")
                     $input.val($('.selected').text());
                     events.emit("inputChangeEvent", $input.val());
-                    if ($inputArrow) {
-                        let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
-                        print(id)
-                        redirectToSpeciessearch(id);
-                    }
-                } else {
                     let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
                     redirectToSpeciessearch(id);
+
+                } else {
+                    print('NO SELECTED')
+                    print(currentSuggestionsArrayWithId);
+                    print($input.val().trim())
+                    let id = currentSuggestionsArrayWithId.find((el) => el.scientificName.toUpperCase() == $input.val().trim().toUpperCase()).id;
+                    if (id || id == 0) redirectToSpeciessearch(id);
                 }
             }
             // UP
@@ -177,7 +179,7 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
     // redirects by manipulating speciesSearchLink and triggering click
     function redirectToSpeciessearch(id) {
         let ssl = document.getElementById('speciesSearchLink');
-        if (id) {
+        if (id || id == 0) {
             ssl.href = ssl.href + '/' + id;
             ssl.click();
         } else {
@@ -244,7 +246,6 @@ function getAllSpeciesFromDB() {
             };
             species.push(speciesObject);
         });
-        console.log(species);
     });
     return species;
 }
