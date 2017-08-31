@@ -146,8 +146,8 @@
 
             <div id="newsletter" class="text-center">
                 <span><b>Abonnez-vous à notre newletter</b></span>
-                <input type="text" name="email" placeholder="Adresse email">
-                <button class="btn btn-default">S'INSCRIRE</button>
+                {{ form_start(newsletterForm, { 'attr': {'class': 'form-inline'}})  }}
+                {{ form_end(newsletterForm) }}
             </div>
 
              {#OBSERVATION DU JOUR#}

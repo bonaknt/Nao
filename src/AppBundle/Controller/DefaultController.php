@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Newsletter;
+use AppBundle\Form\NewsletterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -14,12 +16,16 @@ class DefaultController extends Controller
 	 */
     public function indexAction()
     {
-    	if(isset($_COOKIE['id']) && isset($_COOKIE['pw']))
-		{
-			return $this->render('nao/indexConnected.html.twig');
-		}
+    	$newsletterEntity = new Newsletter();
 
-        return $this->render('nao/index.html.twig');
+		$newsletterForm = $this
+			->get('form.factory')
+			->create(NewsletterType::class, $newsletterEntity);
+
+
+        return $this->render('nao/index.html.twig', array(
+        	'newsletterForm' => $newsletterForm->createView(),
+		));
     }
 
     /**
