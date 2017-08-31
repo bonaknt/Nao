@@ -33,7 +33,7 @@ class Newsletter
      *
      * @ORM\Column(name="validity", type="boolean")
      */
-    private $validity;
+    private $validity = 1;
 
 
     /**

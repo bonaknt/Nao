@@ -67,8 +67,11 @@ class SpeciesController extends Controller
 				'attr'	=> ['class' => 'form-control'],
 			));
 
-		// If form submit
-		if ($request->isMethod('POST') && $observationsForm->handleRequest($request)->isValid())
+		// Attraper la requete
+		$observationsForm->handleRequest($request);
+
+		// If form submitted
+		if ($observationsForm->isSubmitted() && $observationsForm->isValid())
 		{
 			$picture = $observationsEntity->getPictures();
 			// S'il y a une image
@@ -115,7 +118,7 @@ class SpeciesController extends Controller
 			->getManager()
 			->getRepository('AppBundle:Species');
 
-			//	On met dans un tableau le nom des espèces
+		//	On met dans un tableau le nom des espèces
 		$listSpeciesName = [];
 		for($i=0 ; $i<count($listObsInvalidName); $i++)
 		{

@@ -6,6 +6,7 @@ use AppBundle\Entity\Newsletter;
 use AppBundle\Form\NewsletterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Species;
 
@@ -14,7 +15,7 @@ class DefaultController extends Controller
 	/**
 	 * @Route("/", name="homepage")
 	 */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
     	$newsletterEntity = new Newsletter();
 
@@ -22,6 +23,16 @@ class DefaultController extends Controller
 			->get('form.factory')
 			->create(NewsletterType::class, $newsletterEntity);
 
+		// Attraper la requete
+		$newsletterForm->handleRequest($request);
+
+		// If form submitted
+		if ($newsletterForm->isSubmitted() && $newsletterForm->isValid())
+		{
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($newsletterEntity);
+			$em->flush();
+		}
 
         return $this->render('nao/index.html.twig', array(
         	'newsletterForm' => $newsletterForm->createView(),

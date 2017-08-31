@@ -10,4 +10,10 @@ namespace AppBundle\Repository;
  */
 class NewsletterRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findValidEmail()
+	{
+		$query = $this->_em->createQuery('SELECT n.email FROM AppBundle:Newsletter n');
+
+		return $query->getResult();
+	}
 }

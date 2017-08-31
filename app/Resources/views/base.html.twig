@@ -95,7 +95,7 @@
 
                     <div id="toggle" class="text-center">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('dashboard') }}">
+                            <a href="{{ path('admin') }}">
                                 <div class="small-navbar-el small-login-block">TABLEAU DE BORD</div>
                             </a>
                             <a href="{{ path('fos_user_security_logout') }}">
