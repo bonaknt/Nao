@@ -43,8 +43,11 @@
                                 <b>Rechercher</b>
                             </a>
                             <div>
-                                <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
-                                <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                <form action="">
+                                    <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
+                                    <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                                    <input type="submit" class="hidden">
+                                </form>
                                 <ul id="nav-suggestions-container">
                                     {# SUGGESTIONS #}
                                 </ul>

@@ -206,9 +206,3 @@ function print(string) {
 }
 
 
-// OK : getAllSPeciesFixture : transformer result de ajax de tableau vers objet {scientificName: "...", id: 1}
-// OK : input.updateCurrentSuggestion : transformer pour accepter tableau d'objet et extraire un nouveau trableau avec scientificNames
-// input ne se charge que de la barre de rech, il ne manipule que tableau avec scientificName mais c'est lui qui fait la transform initial
-
-// spciesview.renderSpecies : prend en charge même tableau d'objet que speciesModel donc pas transformation argument mais adapter le corps de la function
-// birdTemplate : adapter
