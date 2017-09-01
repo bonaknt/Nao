@@ -59,6 +59,25 @@ class AdminController extends Controller
 		}
 		return $this->executeDynamicMethod($action.'<EntityName>Action');
 	}
+
+
+	/**
+	 * @Route("/newsletter", name="newsletter")
+	 */
+	public function newsletterAction(Request $request)
+	{
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Newsletter');
+
+		$listNewsletterValid = $repository->findValidEmail();
+
+		return $this->render('nao/newsletter.html.twig', array(
+			'listNewsletterValid'	=>	$listNewsletterValid,
+		));
+	}
+
 	/**
 	 * Utility method which initializes the configuration of the entity on which
 	 * the user is performing the action.

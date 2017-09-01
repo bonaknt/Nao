@@ -18,7 +18,7 @@
 
     <div id="search-result-container">
         <div class="row" id="result-row">
-            {% if specieName != null %}
+            {% if specieName is defined and specieName != null %}
                 <h1>{{ specieName.scientificName }}</h1>
             {% endif %}
         </div>
