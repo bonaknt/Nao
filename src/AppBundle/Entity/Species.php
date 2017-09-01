@@ -12,155 +12,155 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Species   implements \JsonSerializable
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
-     */
-    private $name;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="name", type="string", length=255, nullable=true)
+	 */
+	private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="scientificName", type="string", length=255)
-     */
-    private $scientificName;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="scientificName", type="string", length=255)
+	 */
+	private $scientificName;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Sequence", type="string", length=255)
-     */
-    private $sequence;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="Sequence", type="string", length=255)
+	 */
+	private $sequence;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="family", type="string", length=255)
-     */
-    private $family;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="family", type="string", length=255)
+	 */
+	private $family;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Species
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
+	/**
+	 * Set name
+	 *
+	 * @param string $name
+	 *
+	 * @return Species
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/**
+	 * Get name
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * Set scientificName
-     *
-     * @param string $scientificName
-     *
-     * @return Species
-     */
-    public function setScientificName($scientificName)
-    {
-        $this->scientificName = $scientificName;
+	/**
+	 * Set scientificName
+	 *
+	 * @param string $scientificName
+	 *
+	 * @return Species
+	 */
+	public function setScientificName($scientificName)
+	{
+		$this->scientificName = $scientificName;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get scientificName
-     *
-     * @return string
-     */
-    public function getScientificName()
-    {
-        return $this->scientificName;
-    }
+	/**
+	 * Get scientificName
+	 *
+	 * @return string
+	 */
+	public function getScientificName()
+	{
+		return $this->scientificName;
+	}
 
-    /**
-     * Set sequence
-     *
-     * @param string $sequence
-     *
-     * @return Species
-     */
-    public function setSequence($sequence)
-    {
-        $this->sequence = $sequence;
+	/**
+	 * Set sequence
+	 *
+	 * @param string $sequence
+	 *
+	 * @return Species
+	 */
+	public function setSequence($sequence)
+	{
+		$this->sequence = $sequence;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get sequence
-     *
-     * @return string
-     */
-    public function getSequence()
-    {
-        return $this->sequence;
-    }
+	/**
+	 * Get sequence
+	 *
+	 * @return string
+	 */
+	public function getSequence()
+	{
+		return $this->sequence;
+	}
 
-    /**
-     * Set family
-     *
-     * @param string $family
-     *
-     * @return Species
-     */
-    public function setFamily($family)
-    {
-        $this->family = $family;
+	/**
+	 * Set family
+	 *
+	 * @param string $family
+	 *
+	 * @return Species
+	 */
+	public function setFamily($family)
+	{
+		$this->family = $family;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get family
-     *
-     * @return string
-     */
-    public function getFamily()
-    {
-        return $this->family;
-    }
+	/**
+	 * Get family
+	 *
+	 * @return string
+	 */
+	public function getFamily()
+	{
+		return $this->family;
+	}
 
-    public function jsonSerialize()
-    {
+	public function jsonSerialize()
+	{
 
-        return json_encode(['name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
-    }
+		return json_encode(['id' => $this->id ,'name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
+	}
 
 
 
