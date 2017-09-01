@@ -58,6 +58,14 @@
         </li>
         {% endif %}
 
+        {% if is_granted('ROLE_SUPER_USER') %}
+
+            <li>
+                <a href="{{ path('description') }}">
+                    <i class="fa fa-book" aria-hidden="true"></i> Description
+                </a>
+            </li>
+        {% endif %}
     {% endblock main_menu %}
 </ul>
 

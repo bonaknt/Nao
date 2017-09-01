@@ -49,6 +49,12 @@ class Species   implements \JsonSerializable
 	 */
 	private $family;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="description", type="string", length=10000, nullable=true)
+	 */
+	private $description;
 
 	/**
 	 * Get id
@@ -156,15 +162,36 @@ class Species   implements \JsonSerializable
 		return $this->family;
 	}
 
+
+	/**
+	 * Set description
+	 *
+	 * @param string $family
+	 *
+	 * @return Species
+	 */
+	public function setDescription($description)
+	{
+		$this->description = $description;
+
+		return $this;
+	}
+
+	/**
+	 * Get description
+	 *
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
+
 	public function jsonSerialize()
 	{
 
 		return json_encode(['id' => $this->id ,'name' => $this->name, 'family' => $this->family, 'scientificName' => $this->scientificName, 'sequence' => $this->sequence]);
 	}
-
-
-
-
 
 }
 

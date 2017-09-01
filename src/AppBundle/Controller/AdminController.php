@@ -79,6 +79,14 @@ class AdminController extends Controller
 	}
 
 	/**
+	 * @Route("/description", name="description")
+	 */
+	public function descriptionAction(Request $request)
+	{
+		return $this->render('nao/description.html.twig');
+	}
+
+	/**
 	 * Utility method which initializes the configuration of the entity on which
 	 * the user is performing the action.
 	 *
