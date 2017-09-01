@@ -21,6 +21,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Species;
+use AppBundle\Form\DescriptionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 /**
  * The controller used to render all the default EasyAdmin actions.
@@ -83,7 +86,36 @@ class AdminController extends Controller
 	 */
 	public function descriptionAction(Request $request)
 	{
-		return $this->render('nao/description.html.twig');
+		$speciesEntity = new Species();
+
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Species');
+
+		$listScientificName = $repository->findScientificName();
+
+		$descriptionForm = $this
+			->get('form.factory')
+			->create(DescriptionType::class, $speciesEntity)
+			->add('scientificName', ChoiceType::class, array(
+				//	on inverse les clés et valeurs
+				'choices'	=> array_flip($listScientificName),
+				'label'		=> "Espèce d'oiseau rencontré",
+				'attr'	=> ['class' =>	'form-control'],
+			));
+
+		$descriptionForm->handleRequest($request);
+
+		if($descriptionForm->isSubmitted() && $descriptionForm->isValid())
+		{
+			$em = $this->getDoctrine()->getManager();
+			$repository->updateById($descriptionForm['scientificName']->getData(), $speciesEntity->getDescription());
+		}
+
+		return $this->render('nao/description.html.twig', array(
+			'descriptionForm'	=>	$descriptionForm->createView(),
+		));
 	}
 
 	/**

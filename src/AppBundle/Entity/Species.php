@@ -38,20 +38,6 @@ class Species   implements \JsonSerializable
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="Sequence", type="string", length=255)
-	 */
-	private $sequence;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="family", type="string", length=255)
-	 */
-	private $family;
-
-	/**
-	 * @var string
-	 *
 	 * @ORM\Column(name="description", type="string", length=10000, nullable=true)
 	 */
 	private $description;

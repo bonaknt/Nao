@@ -7,7 +7,22 @@
     {% block body %}
 
         {{ parent() }}
-            <h1>Description</h1>
+        <div class="container">
+            <h1>Changer une description</h1>
 
-        <p>Formulaire à ajouter pour ajouter une description à l'oiseau</p>
+            {{ form_start(descriptionForm) }}
+
+                <div class="form-group">
+                    {{ form_row(descriptionForm.scientificName) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(descriptionForm.description) }}
+                </div>
+                <div class="form-group text-right">
+                    {{ form_row(descriptionForm.submit) }}
+                </div>
+            {{ form_end(descriptionForm) }}
+
+        </div>
     {% endblock %}

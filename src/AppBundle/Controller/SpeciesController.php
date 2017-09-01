@@ -109,7 +109,7 @@ class SpeciesController extends Controller
 			$em->flush();
 		}
 
-				return $this->render('nao/species/addingSpecies.html.twig', [
+		return $this->render('nao/species/addingSpecies.html.twig', [
 			'observationsForm' 	=> $observationsForm->createView(),
 		]);
 	}
