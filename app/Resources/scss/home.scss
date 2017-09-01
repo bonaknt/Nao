@@ -45,6 +45,14 @@
 #vous-etes {
   background-color: $almostwhite;
   height: 100vh;
+  color: $brown;
+  a {
+    color: $brown !important;
+  }
+  #ornithologue, #explorateur {
+    font-size: 1.7em;
+    margin-top: 70px;
+  }
   h2 {
     margin-top: 0;
     padding-top: 20px;
@@ -68,6 +76,16 @@
   }
   .col-xs-12 {
     //border: 1px solid blue;
+  }
+  button {
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: $lightgreen;
+    color: $almostwhite;
+    font-weight: bold;
+  }
+  #btn-ornitho {
+    margin-top: 30px;
   }
 }
 
@@ -188,6 +206,14 @@
   #text {
     background-color: lighten(black, 15%);
     color: $almostwhite;
+    padding-top: 30px;
+  }
+  button {
+    background-color: $bluegreen;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    font-weight: bold;
   }
 }
 
