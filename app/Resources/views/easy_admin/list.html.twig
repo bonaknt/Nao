@@ -76,7 +76,7 @@
                         {% endblock search_action %}
                     {% endif %}
 
-                    {% if is_granted('ROLE_SUPER_ADMINN') %}
+                    {% if is_granted('ROLE_USER') %}
                     {% if easyadmin_action_is_enabled_for_list_view('new', _entity_config.name) %}
                         {% set _action = easyadmin_get_action_for_list_view('new', _entity_config.name) %}
                         {% block new_action %}
@@ -122,7 +122,7 @@
                     </th>
                 {% endfor %}
 
-            {% if is_granted('ROLE_SUPER_USER') %}
+             {% if is_granted('ROLE_USER') %}
                 {% if _list_item_actions|length > 0 %}
                     <th>
                         <span>Actions</span>
@@ -147,9 +147,9 @@
                             {{ easyadmin_render_field_for_list_view(_entity_config.name, item, metadata) }}
                         </td>
                     {% endfor %}
-                        
 
-        {% if is_granted('ROLE_SUPER_USER') %}
+
+         {% if is_granted('ROLE_USER') %}
                     {% if _list_item_actions|length > 0 %}
                         {% set _column_label =  'list.row_actions'|trans(_trans_parameters, 'EasyAdminBundle') %}
                         <td data-label="{{ _column_label }}" class="actions">

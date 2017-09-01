@@ -2,7 +2,7 @@ var $latInput = $('.latitude');
 var $lngInput = $('.longitude');
 function initMap() {
     var paris = {lat: 48.864716, lng: 2.349014};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById('map-newobservation'), {
         zoom: 5,
         center: paris
     });
