@@ -43,4 +43,15 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
 		return $results;
 	}
+
+	public function findPicturesBySpecies($species)
+    {
+
+        $query  = $this->_em->createQuery('SELECT o.pictures FROM AppBundle:Observations o WHERE o.species = :species');
+        $query->setParameter('species', $species);
+
+        $results = $query->getResult();
+
+        return $results;
+    }
 }

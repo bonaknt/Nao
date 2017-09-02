@@ -206,6 +206,15 @@
                             $('#tooltip-triangle').toggleClass('hidden')
                         })
 
+                        // DON'T DISPLAY SEARCHBAR ON PAGE SEARSCHSPEACIES
+                        function isLocation(location) {
+                            return window.location.href.includes(location)
+                        }
+
+                        if (isLocation('speciessearch')) {
+                            $("#rechercher").css("top", "5px").find('div').hide();
+                        }
+
 
                     });
 

@@ -77,12 +77,24 @@
   .col-xs-12 {
     //border: 1px solid blue;
   }
+  .text-button {
+    border: 1px solid red;
+    height: 135px;
+    p {
+      height: 135px;
+
+    }
+  }
   button {
     margin-top: 10px;
     border-radius: 10px;
     background-color: $lightgreen;
     color: $almostwhite;
     font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%)
   }
   #btn-ornitho {
     margin-top: 30px;
@@ -124,7 +136,7 @@
       border-radius: 100px;
       height: 160px;
       width: 160px;
-      margin-left: 20%;
+      margin: auto;
     }
     img {
       max-height: 60%;

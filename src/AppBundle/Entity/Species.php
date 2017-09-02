@@ -49,6 +49,7 @@ class Species   implements \JsonSerializable
      */
     private $family;
 
+    private $pictures;
 
     /**
      * Get id
@@ -154,6 +155,19 @@ class Species   implements \JsonSerializable
     public function getFamily()
     {
         return $this->family;
+    }
+
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @param mixed $pictures
+     */
+    public function setPictures($pictures)
+    {
+        $this->pictures = $pictures;
     }
 
     public function jsonSerialize()
