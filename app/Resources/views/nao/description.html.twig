@@ -7,7 +7,18 @@
     {% block body %}
 
         {{ parent() }}
+
+        {% for flash_message in app.session.flashBag.get('success') %}
+
+            <div class="alert alert-success">
+                <div class="container text-center">
+                    {{ flash_message }}
+                </div>
+            </div>
+        {% endfor %}
+
         <div class="container">
+
             <h1>Changer une description</h1>
 
             {{ form_start(descriptionForm) }}

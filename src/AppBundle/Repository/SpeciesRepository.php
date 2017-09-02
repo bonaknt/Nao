@@ -43,9 +43,12 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 
 	public function updateById($id, $description)
 	{
-		$update = $this->_em->createQuery('UPDATE AppBundle:Species description = :description WHERE s.id = :id');
-		$update->setParameter('id', $id);
-		$update->setParameter('description', $description);
-		dump($id);
+		$update = $this->_em->createQuery('UPDATE AppBundle:Species s SET s.description = :description WHERE s.id = :id');
+		$update->setParameters( array(
+			'id' => $id,
+			'description' => $description,
+		));
+
+		return $update->getResult();
 	}
 }

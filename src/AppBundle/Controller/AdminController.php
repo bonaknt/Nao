@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Entity\Species;
 use AppBundle\Form\DescriptionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -111,6 +112,8 @@ class AdminController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 			$repository->updateById($descriptionForm['scientificName']->getData(), $speciesEntity->getDescription());
+
+			$this->addFlash("success", "La description a été mise à jour");
 		}
 
 		return $this->render('nao/description.html.twig', array(
