@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use JavierEguiluz\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
@@ -13,6 +14,9 @@ use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType as text;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -77,8 +81,59 @@ class AdminController extends Controller
 
 		$listNewsletterValid = $repository->findValidEmail();
 
+		$newsletterForm = $this
+			->createFormBuilder()
+			->add('object', text::class, array(
+				'label'		=>	"Objet",
+				'attr'		=>	[
+					'class'		=>	'form-control'
+				],
+			))
+			->add('message',TextareaType::class, array(
+				'label'		=>	"Message",
+				'attr'		=>	[
+					'class'		=>	'form-control',
+					'rows'		=>	'15',
+					'style'		=>	'resize:vertical;'
+				],
+			))
+			->add('submit', SubmitType::class, array(
+				'label'		=>	'Envoyer à tous les contacts',
+				'attr'		=>	['class' =>	'btn btn-primary']
+			))
+			->getForm();
+
+		$allEmails = [];
+
+		foreach ($listNewsletterValid as $listEmail)
+		{
+			array_push($allEmails, $listEmail['email']);
+		}
+		dump($allEmails);
+
+
+
+		$newsletterForm->handleRequest($request);
+
+		if ($newsletterForm->isSubmitted())
+		{
+			$message = \Swift_Message::newInstance();
+			$message->setSubject($newsletterForm->getData()['object']);
+			$message->setFrom($this->getParameter('mailer_user'));
+			$message->setTo($allEmails);
+			// pour envoyer le message en HTML
+			$message->setBody(
+				$newsletterForm->getData()['message'],
+				'text/html');
+			//envoi du message
+			$this->get('mailer')->send($message);
+
+			$this->addFlash('success', 'La newsletter a bien été envoyé :-)');
+		}
+
 		return $this->render('nao/newsletter.html.twig', array(
 			'listNewsletterValid'	=>	$listNewsletterValid,
+			'newsletterForm'		=>	$newsletterForm->createView()
 		));
 	}
 
