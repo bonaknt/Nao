@@ -8,11 +8,17 @@
 
     {{ parent() }}
 
-        <style>
+        {% for flash_message in app.session.flashBag.get('success') %}
 
-        </style>
+            <div class="alert alert-success">
+                <div class="container text-center">
+                    {{ flash_message }}
+                </div>
+            </div>
+        {% endfor %}
 
-    <!--Début du Caroussel-->
+
+        <!--Début du Caroussel-->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
