@@ -1,216 +1,217 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!--BOOTSTRAP-->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--FONT AWESOME-->
-            <link rel="stylesheet" href="{{ asset('build/global.css') }}"> <!--Feuille de style CSS-->
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!--BOOTSTRAP-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--FONT AWESOME-->
+        <link rel="stylesheet" href="{{ asset('build/global.css') }}"> <!--Feuille de style CSS-->
 
-        {% endblock %}
+    {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
 
-    <style>
+<style>
 
-    </style>
-    <body>
-            {% block nav %}
-                {#  BARRE DE NAV DESKTOP #}
-                <nav id="big-nav" class="hidden-sm hidden-xs">
-                    <div id="logo-nao-block">
-                        <a href="{{ path('homepage') }}">
-                            <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
-                        </a>
-                    </div>
-                    <div id="observation-block" class="red">
-                        <div class="icon white inline-block"><img id="icon-ajouter" src="{{ asset('images/Ajouter.svg') }}" alt=""></div>
-                        <div class="nav-text-block inline-block">
-                            <a href="{{ path('addingSpecies') }}">
-                                <div class="nav-text white"><b>Ajouter</b></div>
-                                <div class="nav-text white">une observation</div>
-                            </a>
-                        </div>
-                    </div>
+</style>
+<body>
+{% block nav %}
+    {#  BARRE DE NAV DESKTOP #}
+    <nav id="big-nav" class="hidden-sm hidden-xs">
+        <div id="logo-nao-block">
+            <a href="{{ path('homepage') }}">
+                <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+            </a>
+        </div>
+        <div id="observation-block" class="red">
+            <div class="icon white inline-block"><img id="icon-ajouter" src="{{ asset('images/Ajouter.svg') }}" alt=""></div>
+            <div class="nav-text-block inline-block">
+                <a href="{{ path('addingSpecies') }}">
+                    <div class="nav-text white"><b>Ajouter</b></div>
+                    <div class="nav-text white">une observation</div>
+                </a>
+            </div>
+        </div>
 
-                    <div id="recherche-block" class="inline-block red">
-                        <div class="icon white inline-block"><img id="icon-rechercher" src="{{ asset('images/Rechercher.svg') }}" alt=""></div>
-                        <div id="rechercher" class="nav-text-block inline-block white">
-                            <a href="{{ path('speciesSearch') }}">
-                                <b>Rechercher</b>
-                            </a>
-                            <div>
-                                <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
-                                <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                                <ul id="nav-suggestions-container">
-                                    {# SUGGESTIONS #}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <div id="login-block" class="login-block-connected">
-                                <img id="oeuf" src="{{ asset('images/oeuf.svg') }}" alt="">
-                                <div id="tooltip-triangle" class="hidden"></div>
-                                <div id="tooltip" class="text-center hidden">
-                                    <h3>{{ app.user.username }}</h3>
-                                    <hr>
-                                    <a href="{{ path('admin') }}">
-                                        <div>Tableau de bord</div>
-                                    </a>
-                                    <a href="{{ path('fos_user_security_logout') }}">
-                                        <div id="tooltip-deconnexion">Déconnexion</div>
-                                    </a>
-                                </div>
-                        </div>
-                    {% else %}
-                        <div id="login-block">
-                            <a  href="{{ path('fos_user_security_login') }}">
-                                <b><div id="connexion" class="red">CONNEXION</div></b>
-                            </a>
-                            <a href="{{ path('fos_user_registration_register') }}">
-                                <b><div id="inscription" class="red">INSCRIPTION</div></b>
-                            </a>
-                        </div>
-                    {% endif %}
-
-
-                </nav>
-
-                {# ================== BARRE DE NAV MOBILE  ================= #}
-
-                <nav id="small-nav" class="hidden-md hidden-lg">
-                    <div id="logo-nao-block">
-                        <a href="{{ path('homepage') }}">
-                            <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
-                        </a>
-                    </div>
-                    <div id="toggle-widget">
-                        <div class="white-bar"></div>
-                    </div>
-
-                    <div id="toggle" class="text-center">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="{{ path('admin') }}">
-                                <div class="small-navbar-el small-login-block">TABLEAU DE BORD</div>
-                            </a>
-                            <a href="{{ path('fos_user_security_logout') }}">
-                                <div class="small-navbar-el small-login-block">DÉCONNEXION</div>
-                            </a>
-                        {% else %}
-                            <a href="{{ path('login') }}">
-                                <div class="small-navbar-el small-login-block">SE CONNECTER</div>
-                            </a>
-                            <a href="{{ path('signin') }}">
-                                <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
-                            </a>
-                        {% endif %}
-                        <a href="{{ path('speciesSearch') }}">
-                            <div class="small-navbar-el small-other">RECHERCHER</div>
-                        </a>
-                        <a href="{{ path('addingSpecies') }}">
-                            <div class="small-navbar-el small-other">AJOUTER UNE OBSERVATION</div>
-                        </a>
-                    </div>
-
-                    <div id="small-search-bar">
-                        <input type="text" placeholder="Entrez le nom d'une espèce">
-                        <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
-                    </div>
-                </nav>
-
-            {% endblock %}
-
-
-            {% block body %}
-            {% endblock %}
-
-
-            {% block footer %}
-
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-
-                {% else %}
-
-                {% endif %}
-
-
-            <div class="container-fluid">
-                <div class="row">
-                    <footer>
-                        <div class="col-md-12">
-                            <div class="col-md-4 text-right" >
-                                <h3>Nous suivre sur les réseaux sociaux :</h3>
-                                <a href="#" class="socialLink">
-                                    <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" class="socialLink">
-                                    <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" class="socialLink">
-                                    <i class="fa fa-pinterest fa-3x" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" class="socialLink">
-                                    <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
-                                </a>
-                            </div>
-
-                            <div class="col-md-4 col-md-offset-4">
-                                <h3>Les liens utiles :</h3>
-                                <ul>
-                                    <li><a href="{{ path('contactUs') }}">Nous contacter</a></li>
-                                    <li><a href="{{ path('legalNotice') }}">Les mentions légals</a></li>
-                                    <li><a href="{{ path('joinAssoc') }}">Rejoindre l'association</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="text-center" id="copyright">© 2017 - Copyright Nos Amis les Oiseaux</div>
-                    </footer>
+        <div id="recherche-block" class="inline-block red">
+            <div class="icon white inline-block"><img id="icon-rechercher" src="{{ asset('images/Rechercher.svg') }}" alt=""></div>
+            <div id="rechercher" class="nav-text-block inline-block white">
+                <a id="speciesSearchLink" href="{{ path('speciesSearch') }}">
+                    <b>Rechercher</b>
+                </a>
+                <div>
+                    <input id="nav-search-input" type="text" placeholder="Entrez le nom d'une espèce">
+                    <span id="arrow-span"><i id="input-arrow" class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                    <ul id="nav-suggestions-container">
+                        {# SUGGESTIONS #}
+                    </ul>
                 </div>
             </div>
+        </div>
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div id="login-block" class="login-block-connected">
+                <img id="oeuf" src="{{ asset('images/oeuf.svg') }}" alt="">
+                <div id="tooltip-triangle" class="hidden"></div>
+                <div id="tooltip" class="text-center hidden">
+                    <h3>{{ app.user.username }}</h3>
+                    <hr>
+                    <a href="{{ path('admin') }}">
+                        <div>Tableau de bord</div>
+                    </a>
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        <div id="tooltip-deconnexion">Déconnexion</div>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div id="login-block">
+                <a  href="{{ path('fos_user_security_login') }}">
+                    <b><div id="connexion" class="red">CONNEXION</div></b>
+                </a>
+                <a href="{{ path('fos_user_registration_register') }}">
+                    <b><div id="inscription" class="red">INSCRIPTION</div></b>
+                </a>
+            </div>
+        {% endif %}
+
+
+    </nav>
+
+    {# ================== BARRE DE NAV MOBILE  ================= #}
+
+    <nav id="small-nav" class="hidden-md hidden-lg">
+        <div id="logo-nao-block">
+            <a href="{{ path('homepage') }}">
+                <img id="logo-nao" src="{{ asset('images/nao-logo.png') }}" alt="">
+            </a>
+        </div>
+        <div id="toggle-widget">
+            <div class="white-bar"></div>
+        </div>
+
+        <div id="toggle" class="text-center">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href="{{ path('admin') }}">
+                    <div class="small-navbar-el small-login-block">TABLEAU DE BORD</div>
+                </a>
+                <a href="{{ path('fos_user_security_logout') }}">
+                    <div class="small-navbar-el small-login-block">DÉCONNEXION</div>
+                </a>
+            {% else %}
+                <a href="{{ path('login') }}">
+                    <div class="small-navbar-el small-login-block">SE CONNECTER</div>
+                </a>
+                <a href="{{ path('signin') }}">
+                    <div class="small-navbar-el small-login-block">CRÉER UN COMPTE</div>
+                </a>
+            {% endif %}
+            <a href="{{ path('speciesSearch') }}">
+                <div class="small-navbar-el small-other">RECHERCHER</div>
+            </a>
+            <a href="{{ path('addingSpecies') }}">
+                <div class="small-navbar-el small-other">AJOUTER UNE OBSERVATION</div>
+            </a>
+        </div>
+
+        <div id="small-search-bar">
+            <input type="text" placeholder="Entrez le nom d'une espèce">
+            <span id="arrow-span"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+        </div>
+    </nav>
+
+{% endblock %}
+
+
+{% block body %}
+{% endblock %}
+
+
+{% block footer %}
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+    {% else %}
+
+    {% endif %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <footer>
+                <div class="col-md-12">
+                    <div class="col-md-4 text-right" >
+                        <h3>Nous suivre sur les réseaux sociaux :</h3>
+                        <a href="#" class="socialLink">
+                            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="socialLink">
+                            <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="socialLink">
+                            <i class="fa fa-pinterest fa-3x" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="socialLink">
+                            <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 col-md-offset-4">
+                        <h3>Les liens utiles :</h3>
+                        <ul>
+                            <li><a href="{{ path('contactUs') }}">Nous contacter</a></li>
+                            <li><a href="{{ path('legalNotice') }}">Les mentions légals</a></li>
+                            <li><a href="{{ path('joinAssoc') }}">Rejoindre l'association</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center" id="copyright">© 2017 - Copyright Nos Amis les Oiseaux</div>
+            </footer>
+        </div>
+    </div>
 
 
 
-            {% endblock %}
-            {% block javascripts %}
-                <script src="{{ asset('build/app.js') }}"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
-                <script src="{{ asset('static/size.js') }}"></script>
-                <script>
-                    $(document).ready(function(){
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><!--jQuery-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--JS BOOTSTRAP-->
+    {#<script src="{{ asset('static/size.js') }}"></script>#}
+    <script>
+        $(document).ready(function(){
 
-                        $("#toggle-widget").on("click", function(){
-                            $this = $(this);
-                            if ($this.hasClass('is-open')) {
-                                $this.addClass('is-closed').removeClass('is-open');
-                                $("#toggle").animate({
-                                    height: "1"
-                                }, 500);
-                            } else {
-                                $this.addClass('is-open').removeClass('is-closed');
-                                $("#toggle").animate({
-                                    height: "170"
-                                }, 500);
-                            }
-                        });
+            $("#toggle-widget").on("click", function(){
+                $this = $(this);
+                if ($this.hasClass('is-open')) {
+                    $this.addClass('is-closed').removeClass('is-open');
+                    $("#toggle").animate({
+                        height: "1"
+                    }, 500);
+                } else {
+                    $this.addClass('is-open').removeClass('is-closed');
+                    $("#toggle").animate({
+                        height: "170"
+                    }, 500);
+                }
+            });
 
-                        // CUSTOM TOOLTIP
-                        $('#oeuf').on("click", function(){
-                            $('#tooltip').toggleClass('hidden')
-                            $('#tooltip-triangle').toggleClass('hidden')
-                        })
-
-
-                    });
+            // CUSTOM TOOLTIP
+            $('#oeuf').on("click", function(){
+                $('#tooltip').toggleClass('hidden')
+                $('#tooltip-triangle').toggleClass('hidden')
+            })
 
 
-                </script>
-            {% endblock %}
-    </body>
+        });
+
+
+    </script>
+{% endblock %}
+</body>
 </html>
+
