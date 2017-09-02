@@ -8,6 +8,9 @@
 
         {{ parent() }}
 
+        <!--si connecté en tant qu'admin-->
+        {% if is_granted("ROLE_ADMIN") %}
+
         <div class="container">
             <h1>Newsletter</h1>
 
@@ -28,4 +31,9 @@
                 <button type="submit" class="btn btn-primary">Envoyer à tous les contacts</button>
             </form>
         </div>
+
+        {% else %}
+            <h1 class="danger">ERROR 404 : Page non trouvée</h1>
+        {% endif %}
+
     {% endblock %}

@@ -8,6 +8,10 @@
 
         {{ parent() }}
 
+        <!--si connecté en tant qu'admin-->
+        {% if is_granted("ROLE_ADMIN") %}
+
+
         {% for flash_message in app.session.flashBag.get('success') %}
 
             <div class="alert alert-success">
@@ -36,4 +40,8 @@
             {{ form_end(descriptionForm) }}
 
         </div>
+
+        {% else %}
+            <h1 class="danger">ERROR 404 : Page non trouvée</h1>
+        {% endif %}
     {% endblock %}
