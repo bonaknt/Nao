@@ -454,14 +454,14 @@ footer #copyright {
 #newsletter span {
   color: #4C3232;
   font-size: 1.4em;
-  margin-right: 50px;
+  margin-right: 25px;
 }
 
 #newsletter button {
   background-color: #38817A;
   color: white;
   font-weight: bold;
-  margin-left: 50px;
+  margin-left: 25px;
 }
 
 #observation-du-jour {
