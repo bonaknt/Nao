@@ -6,23 +6,22 @@
 
 {% block body %}
     {{ parent() }}
-    <h1>La page de recherche d'espèces</h1>
-    <div id="search-form">
-        <div id="search-group" class="">
-            <input type="text" id="search-input" autocomplete="off">
-            <ul id="suggestions-container">
 
-            </ul>
-        </div>
-    </div>
+        <div id="search-form">
+            <div id="search-group" class="">
+                <input type="text" id="search-input" autocomplete="off">
+                <ul id="suggestions-container">
 
-    <div id="search-result-container">
-        <div class="row" id="result-row">
-            {% if specieName is defined and specieName != null %}
-                <h1>{{ specieName.scientificName }}</h1>
-            {% endif %}
+                </ul>
+            </div>
         </div>
-    </div>
+
+        <div id="search-result-container">
+            <div class="row" id="result-row">
+
+            </div>
+        </div>
+
 
 
 
