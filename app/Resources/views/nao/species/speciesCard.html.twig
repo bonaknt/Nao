@@ -66,21 +66,24 @@
     {% endfor %}
     <div id="num" class="hidden" data-num="{{ num }}"></div>
 
-    <div class="owl-carousel owl-theme">
-        <div class="item" ><div class="inner" style="background-image: url({{ asset('tempo/im1.jpg') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im4.png') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im2.jpg') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im3.jpg') }})"></div></div>
-    </div>
-
     {#<div class="owl-carousel owl-theme">#}
-        {#{% for pic in pictures %}#}
-            {#{% for p in pic %}#}
-                {#{% set image =  p %}#}
-                {#<div class="item"><div class="inner" style="background-image: url({{ asset('uploads/pictures/s:37:"39d3dd95194155249232ba944da08fab.jpeg') }})"></div></div>#}
-            {#{% endfor %}#}
-        {#{% endfor %}#}
+        {#<div class="item" ><div class="inner" style="background-image: url({{ asset('tempo/im1.jpg') }})"></div></div>#}
+        {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im4.png') }})"></div></div>#}
+        {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im2.jpg') }})"></div></div>#}
+        {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im3.jpg') }})"></div></div>#}
     {#</div>#}
+
+    {% set id = 0 %}
+    <div class="owl-carousel owl-theme">
+        {% for pic in pictures %}
+            {% for p in pic %}
+                {% set image =  p %}
+                {% if image != 'N;' %}
+                    <div  class="item"><div data-image={{ image }}  class="inner dataImage" style="background-image: url({{ asset('uploads/pictures/xx') }})"></div></div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
 
 
 
@@ -106,6 +109,7 @@
     <script src="{{ asset('static/initMapBirdcard.js') }}"></script>
     <script src="{{ asset('static/owl.carousel.min.js') }}"></script>
     <script>
+
         function initOwl(n) {
             var items = n < 7 ? n : 7;
             $('.owl-carousel').owlCarousel({
@@ -127,7 +131,26 @@
             });
             if (n < 7) $('.owl-stage').css('margin-bottom', '30px');
         }
-        initOwl($('#num').data('num'));
+
+        $(document).ready(function(){
+            initOwl($('#num').data('num'));
+            var image = "";
+            var $dataImage = $('.dataImage');
+            for (var i = 0; i < $dataImage.length; i++) {
+                var $data = $($dataImage[i]);
+                var rawImage = $data.data('image');
+                if (rawImage.includes('"')) {
+                    image = rawImage.substring(rawImage.indexOf('"') + 1, rawImage.length - 2);
+                } else {
+                    image = rawImage;
+                }
+                var rawBackground =  $data.css('background-image');
+                var properBackground = rawBackground.replace('xx', image);
+                $data.css('background-image', properBackground);
+            }
+        });
+
+
 
     </script>
 {% endblock %}

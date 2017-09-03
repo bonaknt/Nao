@@ -47,6 +47,7 @@ function speciesModel(events) {
                 }
             }
             events.emit('speciesUpdatedEvent', allPatternMatchingSpecies);
+            print(allPatternMatchingSpecies);
     }
 
     // makes ajax query and hydrate allSpeciesArray
@@ -74,13 +75,14 @@ function speciesView(template) {
 
     function renderSpecies(speciesToRender) {
         $resultRow.empty();
-        function birdObject(scientificName, id) {
+        function birdObject(scientificName, id, imagePath) {
             this.scientificName = scientificName;
             this.id = id;
+            this.imagePath = imagePath;
         }
         let birdObjectsArray = [];
         for (let i = 0; i < speciesToRender.length; i++) {
-            let bird = new birdObject(speciesToRender[i].scientificName, speciesToRender[i].id);
+            let bird = new birdObject(speciesToRender[i].scientificName, speciesToRender[i].id, speciesToRender[i].imagePath || null);
             birdObjectsArray.push(bird);
         }
         let html = birdTemplate({'birds': birdObjectsArray});
@@ -226,7 +228,7 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
 
 
 
-// AJAX :: bird objects array
+// AJAX cmd :: bird objects array
 function getAllSpeciesFromDB() {
 
     var species = [];
@@ -234,15 +236,21 @@ function getAllSpeciesFromDB() {
     $.get('api/getallbirds', function(data){
         data.data.forEach(function(bird){
             var parsed = JSON.parse(bird);
-            let scientificName = parsed.scientificName;
+
             // Strip first descriptor if he's included in scientificName
-            var indexOfParenthesis = scientificName.indexOf("(")
+            let scientificName = parsed.scientificName;
+            var indexOfParenthesis = scientificName.indexOf("(");
             if (indexOfParenthesis !== -1) {
                 scientificName = scientificName.substr(0, indexOfParenthesis).trim();
             }
+
+            //
+
+            let imagePath = imagePath || null;
             let speciesObject = {
                 scientificName: scientificName,
-                id: parsed.id
+                id: parsed.id,
+                imagePath: imagePath
             };
             species.push(speciesObject);
         });
@@ -250,6 +258,7 @@ function getAllSpeciesFromDB() {
     return species;
 }
 
+// UTILS
 
 function print(string) {
     console.log(string)
