@@ -50,7 +50,18 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
         $query  = $this->_em->createQuery('SELECT o.pictures FROM AppBundle:Observations o WHERE o.species = :species');
         $query->setParameter('species', $species);
 
-        $results = $query->getResult();
+        $results = $query->getScalarResult();
+
+        return $results;
+    }
+
+    public function countPicturesBySpecies($species)
+    {
+
+        $query  = $this->_em->createQuery('SELECT  COUNT(o.pictures) FROM AppBundle:Observations o WHERE o.species = :species');
+        $query->setParameter('species', $species);
+
+        $results = $query->getScalarResult();
 
         return $results;
     }

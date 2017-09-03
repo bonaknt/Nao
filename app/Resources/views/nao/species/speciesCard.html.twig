@@ -2,6 +2,19 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/owl.theme.default.min.css') }}">
+    <style>
+        .inner {
+            background-color: teal;
+            height: 130px;
+            width: 170px;
+            background-size: cover;
+        }
+        .owl-stage {
+            background-color: white;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -44,6 +57,33 @@
     </div>
 
 
+    {# COUNT NUMBER OF IMAGES #}
+    {% set num = 0%}
+    {% for pic in pictures %}
+        {% for p in pic %}
+            {% set num = num + 1 %}
+        {% endfor %}
+    {% endfor %}
+    <div id="num" class="hidden" data-num="{{ num }}"></div>
+
+    <div class="owl-carousel owl-theme">
+        <div class="item" ><div class="inner" style="background-image: url({{ asset('tempo/im1.jpg') }})"></div></div>
+        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im4.png') }})"></div></div>
+        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im2.jpg') }})"></div></div>
+        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im3.jpg') }})"></div></div>
+    </div>
+
+    {#<div class="owl-carousel owl-theme">#}
+        {#{% for pic in pictures %}#}
+            {#{% for p in pic %}#}
+                {#{% set image =  p %}#}
+                {#<div class="item"><div class="inner" style="background-image: url({{ asset('uploads/pictures/s:37:"39d3dd95194155249232ba944da08fab.jpeg') }})"></div></div>#}
+            {#{% endfor %}#}
+        {#{% endfor %}#}
+    {#</div>#}
+
+
+
     {% if observations %}
         <div id="data" hidden="hidden">
         {% for observation in observations %}
@@ -51,8 +91,10 @@
          {% endfor %}
         </div>
     {% else %}
-        <p>Aucune observation</p>
+        <p></p>
     {% endif %}
+
+
 
 {% endblock %}
 
@@ -62,4 +104,30 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkp9nFRlaIzb4BSIFO24Q7fLOF37x_NuA&callback=initMap">
     </script>
     <script src="{{ asset('static/initMapBirdcard.js') }}"></script>
+    <script src="{{ asset('static/owl.carousel.min.js') }}"></script>
+    <script>
+        function initOwl(n) {
+            var items = n < 7 ? n : 7;
+            $('.owl-carousel').owlCarousel({
+                stagePadding:20,
+                loop:false,
+                margin:0,
+                nav:true,
+                responsive:{
+                    0:{
+                        items:items
+                    },
+                    600:{
+                        items:items
+                    },
+                    1000:{
+                        items:items,
+                    }
+                }
+            });
+            if (n < 7) $('.owl-stage').css('margin-bottom', '30px');
+        }
+        initOwl($('#num').data('num'));
+
+    </script>
 {% endblock %}
