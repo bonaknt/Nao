@@ -19,7 +19,8 @@ contents
 /node_modules
 .DS_Store
 Capfile
-/config
+config/deploy
+config/deploy.rb
 /lib
 /log
 size.js
