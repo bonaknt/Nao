@@ -151,8 +151,14 @@
              {#NEWSLETTER#}
 
             <div id="newsletter" class="text-center">
-                <span><b>Abonnez-vous à notre newsletter</b></span>
                 {{ form_start(newsletterForm, { 'attr': {'class': 'form-inline'}})  }}
+                <span><b>Abonnez-vous à notre newsletter</b></span>
+                <div class="form-group">
+                    {{ form_row(newsletterForm.email) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(newsletterForm.submit) }}
+                </div>
                 {{ form_end(newsletterForm) }}
             </div>
 
