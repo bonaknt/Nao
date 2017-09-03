@@ -25,8 +25,17 @@ class SpeciesController extends Controller
 
 		$species = $repository->find($id);
 
+		$repository = $this
+			->getDoctrine()
+			->getManager()
+			->getRepository('AppBundle:Observations');
+
+		$observations = $repository->findBySpecies($id);
+		$pictures = $repository->findPicturesBySpecies($id);
+		$numofpics = $repository->countPicturesBySpecies($id);
+
 		return $this->render('nao/species/speciesCard.html.twig', array(
-			'species' => $species,
+			'species' => $species, 'observations' => $observations, 'pictures' => $pictures, 'numofpics' => $numofpics
 		));
 	}
 
