@@ -20,19 +20,27 @@
 {% block body %}
     {{ parent() }}
     <div id="search-form" class="search-form-individual">
-            <h2 class="text-center">{{ species.scientificName }}</h2>
+        <h2 class="text-center">{{ species.scientificName }}</h2>
     </div>
 
     <div class="container-fluid">
         <div id="row-birdcard" class="row">
             <div class="col-sm-6 text-birdcard">
                 <p>
-                    {{ species.description }}
+                    Et olim licet otiosae sint tribus pacataeque centuriae et nulla suffragiorum
+                    certamina set Pompiliani redierit securitas temporis, per omnes tamen quotquot
+                    sunt partes terrarum, ut domina suscipitur et regina et ubique patrum reverenda
+                    cum auctoritate canities populique Romani nomen circumspectum et verecundum. <br>
+                    <br>
+                    Denique Antiochensis ordinis vertices sub uno elogio iussit occidi ideo efferatus,
+                    quod ei celebrari vilitatem intempestivam urgenti, cum inpenderet inopia, gravius
+                    rationabili responderunt; et perissent ad unum ni comes orientis tunc Honoratus
+                    fixa constantia restitisset.
                 </p>
                 <div id="info-birdcard" class="text-center">
                     <div class="row">
-                        <div class="col-xs-6"><span>Séquence : {{ species.sequence }} </span></div>
-                        <div class="col-xs-6"><span>Famille : {{ species.family }}</span></div>
+                        <div class="col-xs-6"><span>Séquence : </span></div>
+                        <div class="col-xs-6"><span>Famille : </span></div>
                     </div>
                 </div>
             </div>
@@ -58,29 +66,32 @@
     {% endfor %}
     <div id="num" class="hidden" data-num="{{ num }}"></div>
 
-    <div class="owl-carousel owl-theme">
-        <div class="item" ><div class="inner" style="background-image: url({{ asset('tempo/im1.jpg') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im4.png') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im2.jpg') }})"></div></div>
-        <div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im3.jpg') }})"></div></div>
-    </div>
-
     {#<div class="owl-carousel owl-theme">#}
-        {#{% for pic in pictures %}#}
-            {#{% for p in pic %}#}
-                {#{% set image =  p %}#}
-                {#<div class="item"><div class="inner" style="background-image: url({{ asset('uploads/pictures/s:37:"39d3dd95194155249232ba944da08fab.jpeg') }})"></div></div>#}
-            {#{% endfor %}#}
-        {#{% endfor %}#}
+    {#<div class="item" ><div class="inner" style="background-image: url({{ asset('tempo/im1.jpg') }})"></div></div>#}
+    {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im4.png') }})"></div></div>#}
+    {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im2.jpg') }})"></div></div>#}
+    {#<div class="item"><div class="inner" style="background-image: url({{ asset('tempo/im3.jpg') }})"></div></div>#}
     {#</div>#}
+
+    {% set id = 0 %}
+    <div class="owl-carousel owl-theme">
+    {% for pic in pictures %}
+        {% for p in pic %}
+            {% set image =  p %}
+            {% if image != 'N;' %}
+                <div  class="item"><div data-image="{{ image }}"  class="inner dataImage" style="background-image: url({{ asset('uploads/pictures/xx') }})"></div></div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </div>
 
 
 
     {% if observations %}
         <div id="data" hidden="hidden">
-        {% for observation in observations %}
-            <div data-longitude={{ observation.longitude }} data-latitude={{ observation.latitude }}></div>
-         {% endfor %}
+            {% for observation in observations %}
+                <div data-longitude={{ observation.longitude }} data-latitude={{ observation.latitude }}></div>
+            {% endfor %}
         </div>
     {% else %}
         <p></p>
@@ -98,6 +109,7 @@
     <script src="{{ asset('static/initMapBirdcard.js') }}"></script>
     <script src="{{ asset('static/owl.carousel.min.js') }}"></script>
     <script>
+
         function initOwl(n) {
             var items = n < 7 ? n : 7;
             $('.owl-carousel').owlCarousel({
@@ -119,7 +131,26 @@
             });
             if (n < 7) $('.owl-stage').css('margin-bottom', '30px');
         }
-        initOwl($('#num').data('num'));
+
+        $(document).ready(function(){
+            initOwl($('#num').data('num'));
+            var image = "";
+            var $dataImage = $('.dataImage');
+            for (var i = 0; i < $dataImage.length; i++) {
+                var $data = $($dataImage[i]);
+                var rawImage = $data.data('image');
+                if (rawImage.includes('"')) {
+                    image = rawImage.substring(rawImage.indexOf('"') + 1, rawImage.length - 2);
+                } else {
+                    image = rawImage;
+                }
+                var rawBackground =  $data.css('background-image');
+                var properBackground = rawBackground.replace('xx', image);
+                $data.css('background-image', properBackground);
+            }
+        });
+
+
 
     </script>
 {% endblock %}
