@@ -65,4 +65,10 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
         return $results;
     }
+
+    // find the most recent observation of each species
+    public function findMostRecentForEachSpecies()
+    {
+
+    }
 }
