@@ -35,7 +35,10 @@ class SpeciesController extends Controller
 		$numofpics = $repository->countPicturesBySpecies($id);
 
 		return $this->render('nao/species/speciesCard.html.twig', array(
-			'species' => $species, 'observations' => $observations, 'pictures' => $pictures, 'numofpics' => $numofpics
+			'species' => $species,
+			'observations' => $observations,
+			'pictures' => $pictures,
+			'numofpics' => $numofpics
 		));
 	}
 

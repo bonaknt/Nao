@@ -27,20 +27,12 @@
         <div id="row-birdcard" class="row">
             <div class="col-sm-6 text-birdcard">
                 <p>
-                    Et olim licet otiosae sint tribus pacataeque centuriae et nulla suffragiorum
-                    certamina set Pompiliani redierit securitas temporis, per omnes tamen quotquot
-                    sunt partes terrarum, ut domina suscipitur et regina et ubique patrum reverenda
-                    cum auctoritate canities populique Romani nomen circumspectum et verecundum. <br>
-                    <br>
-                    Denique Antiochensis ordinis vertices sub uno elogio iussit occidi ideo efferatus,
-                    quod ei celebrari vilitatem intempestivam urgenti, cum inpenderet inopia, gravius
-                    rationabili responderunt; et perissent ad unum ni comes orientis tunc Honoratus
-                    fixa constantia restitisset.
+                    {{ species.description }}
                 </p>
                 <div id="info-birdcard" class="text-center">
                     <div class="row">
-                        <div class="col-xs-6"><span>Séquence : </span></div>
-                        <div class="col-xs-6"><span>Famille : </span></div>
+                        <div class="col-xs-6"><span>Séquence : {{ species.sequence }} </span></div>
+                        <div class="col-xs-6"><span>Famille : {{ species.family }}</span></div>
                     </div>
                 </div>
             </div>
