@@ -11,12 +11,6 @@ use AppBundle\Entity\Users;
 
 class ConnectionController extends Controller
 {
-	/**
-	 * @Route("/loin", name="login")
-	 */
-	public function loginAction(Request $request)
-	{
-	}
 
 	/**
 	 * @Route("/register/", name="signin")

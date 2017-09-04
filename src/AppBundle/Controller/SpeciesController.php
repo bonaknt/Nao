@@ -123,9 +123,10 @@ class SpeciesController extends Controller
 		]);
 	}
 
-	/**
+	/*
+
 	 * @Route("/obswaitingvalidation", name="obsWaitingValidation")
-	 */
+
 	public function obsWaitingValidationAction(Request $request)
 	{
 		$repository = $this
@@ -156,9 +157,9 @@ class SpeciesController extends Controller
 		));
 	}
 
-	/**
+
 	 * @Route("/obsvalidated", name="obsValidated")
-	 */
+
 	public function ObsValidatedAction(Request $request)
 	{
 		//	Récupérer l'id
@@ -172,9 +173,9 @@ class SpeciesController extends Controller
 		return $this->redirectToRoute('obsWaitingValidation');
 	}
 
-	/**
+
 	 * @Route("/obsdeleted", name="obsDeleted")
-	 */
+
 	public function ObsDeletedAction(Request $request)
 	{
 		//	Récupérer l'id
@@ -186,5 +187,5 @@ class SpeciesController extends Controller
 		$em->flush();
 
 		return $this->redirectToRoute('obsWaitingValidation');
-	}
+	}*/
 }
