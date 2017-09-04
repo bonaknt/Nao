@@ -31,6 +31,7 @@ class SpeciesController extends Controller
 			->getRepository('AppBundle:Observations');
 
 		$observations = $repository->findBySpecies($id);
+		dump($id);
 		$pictures = $repository->findPicturesBySpecies($id);
 		$numofpics = $repository->countPicturesBySpecies($id);
 
