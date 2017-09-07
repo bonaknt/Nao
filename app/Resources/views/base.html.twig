@@ -59,9 +59,11 @@
                                 <div id="tooltip" class="text-center hidden">
                                     <h3>{{ app.user.username }}</h3>
                                     <hr>
+                                    {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")%}
                                     <a href="{{ path('dashboard') }}">
                                         <div>Tableau de bord</div>
                                     </a>
+                                    {% endif %}
                                     <a href="{{ path('fos_user_security_logout') }}">
                                         <div id="tooltip-deconnexion">Déconnexion</div>
                                     </a>

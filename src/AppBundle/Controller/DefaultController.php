@@ -16,10 +16,19 @@ class DefaultController extends Controller
     {
     	if(isset($_COOKIE['id']) && isset($_COOKIE['pw']))
 		{
+
+
 			return $this->render('nao/indexConnected.html.twig');
 		}
 
-        return $this->render('nao/index.html.twig');
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Observations');
+
+        $lastObservations = $repository->findLastObservations();
+        dump($lastObservations);
+        return $this->render('nao/index.html.twig', array('lastObservations' => $lastObservations));
     }
 
     /**

@@ -12,6 +12,8 @@
 
         </style>
 
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
     <!--Début du Caroussel-->
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -225,6 +227,7 @@
             </div>
 
 
+
              {# =========== NEWSLETTER ========#}
 
             <div id="newsletter" class="text-center">
@@ -238,6 +241,8 @@
                     </div>
                 </div>
             </div>
+
+        {% endif %}
 
              {# ============= OBSERVATION DU JOUR  ============= #}
 

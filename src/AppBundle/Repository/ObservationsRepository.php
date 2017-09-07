@@ -66,6 +66,18 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
         return $results;
     }
 
+    public function findLastObservations() {
+
+        $qb = $this->createQueryBuilder('o');
+        $qb ->select('o')
+            ->leftJoin('o.species', 's')
+            ->orderBy('o.obsDate','DESC');
+
+        return $qb
+            ->getQuery()
+            ->getScalarResult();
+    }
+
     // find the most recent observation of each species
     public function findMostRecentForEachSpecies()
     {

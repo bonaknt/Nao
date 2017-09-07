@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Observations
@@ -30,8 +31,8 @@ class Observations
     private $idUser;
 
     /**
-     * @var int
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
+     * var int
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
      * @ORM\Column(name="species", type="integer")
      */
@@ -73,7 +74,7 @@ class Observations
 	private $validated = 0;
 
 	/**
-	 * @var datetime
+	 * @var DateTime
 	 *
 	 * @ORM\Column(name="obs_date", type="datetime")
 	 */
