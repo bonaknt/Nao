@@ -26,15 +26,13 @@ class Observations
      * @var int
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Users", cascade={"persist"})
 	 * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="id_user", type="integer")
+     * @ORM\Column(name="id_user")
      */
     private $idUser;
 
     /**
-     * var int
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Species", cascade={"persist"})
-	 * @ORM\JoinColumn(nullable=false)
-     * @ORM\Column(name="species", type="integer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Species",inversedBy="observations", cascade={"persist"})
+	 * @ORM\JoinColumn(name="species", referencedColumnName="id")
      */
     private $species;
 

@@ -52,6 +52,11 @@ class Species   implements \JsonSerializable
     private $pictures;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Observations", mappedBy="species")
+     */
+    private $observations;
+
+    /**
      * Get id
      *
      * @return int
@@ -168,6 +173,22 @@ class Species   implements \JsonSerializable
     public function setPictures($pictures)
     {
         $this->pictures = $pictures;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObservations()
+    {
+        return $this->observations;
+    }
+
+    /**
+     * @param mixed $observations
+     */
+    public function setObservations($observations)
+    {
+        $this->observations = $observations;
     }
 
     public function jsonSerialize()
