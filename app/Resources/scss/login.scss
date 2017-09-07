@@ -1,0 +1,47 @@
+
+.login-background {
+  background-position: top;
+  background-size: cover;
+}
+.login-container {
+  min-height: calc(100vh);
+  position: relative;
+}
+.login-form {
+  margin-top: 2%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 15px 15px 0 0;
+  //transform: translateY(-50%);
+  button {
+    border-radius: 10px;
+    background-color: $lightgreen;
+    color: $almostwhite;
+    font-weight: bold;
+
+  }
+}
+.pas-de-compte {
+  border-top: 2px solid black;
+  margin-left: 25%;
+  margin-right: 25%;
+  background-color: white;
+  padding-bottom: 20px;
+  border-radius: 0 0 15px 15px;
+  p {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-top: 20px;
+  }
+  button {
+    border-radius: 10px;
+    background-color: $lightgreen;
+    color: $almostwhite;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

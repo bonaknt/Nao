@@ -75,7 +75,7 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb
             ->getQuery()
-            ->getScalarResult();
+            ->getResult();
     }
 
     // find the most recent observation of each species
