@@ -9,7 +9,9 @@
     {{ parent() }}
 
         <style>
-
+            #search-result-container, #result-row, .bird-box {
+                z-index: auto !important;
+            }
         </style>
 
         {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -265,17 +267,49 @@
 
         </div>
 
+        <div id="dernieres-obs" class="container-fluid no-padding" style="background-image: url({{ asset('images/dernieres.jpg') }})">
+
+
+            <div id="search-result-container">
+                <div class="row" id="result-row">
+
+                    {% for obs in lastObservations %}
+
+                        <div class="col-xs-4 col-sm-3 bird-box">
+                            <div class="bird">
+                                <a href="speciessearch/{{obs.species.id}}">
+                                    <div class="img-container text-center">
+                                        {#if image then :#}
+                                        {#<img class="no-photo-img" src={{imagePath}} alt="">#}
+                                        {#else :#}
+                                        <img class="no-photo-img" src="{{ asset('images/no-photo.svg') }}" alt="">
+                                    </div>
+                                    <div class="scient-name text-center">
+                                        <a href="speciessearch/{{ obs.species.id }}"><b>{{ obs.species.scientificName }}</b></a>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
 
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('static/owl.carousel.min.js') }}"></script>
     <script>
-//        $(document).ready(function(){
-//            $('#myCarousel').carousel()
-//
-//
-//        })
+
     </script>
 {% endblock %}

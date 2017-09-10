@@ -71,7 +71,8 @@ class ObservationsRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('o');
         $qb ->select('o')
             ->leftJoin('o.species', 's')
-            ->orderBy('o.obsDate','DESC');
+            ->orderBy('o.obsDate','DESC')
+            ->setMaxResults(6);
 
         return $qb
             ->getQuery()

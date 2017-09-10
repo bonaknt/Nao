@@ -107,6 +107,14 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
         events.emit('inputChangeEvent', currentValue);
     });
     $input.on('focusout', function() {
+        // check if element is selected
+        if ($suggestionsContainer.find('li').is('.selected')) {
+            print('true selected')
+            $input.val($('.selected').text());
+            events.emit("inputChangeEvent", $input.val());
+            let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
+            redirectToSpeciessearch(id);
+        }
         $suggestionsContainer.empty();
         currentlyHighlighted = [];
     });
@@ -168,7 +176,6 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
                     if(regex.test(inputVal)) {
                         let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == suggestion).id;
                         redirectToSpeciessearch(id);
-                        print(trimmed)
                     } else {
                         redirectToSpeciessearch();
                     }
@@ -205,6 +212,13 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
             // print(suggestion)
             $suggestionsContainer.append(suggestion);
         }
+        $suggestionsContainer.find('li').on('mouseenter', function(){
+            let $this = $(this);
+            $this.addClass('selected');
+            $this.on('mouseleave', function(){
+                $this.removeClass('selected');
+            });
+        });
     }
     function highlightSuggestion() {
         // if (index !== -1) {// new highlight
