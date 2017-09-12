@@ -14,12 +14,6 @@ class DefaultController extends Controller
 	 */
     public function indexAction()
     {
-    	if(isset($_COOKIE['id']) && isset($_COOKIE['pw']))
-		{
-
-
-			return $this->render('nao/indexConnected.html.twig');
-		}
 
         $repository = $this
             ->getDoctrine()
@@ -27,7 +21,6 @@ class DefaultController extends Controller
             ->getRepository('AppBundle:Observations');
 
         $lastObservations = $repository->findLastObservations();
-        dump($lastObservations);
         return $this->render('nao/index.html.twig', array('lastObservations' => $lastObservations));
     }
 

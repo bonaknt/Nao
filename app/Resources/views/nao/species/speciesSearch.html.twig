@@ -28,5 +28,22 @@
 {% endblock %}
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     {{ parent() }}
+    <script>
+        function getObs() {
+            var parsed = [];
+            $.get('api/getallbirds', function(data){
+                data.observations.forEach(function(obs){
+                    var preparsed = JSON.parse(obs);
+                    var species = JSON.parse(preparsed.species);
+                    preparsed.species = species;
+                    parsed.push(preparsed);
+                });
+            });
+            return parsed;
+        }
+        var obs = getObs()
+
+    </script>
 {% endblock %}

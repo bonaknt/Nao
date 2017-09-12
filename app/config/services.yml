@@ -37,3 +37,16 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    species.repository:
+        class: Doctrine\ORM\SpeciesRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - AppBundle\Entity\Species
+    observation.form:
+        class: AppBundle\Form\ObservationsType
+        tags:
+            - { name: form.type, alias: app_observation_form }
+        calls:
+            - method: setSpeciesRepository
+              arguments:
+                - '@species.repository'

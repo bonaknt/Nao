@@ -49,10 +49,17 @@ class SpeciesController extends Controller
 			->getManager()
 			->getRepository('AppBundle:Species');
 
-		$listSpecies = $repository->findAll();
+        $listSpecies = $repository->findAll();
+
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Observations');
+
+		$observations = $repository->findAll();
 
 		return $this->render('nao/species/speciesSearch.html.twig', array(
-			'listSpecies' => $listSpecies,
+			'listSpecies' => $listSpecies, 'observations' => $observations
 		));
 	}
 
@@ -72,15 +79,10 @@ class SpeciesController extends Controller
 
 		// Création du formulaire
 			//	Il faut ajouter un champ pour ajouter les images capturées
+
 		$observationsForm = $this
 			->get('form.factory')
-			->create(ObservationsType::class, $observationsEntity)
-			->add('species', ChoiceType::class, array(
-				//	on inverse les clés et valeurs
-				'choices'	=> array_flip($listScientificName),
-				'label'		=> "Espèce d'oiseau rencontré",
-				'attr'	=> ['class' => 'form-control'],
-			));
+			->create(ObservationsType::class, $observationsEntity);
 
 		// If form submit
 		if ($request->isMethod('POST') && $observationsForm->handleRequest($request)->isValid())

@@ -48,4 +48,12 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 
         return $query->getSingleResult();
     }
+
+    public function findAllWithObservations() {
+        $query = $this->_em->createQuery('SELECT s FROM AppBundle:Species s');
+
+        return $query->getResult();
+    }
+
+
 }

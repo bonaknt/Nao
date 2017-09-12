@@ -2,6 +2,10 @@ import eventsConstructor from '../events';
 import $ from 'jquery';
 import birdTemplate from './birdTemplate';
 import difference from 'lodash.difference';
+import uniqBy from 'lodash/uniqBy';
+import filter from 'lodash/filter';
+import findInArray from 'lodash/find';
+
 
 // ============= MAIN ================
 
@@ -15,7 +19,7 @@ export function initSearchPage() {
 
     var inputFormObj = inputForm($('#search-input'), $('#suggestions-container'), events);
     var speMod = speciesModel(events);
-    var speView = speciesView(template);
+    var speView = speciesView(template, $('#result-row'));
 
     events.on('inputChangeEvent', speMod.updateSuggestionsArray);
     events.on('speciesUpdatedEvent', inputFormObj.updateCurrentSuggestions);
@@ -52,8 +56,7 @@ function speciesModel(events) {
 
     // makes ajax query and hydrate allSpeciesArray
     function hydrateSpecies() {
-        //TODO: ajax query
-        //fixte
+
         return getAllSpeciesFromDB();
     }
     return {
@@ -64,28 +67,11 @@ function speciesModel(events) {
 
 // ============= SPECIES VIEW ================
 
-function speciesView(template) {
-    const birdTemplate = template;
-    const $resultRow = $('#result-row');
-    // to be hydrated just before speciesModel.allPatternMatchingSpecies is updated;
-    // then the difference is made between prev state et new state for optimization reasons for rendering AND DO NOT FORGET TO REMOVE
-    // diff PREV - NEW => remove
-
-    let allPatternMatchingSpeciesPrev = [];
+function speciesView(template, $resultRow) {
 
     function renderSpecies(speciesToRender) {
         $resultRow.empty();
-        function birdObject(scientificName, id, imagePath) {
-            this.scientificName = scientificName;
-            this.id = id;
-            this.imagePath = imagePath;
-        }
-        let birdObjectsArray = [];
-        for (let i = 0; i < speciesToRender.length; i++) {
-            let bird = new birdObject(speciesToRender[i].scientificName, speciesToRender[i].id, speciesToRender[i].imagePath || null);
-            birdObjectsArray.push(bird);
-        }
-        let html = birdTemplate({'birds': birdObjectsArray});
+        let html = template({'birds': speciesToRender});
         $resultRow.append(html);
     }
     return {
@@ -128,14 +114,12 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
             if (e.which == 13) {
                 // vérifier qu'un élément a bien la classe selected
                 if ($('.selected').length != 0) {
-                    print("YES SELECTED")
                     $input.val($('.selected').text());
                     events.emit("inputChangeEvent", $input.val());
                     let id = currentSuggestionsArrayWithId.find((el) => el.scientificName == $input.val().trim()).id;
                     redirectToSpeciessearch(id);
 
                 } else {
-                    print('NO SELECTED')
                     print(currentSuggestionsArrayWithId);
                     print($input.val().trim())
                     let id = currentSuggestionsArrayWithId.find((el) => el.scientificName.toUpperCase() == $input.val().trim().toUpperCase()).id;
@@ -189,10 +173,9 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
     function redirectToSpeciessearch(id) {
         let ssl = document.getElementById('speciesSearchLink');
         if (id || id == 0) {
-            ssl.href = ssl.href + '/' + id;
-            ssl.click();
+            window.location = ssl.href + '/' + id;
         } else {
-            ssl.click();
+            window.location = ssl.href;
         }
     }
 
@@ -242,24 +225,21 @@ function inputForm($input, $suggestionsContainer, events, $inputArrow) {
 
 
 
-// AJAX cmd :: bird objects array
+// AJAX cmd  ->  [bird, bird, ...]
 function getAllSpeciesFromDB() {
 
     var species = [];
 
     $.get('api/getallbirds', function(data){
-        data.data.forEach(function(bird){
+        data.species.forEach(function(bird){
             var parsed = JSON.parse(bird);
 
-            // Strip first descriptor if he's included in scientificName
+            // Strip first descriptor if it's included in scientificName
             let scientificName = parsed.scientificName;
             var indexOfParenthesis = scientificName.indexOf("(");
             if (indexOfParenthesis !== -1) {
                 scientificName = scientificName.substr(0, indexOfParenthesis).trim();
             }
-
-            //
-
             let imagePath = imagePath || null;
             let speciesObject = {
                 scientificName: scientificName,
@@ -268,6 +248,19 @@ function getAllSpeciesFromDB() {
             };
             species.push(speciesObject);
         });
+        var semiParsedObservations = [];
+        data.observations.forEach(function(observation){
+            semiParsedObservations.push(JSON.parse(observation));
+        });
+        var fullyParsedObservations = []
+        semiParsedObservations.forEach(function(observation) {
+            let species = JSON.parse(observation.species);
+            observation.species = species;
+            fullyParsedObservations.push(observation)
+        })
+        console.log(fullyParsedObservations)
+        let picturesArray = picturesAndIdFromObservationsArray(fullyParsedObservations);
+        species = mergeArrays(species, picturesArray)
     });
     return species;
 }
@@ -277,5 +270,30 @@ function getAllSpeciesFromDB() {
 function print(string) {
     console.log(string)
 }
+
+// [observation : {..., species : {...}, pictures: ""}, ...]  ->   [{"id1", "picture1"}, ...]
+function picturesAndIdFromObservationsArray(observationsArray) {
+
+     return uniqBy(filter(observationsArray, observation => observation.pictures != null), "species.id")
+        .map(observation => {
+            let pic = {};
+            pic.id = observation.species.id;
+            pic.picture = observation.pictures;
+            return pic
+        })
+
+}
+
+function mergeArrays(speciesArray, picturesArray) {
+
+    return speciesArray.map(species => {
+        let pictureObject = findInArray(picturesArray, picture => picture.id == species.id)
+        if (pictureObject) species.imagePath = 'uploads/pictures/' + pictureObject.picture;
+        else species.imagePath = null
+        return species
+    })
+
+}
+
 
 

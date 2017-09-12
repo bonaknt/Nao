@@ -1,7 +1,12 @@
 <?php
 namespace AppBundle\Form;
 
+use AppBundle\AppBundle;
+use AppBundle\Entity\Species;
+use AppBundle\Repository\SpeciesRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +22,11 @@ use Symfony\Component\Validator\Constraints\Range;
 
 class ObservationsType extends AbstractType
 {
+    /**
+     * @var SpeciesRepository
+     */
+    private $speciesRepository;
+
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
@@ -85,7 +95,14 @@ class ObservationsType extends AbstractType
 				'label'	=> 	'Ajouter',
 				'attr'	=>	['class' => 'btn btn-primary']
 			))
-		;
+            ->add('species', EntityType::class, array(
+                //	on inverse les clés et valeurs
+                'class' => 'AppBundle:Species',
+                'choices'	=> $this->speciesRepository->findBy(array(), array("id" => "ASC")),
+                'label'		=> "Espèce d'oiseau rencontré",
+                'attr'	=> ['class' => 'form-control'],
+            ));
+
 	}
 	public function configureOptions(OptionsResolver $resolver)
 	{
@@ -97,4 +114,13 @@ class ObservationsType extends AbstractType
 	{
 		return 'appbundle_observations';
 	}
+
+    /**
+     * @param SpeciesRepository $speciesRepository
+     */
+    public function setSpeciesRepository($speciesRepository)
+    {
+        $this->speciesRepository = $speciesRepository;
+    }
+
 }

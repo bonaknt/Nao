@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="observations")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ObservationsRepository")
  */
-class Observations
+class Observations implements \JsonSerializable
 {
     /**
      * @var int
@@ -278,5 +278,11 @@ class Observations
     public function getObsDate()
     {
         return $this->obsDate;
+    }
+
+    public function jsonSerialize()
+    {
+
+        return json_encode(['species' => $this->species, 'pictures' => $this->pictures]);
     }
 }
