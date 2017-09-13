@@ -173,7 +173,24 @@
     {#-------------- BLOC CONTENU ---------------------#}
 
 
-            <aside class="main-sidebar">
+        <section id="wellcome-bar" class="text-center">
+            <p id="bonjour"><b>Bonjour <spa class="red"n>{{ app.user.username }}</span></b></p>
+            {% set userType = "" %}
+            {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+                {% set userType = "Administrateur" %}
+            {% elseif "ROLE_SUPER_USER" in app.user.roles %}
+                {% set userType = "Ornithologue" %}
+            {% else %}
+                {% set userType = "Explorateur" %}
+            {% endif %}
+            <p>Vous êtes sur votre tableau de bord personnel. <br> Vous êtes actuellement <span class="red"><b>{{ userType }}</b></span></p>
+        </section>
+
+
+        <div  id="admin-row" class="row">
+
+
+            <aside class="main-sidebar col-sm-3">
                 {% block sidebar %}
                     <section class="sidebar">
                         {% block main_menu_wrapper %}
@@ -187,32 +204,39 @@
                 {% endblock sidebar %}
             </aside>
 
-            <div class="content-wrapper">
+
+            <div class="content-wrapper col-sm-9">
                 {% block content %}
                     {% block flash_messages %}
                         {{ include(_entity_config is defined ? _entity_config.templates.flash_messages : '@EasyAdmin/default/flash_messages.html.twig') }}
                     {% endblock flash_messages %}
 
-                    <section class="content-header">
-                        {% block content_header %}
-                            <h1 class="title">{% block content_title %}{% endblock %}</h1>
-                        {% endblock content_header %}
-                        {% block content_help %}
-                            {% if _entity_config is defined and _entity_config[app.request.query.get('action')]['help']|default(false) %}
-                                <div class="box box-widget help-entity">
-                                    <div class="box-body">
-                                        {{ _entity_config[app.request.query.get('action')]['help']|trans|raw }}
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endblock content_help %}
-                    </section>
+                    {#<section class="content-header">#}
+                        {#{% block content_header %}#}
+                            {#<h1 class="title">{% block content_title %}{% endblock %}</h1>#}
+                        {#{% endblock content_header %}#}
+                        {#{% block content_help %}#}
+                            {#{% if _entity_config is defined and _entity_config[app.request.query.get('action')]['help']|default(false) %}#}
+                                {#<div class="box box-widget help-entity">#}
+                                    {#<div class="box-body">#}
+                                        {#{{ _entity_config[app.request.query.get('action')]['help']|trans|raw }}#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#{% endif %}#}
+                        {#{% endblock content_help %}#}
+                    {#</section>#}
 
                     <section id="main" class="content">
                         {% block main %}{% endblock %}
                     </section>
                 {% endblock content %}
             </div>
+
+        </div>
+
+
+
+
         {% endblock wrapper %}
     </div>
 

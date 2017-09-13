@@ -1,0 +1,55 @@
+#wellcome-bar {
+  margin-top: 40px;
+  background-color: $brown;
+  height: 100px;
+  color: white;
+  font-size: 1.1em;
+  padding-top: 10px;
+  .red {
+    color: red;
+  }
+  #bonjour {
+    font-size: 1.2em;
+  }
+}
+.main-sidebar {
+  //background-color: blue;
+}
+.content-wrapper {
+  border-left: 4px solid $mainblue;
+  min-height: 400px;
+}
+#admin-row {
+  min-height: 400px;
+}
+.main-sidebar {
+  //padding-top: 30px;
+}
+.sidebar-menu {
+  width: 90%;
+}
+.sidebar-menu li {
+  text-decoration: none;
+  list-style: none;
+  margin-top: 25px;
+  line-height: 35px;
+  border-radius: 3px;
+  background-color: $mainblue;
+  color: $almostwhite;
+}
+
+
+thead tr {
+  background-color: transparent !important;
+  a {
+    color: black;
+  }
+}
+tr:nth-child(odd){background-color:$maingreen}
+tr:nth-child(even){background-color:$mainblue}
+tr {
+  color:white;
+  td {
+    border: none !important;
+  }
+}

@@ -33,20 +33,15 @@
 <ul class="sidebar-menu">
     {% block main_menu %}
 
-        <li>
-            <a href="{{ path('homepage') }}">
-                <i class="fa fa-angle-double-left" aria-hidden="true"></i>Retour au site
-            </a>
-        </li>
 
-        <li>
+        <li class="text-center">
             <a href="?entity=Observations">
                 <i class="fa fa-camera-retro" aria-hidden="true"></i> Observations
             </a>
         </li>
 
         {% if is_granted('ROLE_ADMIN') %}
-        <li>
+        <li class="text-center">
             <a href="?entity=Users">
                 <i class="fa fa-users" aria-hidden="true"></i> Utilisateurs
             </a>
