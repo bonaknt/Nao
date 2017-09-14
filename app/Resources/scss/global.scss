@@ -10,7 +10,11 @@
 @import '/searchspecies/searchcard';
 @import 'login';
 @import '/admin/admin';
+@import 'observation';
 
+body {
+  background-color: $almostwhite;
+}
 .no-padding {
   padding-left: 0 !important;
   padding-right: 0 !important;

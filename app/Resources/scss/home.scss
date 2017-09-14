@@ -237,6 +237,13 @@
   background-position: center;
   .bird-box {
     padding: 40px 30px 40px 30px !important;
+    .img-container {
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+    .scient-name {
+      margin-top: 20px !important;
+    }
   }
 }
 
@@ -269,8 +276,13 @@
       #observation-jour-img-container {
         height: 210px;
       }
+      button {
+        margin-top: 0;
+      }
       #text {
         height: 220px;
+        padding-top: 1px;
+
       }
     }
   }
@@ -392,6 +404,29 @@
           font-size: 0.8em;
         }
       }
+    }
+  }
+
+
+  // OBSERVATION DU JOUR
+  #observation-du-jour {
+    padding-top: 25px;
+    h3 {
+      margin-top: 0;
+    }
+    .row {
+      padding-left: 50px;
+      padding-right: 50px;
+      #observation-jour-img-container {
+        height: 210px;
+      }
+      #text {
+        height: 220px;
+        padding-top: 10px;
+      }
+    }
+    button {
+      margin-top: 0;
     }
   }
 

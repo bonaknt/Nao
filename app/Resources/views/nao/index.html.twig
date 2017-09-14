@@ -280,14 +280,21 @@
                         <div class="col-xs-4 col-sm-3 bird-box">
                             <div class="bird">
                                 <a href="speciessearch/{{obs.species.id}}">
-                                    <div class="img-container text-center">
-                                        {% if obs.pictures %}
-
-                                        <img class="no-photo-img" src={{ asset('uploads/pictures/' ~ obs.pictures) }} alt="">
-                                        {% else %}
-                                        <img class="no-photo-img" src="{{ asset('images/no-photo.svg') }}" alt="">
-                                        {% endif %}
+                                    {% if obs.pictures %}
+                                    <div class="img-container text-center" style="background-image: url({{ asset('uploads/pictures/' ~ obs.pictures) }})">
                                     </div>
+                                    {% else %}
+                                    <div class="img-container text-center" style="background-image: url({{ asset('images/no-photo.svg') }}); background-size: 70%; transform: translateY(10px)">
+                                    </div>
+                                    {% endif %}
+                                    {#<div class="img-container text-center">#}
+                                        {#{% if obs.pictures %}#}
+
+                                        {#<img class="no-photo-img" src={{ asset('uploads/pictures/' ~ obs.pictures) }} alt="">#}
+                                        {#{% else %}#}
+                                        {#<img class="no-photo-img" src="{{ asset('images/no-photo.svg') }}" alt="">#}
+                                        {#{% endif %}#}
+                                    {#</div>#}
                                     <div class="scient-name text-center">
                                         <a href="speciessearch/{{ obs.species.id }}"><b>{{ obs.species.scientificName }}</b></a>
                                     </div>

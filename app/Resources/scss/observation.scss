@@ -1,0 +1,42 @@
+#observation-h3 {
+  margin-top: 30px;
+  margin-bottom: 30px
+}
+#observation-container {
+  margin: 0 6% 60px 6%;
+  border-radius: 25px;
+  background-color: white;
+  box-shadow: 3px 3px 5px 2px lighten(#888888, 10%);
+  .padding-row {
+    padding: 50px 50px 0;
+  }
+  #map-newobservation {
+    height: 500px;
+    margin-top: 30px;
+  }
+  #date_group {
+    appbundle_observations_obsDate_time {
+      display: inline-block;
+    }
+  }
+  .margin-top {
+    margin-top: 30px;
+  }
+  .margin-left {
+    padding-left: 60px
+  }
+  .margin-right {
+    padding-right: 60px;
+    }
+  .group-btn {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    button {
+      width: 120px;
+      background-color: $lightgreen;
+      border: $lightgreen;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+  }
+}
